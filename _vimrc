@@ -5,6 +5,7 @@ behave mswin
 set noundofile
 set nobackup
 set noswapfile
+colorscheme SolarizedDark
 
 "detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
 
@@ -54,9 +55,14 @@ endif
 
 " let Vundle manage Vundle, required
  Plugin 'VundleVim/Vundle.vim'
+ " -------------------------------------------------------------------------
 " add plugin here
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+map <C-n> :NERDTreeToggle<CR>
 
-
+ " -------------------------------------------------------------------------
  " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required 
+
