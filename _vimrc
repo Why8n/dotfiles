@@ -2,10 +2,45 @@ source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
 
+" reload vimrc
+nnoremap <C-l> :source $MYVIMRC<CR>
+" 显示行号  
+set number  
+" no backup
 set noundofile
 set nobackup
 set noswapfile
+" 实时搜索  
+set incsearch  
+" 搜索到文件两端时不重新搜索  
+set nowrapscan  
+" 不突出显示当前行  
+set nocursorline  
+set expandtab  
+" 设定 tab 长度为 4  
+set tabstop=4  
+" 设定 << 和 >> 命令移动时的宽度为 4  
+set shiftwidth=4  
+set smarttab  
 colorscheme SolarizedDark
+
+" 自动语法高亮  
+syntax on  
+ " 检测文件类型  
+filetype on  
+" 不设定在插入状态无法用退格键和 Delete 键删除回车符  
+set backspace=indent,eol,start  
+set whichwrap+=<,>,h,l  
+
+"switch windows
+"nnoremap <C-h> <C-w>h  
+"nnoremap <C-l> <C-w>l  
+"nnoremap <C-j> <C-w>j  
+"nnoremap <C-k> <C-w>k 
+nmap wh <C-w>h
+nmap wl <C-w>l
+nmap wj <C-w>j
+nmap wk <C-w>k
 
 "detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
 
@@ -58,8 +93,25 @@ endif
  " -------------------------------------------------------------------------
 " add plugin here
 Plugin 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+" set local working directory:current file
+let g:ctrlp_working_path_mode = 'ra'
+
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+" exclusions
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
 Plugin 'scrooloose/nerdtree'
-map <C-n> :NERDTreeToggle<CR>
+nmap wm :NERDTreeToggle<CR>
+let NERDTreeWinPos='left'
+let NERDTreeWinSize=30
 
  " -------------------------------------------------------------------------
  " All of your Plugins must be added before the following line
