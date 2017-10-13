@@ -42,6 +42,13 @@ nmap wl <C-w>l
 nmap wj <C-w>j
 nmap wk <C-w>k
 
+" auto complete brackets
+inoremap {<CR> {<C-o>o}<C-o>O
+inoremap ( ()<ESC>i
+inoremap < <><ESC>i
+inoremap " ""<ESC>i
+inoremap ' ''<ESC>i
+
 
 "detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
 
