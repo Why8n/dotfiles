@@ -153,8 +153,38 @@ let g:NERDAltDelims_java = 1
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
- " -------------------------------------------------------------------------
- " All of your Plugins must be added before the following line
+
+" markdown
+Plugin 'iamcco/markdown-preview.vim'
+" path to the chrome or the command to open chrome(or other modern browsers)
+let g:mkdp_path_to_chrome = 'C:\Program Files (x86)\Google\Chrome\Application\chrome'
+
+" set to 1, the vim will open the preview window once enter the markdown
+" buffer
+let g:mkdp_auto_start = 0
+
+" set to 1, the vim will auto open preview window when you edit the
+" markdown file
+let g:mkdp_auto_open = 1
+
+" set to 1, the vim will auto close current preview window when change
+" from markdown buffer to another buffer
+let g:mkdp_auto_close = 1
+
+" set to 1, the vim will just refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+let g:mkdp_refresh_slow = 0
+
+" set to 1, the MarkdownPreview command can be use for all files,
+" by default it just can be use in markdown file
+let g:mkdp_command_for_global = 0
+nmap <silent> <F8> <Plug>MarkdownPreview        " for normal mode
+imap <silent> <F8> <Plug>MarkdownPreview        " for insert mode
+nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode
+imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
+" -------------------------------------------------------------------------
+" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required 
 
