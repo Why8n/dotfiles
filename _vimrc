@@ -4,33 +4,79 @@ behave mswin
 
 " reload vimrc
 nnoremap <C-l> :source $MYVIMRC<CR>
-" 显示行号  
 set number  
+set relativenumber
 " no backup
 set noundofile
 set nobackup
 set noswapfile
-" 实时搜索  
+"  real time search result shown
 set incsearch  
 " 搜索到文件两端时不重新搜索  
 set nowrapscan  
 " 不突出显示当前行  
 set nocursorline  
+" Use spaces instead of tabs
 set expandtab  
-" 设定 tab 长度为 4  
-set tabstop=4  
-" 设定 << 和 >> 命令移动时的宽度为 4  
+" 1 tab = 4 spaces
+" Set <<  and >> shift width 4  
 set shiftwidth=4  
+set tabstop=4  
+" Be smart when using tabs
 set smarttab  
 colorscheme SolarizedDark
 
-" 自动语法高亮  
-syntax on  
  " 检测文件类型  
-filetype on  
+" filetype on
 " 不设定在插入状态无法用退格键和 Delete 键删除回车符  
 set backspace=indent,eol,start  
 set whichwrap+=<,>,h,l  
+" Ignore case when searching
+set ignorecase
+" When searching try to be samrt about cases
+set smartcase
+" Highlight search results
+set hlsearch
+ " Realtime search show
+ set incsearch
+ " Show matching brackets when text indicator is over them
+ set showmatch
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Enable syntax highlighting
+syntax enable
+" auto syntax highlight
+syntax on  
+
+" Allow to switch buffers without saving
+set hidden
+
+" 智能缩进
+set smartindent
+
+" set cmd window height :( cmd )
+set cmdheight=1
+" 在被分割的窗口间显示空白，便于阅读  
+set fillchars=vert:\ ,stl:\ ,stlnc:\  
+
+" encoding setting
+set enc=utf-8  
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936 
+
+" Ctrl+a  
+nmap <silent> <C-a> ggvG$  
+  
+" 选中状态下 Ctrl+c 复制  
+vnoremap <c-c> "+y  
+  
+" Ctrl+v  
+nmap <silent> <C-v> "+p  
+
 
 "switch windows
 "nnoremap <C-h> <C-w>h  
@@ -49,6 +95,20 @@ inoremap < <><ESC>i
 inoremap " ""<ESC>i
 inoremap ' ''<ESC>i
 
+" Fast quiting without saving
+nmap <leader>q :q!<cr>
+
+" cusor mvoement in insertmode
+inoremap <c-h> <left>
+inoremap <c-l> <right>  
+inoremap <c-j> <c-o>gj  
+inoremap <c-k> <c-o>gk  
+
+" disable window search style
+nnoremap <C-f> /
+inoremap <C-f> <ESC>/
+vnoremap <C-f> <ESC>/<C-r><C-w>
+
 "detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
 
 "if has('win32')
@@ -62,19 +122,19 @@ inoremap ' ''<ESC>i
 	"echo "this is Cywin"
 "endif
 
-function IsWin32()
+function! IsWin32()
 	return has('win32')
 endfunction
 
-function IsWin32Unix()
+function! IsWin32Unix()
 	return has('win32unix')
 endfunction
 
-function IsUnix()
+function! IsUnix()
 	return has('unix')
 endfunction
 
-function IsMac()
+function! IsMac()
 	return has('macunix')
 endfunction
 
