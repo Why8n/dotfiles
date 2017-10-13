@@ -42,6 +42,7 @@ nmap wl <C-w>l
 nmap wj <C-w>j
 nmap wk <C-w>k
 
+
 "detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
 
 "if has('win32')
@@ -98,9 +99,9 @@ let g:ctrlp_cmd = 'CtrlP'
 " set local working directory:current file
 let g:ctrlp_working_path_mode = 'ra'
 
+" exclusions
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-" exclusions
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
@@ -112,9 +113,14 @@ Plugin 'scrooloose/nerdtree'
 nmap wm :NERDTreeToggle<CR>
 let NERDTreeWinPos='left'
 let NERDTreeWinSize=30
+"Refresh both CtrlP and NERDTree
+nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>:CtrlPClearCache<cr>
 
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
  " -------------------------------------------------------------------------
  " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required 
+
 
