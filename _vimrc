@@ -49,7 +49,6 @@ inoremap < <><ESC>i
 inoremap " ""<ESC>i
 inoremap ' ''<ESC>i
 
-
 "detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
 
 "if has('win32')
@@ -137,6 +136,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+Plugin 'tpope/vim-surround'
  " -------------------------------------------------------------------------
  " All of your Plugins must be added before the following line
 call vundle#end()            " required
