@@ -74,6 +74,14 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 
+" Disable arrow movement, resize splits instead.
+" if get(g:, 'elite_mode')
+    nnoremap <Up>    :resize +2<CR>
+    nnoremap <Down>  :resize -2<CR>
+    nnoremap <Left>  :vertical resize +2<CR>
+    nnoremap <Right> :vertical resize -2<CR>
+" endif
+
 " Ctrl+a  
 nmap <silent> <C-a> ggvG$  
   
@@ -249,6 +257,19 @@ nmap <silent> <F8> <Plug>MarkdownPreview        " for normal mode
 imap <silent> <F8> <Plug>MarkdownPreview        " for insert mode
 nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode
 imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
+
+
+
+
+
+
+
+
+
+
+
+
+
 " -------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
