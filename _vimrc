@@ -68,6 +68,12 @@ set fillchars=vert:\ ,stl:\ ,stlnc:\
 set enc=utf-8  
 set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936 
 
+" remove gui
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+
 " Ctrl+a  
 nmap <silent> <C-a> ggvG$  
   
