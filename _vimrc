@@ -259,6 +259,18 @@ nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode
 imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
 
 
+" Plugin 'reedes/vim-pencil'
+" augroup pencil
+"   autocmd!
+"   autocmd FileType markdown,mkd,md call pencil#init()
+"   autocmd FileType text         call pencil#init()
+" augroup END
+" let g:airline_section_x = '%{PencilMode()}'
+
+
+
+
+
 
 
 
