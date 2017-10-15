@@ -122,6 +122,8 @@ inoremap <c-k> <c-o>gk
 nnoremap <C-f> /
 inoremap <C-f> <ESC>/
 vnoremap <C-f> <ESC>/<C-r><C-w>
+" command mode
+cnoremap <C-f> <C-r><C-w>
 
 "detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
 
@@ -268,7 +270,36 @@ imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
 " let g:airline_section_x = '%{PencilMode()}'
 
 
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_key_invoke_completion = '<M-/>' "default <C-Space>,modify to alt+/
+" 自动补全配置  
+set completeopt=longest,menu " "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)  
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口 
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项  
 
+"youcompleteme  默认tab  s-tab 和自动补全冲突  
+let g:ycm_key_list_select_completion=['<c-n>']  
+let g:ycm_key_list_select_completion = ['<Down>']  
+let g:ycm_key_list_previous_completion=['<c-p>']  
+let g:ycm_key_list_previous_completion = ['<Up>']  
+let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示  
+
+"在注释输入中也能补全  
+let g:ycm_complete_in_comments = 1  
+"在字符串输入中也能补全  
+let g:ycm_complete_in_strings = 1  
+"注释和字符串中的文字也会被收入补全  
+let g:ycm_collect_identifiers_from_comments_and_strings = 0  
+let g:clang_user_options='|| exit 0'  
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处 
+
+if IsUnix()
+    let g:ycm_server_python_interpreter='/usr/bin/python'
+    let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+elseif IsWin32()
+    let g:ycm_server_python_interpreter="D:/Program\ Files\ (x86)/Python/python2/python.exe"
+    let g:ycm_global_ycm_extra_conf="D:/Program\ Files\ (x86)/Vim/vimfiles/.ycm_extra_conf.py"
+endif
 
 
 
