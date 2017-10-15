@@ -103,11 +103,11 @@ nmap wj <C-w>j
 nmap wk <C-w>k
 
 " auto complete brackets
-inoremap {<CR> {<C-o>o}<C-o>O
-inoremap ( ()<ESC>i
-inoremap < <><ESC>i
-inoremap " ""<ESC>i
-inoremap ' ''<ESC>i
+" inoremap {<CR> {<C-o>o}<C-o>O
+" inoremap ( ()<ESC>i
+" inoremap < <><ESC>i
+" inoremap " ""<ESC>i
+" inoremap ' ''<ESC>i
 
 " Fast quiting without saving
 nmap <leader>q :q!<cr>
@@ -207,10 +207,12 @@ Plugin 'vim-syntastic/syntastic'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+" overwrite quickfix when execute :SyntasticSetLocList
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+map <F2> :SyntasticToggleMode<CR>
 
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
@@ -301,7 +303,8 @@ elseif IsWin32()
     let g:ycm_global_ycm_extra_conf="D:/Program\ Files\ (x86)/Vim/vimfiles/.ycm_extra_conf.py"
 endif
 
-
+Plugin 'Raimondi/delimitMate'
+inoremap {<CR> {<CR>}<C-o>O
 
 
 
