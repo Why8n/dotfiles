@@ -322,6 +322,10 @@ let delimitMate_matchpairs = "(:),[:],{:},<:>"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 
 Plugin 'kshenoy/vim-signature'
+Plugin 'vim-scripts/Marks-Browser'
+nmap <silent> <leader>mb :MarksBrowser<cr>
+" the browser window not close itself after you jump to a mark
+let marksCloseWhenSelected = 0
 
 
 " -------------------------------------------------------------------------
