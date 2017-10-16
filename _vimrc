@@ -321,6 +321,7 @@ inoremap {<CR> {<CR>}<C-o>O
 let delimitMate_matchpairs = "(:),[:],{:},<:>"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 
+Plugin 'kshenoy/vim-signature'
 
 
 " -------------------------------------------------------------------------
