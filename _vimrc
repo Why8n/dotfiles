@@ -4,6 +4,8 @@ behave mswin
 
 " reload vimrc
 nnoremap <C-l> :source $MYVIMRC<CR>
+" change leader \ to ;
+let mapleader=';'
 set number  
 set relativenumber
 " no backup
@@ -195,6 +197,15 @@ Plugin 'scrooloose/nerdtree'
 nmap wm :NERDTreeToggle<CR>
 let NERDTreeWinPos='left'
 let NERDTreeWinSize=30
+" 当不带参数打开Vim时自动加载项目树
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" 当所有文件关闭时关闭项目树窗格
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" 不显示这些文件
+let NERDTreeIgnore=['\.pyc$', '\~$', 'node_modules'] "ignore files in NERDTree
+" 不显示项目树上额外的信息，例如帮助、提示什么的
+let NERDTreeMinimalUI=1 
 "Refresh both CtrlP and NERDTree
 nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>:CtrlPClearCache<cr>
 
@@ -305,14 +316,10 @@ endif
 
 Plugin 'Raimondi/delimitMate'
 inoremap {<CR> {<CR>}<C-o>O
-
-
-
-
-
-
-
-
+" Use this option to tell delimitMate which characters should be considered
+" matching pairs. Read |delimitMateAutoClose| for details.
+let delimitMate_matchpairs = "(:),[:],{:},<:>"
+au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 
 
 
