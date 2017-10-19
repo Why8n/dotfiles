@@ -1,4 +1,4 @@
-source $VIMRUNTIME/vimrc_example.vim
+
 source $VIMRUNTIME/mswin.vim
 behave mswin
 
@@ -6,33 +6,33 @@ behave mswin
 nnoremap <C-l> :source $MYVIMRC<CR>
 " change leader \ to ;
 let mapleader=';'
-set number  
+set number
 set relativenumber
 " no backup
 set noundofile
 set nobackup
 set noswapfile
 "  real time search result shown
-set incsearch  
-" 搜索到文件两端时不重新搜索  
-set nowrapscan  
-" 不突出显示当前行  
-set nocursorline  
+set incsearch
+" 搜索到文件两端时不重新搜索
+set nowrapscan
+" 不突出显示当前行
+set nocursorline
 " Use spaces instead of tabs
-set expandtab  
+set expandtab
 " 1 tab = 4 spaces
-" Set <<  and >> shift width 4  
-set shiftwidth=4  
-set tabstop=4  
+" Set <<  and >> shift width 4
+set shiftwidth=4
+set tabstop=4
 " Be smart when using tabs
-set smarttab  
+set smarttab
 colorscheme SolarizedDark
 
- " 检测文件类型  
+ " 检测文件类型
 " filetype on
-" 不设定在插入状态无法用退格键和 Delete 键删除回车符  
-set backspace=indent,eol,start  
-set whichwrap+=<,>,h,l  
+" 不设定在插入状态无法用退格键和 Delete 键删除回车符
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 " When searching try to be samrt about cases
@@ -53,7 +53,7 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 " auto syntax highlight
-syntax on  
+syntax on
 
 " Allow to switch buffers without saving
 set hidden
@@ -63,12 +63,12 @@ set smartindent
 
 " set cmd window height :( cmd )
 set cmdheight=1
-" 在被分割的窗口间显示空白，便于阅读  
-set fillchars=vert:\ ,stl:\ ,stlnc:\  
+" 在被分割的窗口间显示空白，便于阅读
+set fillchars=vert:\ ,stl:\ ,stlnc:\
 
 " encoding setting
-set enc=utf-8  
-set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936 
+set enc=utf-8
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 
 " remove gui
 set guioptions-=m  "remove menu bar
@@ -84,21 +84,21 @@ set guioptions-=L  "remove left-hand scroll bar
     nnoremap <Right> :vertical resize -2<CR>
 " endif
 
-" Ctrl+a  
-nmap <silent> <C-a> ggvG$  
-  
-" 选中状态下 Ctrl+c 复制  
-vnoremap <c-c> "+y  
-  
-" Ctrl+v  
-nmap <silent> <C-v> "+p  
+" Ctrl+a
+nmap <silent> <C-a> ggvG$
+
+" 选中状态下 Ctrl+c 复制
+vnoremap <c-c> "+y
+
+" Ctrl+v
+nmap <silent> <C-v> "+p
 
 
 "switch windows
-"nnoremap <C-h> <C-w>h  
-"nnoremap <C-l> <C-w>l  
-"nnoremap <C-j> <C-w>j  
-"nnoremap <C-k> <C-w>k 
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-l> <C-w>l
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
 nmap wh <C-w>h
 nmap wl <C-w>l
 nmap wj <C-w>j
@@ -116,9 +116,9 @@ nmap <leader>q :q!<cr>
 
 " cusor mvoement in insertmode
 inoremap <c-h> <left>
-inoremap <c-l> <right>  
-inoremap <c-j> <c-o>gj  
-inoremap <c-k> <c-o>gk  
+inoremap <c-l> <right>
+inoremap <c-j> <c-o>gj
+inoremap <c-k> <c-o>gk
 
 " disable window search style
 " nnoremap <C-f> /
@@ -165,7 +165,7 @@ endif
 " let Vundle manage Vundle, required
  Plugin 'VundleVim/Vundle.vim'
  " -------------------------------------------------------------------------
-" add plugin here 
+" add plugin here
 Plugin 'dyng/ctrlsf.vim'
 if executable('ag')
     let g:ctrlsf_ackprg = 'ag'
@@ -187,7 +187,7 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 " set local working directory:current file
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_max_files=0 
+let g:ctrlp_max_files=0
 let g:ctrlp_max_depth=40
 " exclusions
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
@@ -213,7 +213,7 @@ elseif IsUnix() || IsMac()
     let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
 elseif IsWin32()
     let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
-endif 
+endif
 
 
 Plugin 'scrooloose/nerdtree'
@@ -228,7 +228,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " 不显示这些文件
 let NERDTreeIgnore=['\.pyc$', '\~$', 'node_modules'] "ignore files in NERDTree
 " 不显示项目树上额外的信息，例如帮助、提示什么的
-let NERDTreeMinimalUI=1 
+let NERDTreeMinimalUI=1
 "Refresh both CtrlP and NERDTree
 nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>:CtrlPClearCache<cr>
 
@@ -305,29 +305,31 @@ imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
 " augroup END
 " let g:airline_section_x = '%{PencilMode()}'
 
-
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_key_invoke_completion = '<M-/>' "default <C-Space>,modify to alt+/
-" 自动补全配置  
-set completeopt=longest,menu " "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)  
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口 
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项  
+" 自动补全配置
+set completeopt=longest,menu " "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
 
-"youcompleteme  默认tab  s-tab 和自动补全冲突  
-let g:ycm_key_list_select_completion=['<c-n>']  
-let g:ycm_key_list_select_completion = ['<Down>']  
-let g:ycm_key_list_previous_completion=['<c-p>']  
-let g:ycm_key_list_previous_completion = ['<Up>']  
-let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示  
+"youcompleteme  默认tab  s-tab 和自动补全冲突
+let g:ycm_key_list_select_completion=['<c-n>']
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion=['<c-p>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
 
-"在注释输入中也能补全  
-let g:ycm_complete_in_comments = 1  
-"在字符串输入中也能补全  
-let g:ycm_complete_in_strings = 1  
-"注释和字符串中的文字也会被收入补全  
-let g:ycm_collect_identifiers_from_comments_and_strings = 0  
-let g:clang_user_options='|| exit 0'  
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处 
+let g:ycm_min_num_of_chars_for_completion = 1
+"在注释输入中也能补全
+let g:ycm_complete_in_comments = 1
+"在字符串输入中也能补全
+let g:ycm_complete_in_strings = 1
+"注释和字符串中的文字也会被收入补全
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+" 让YouCompleteMe同时利用原来的ctags
+let g:ycm_collect_identifiers_from_tag_files = 1  
+let g:clang_user_options='|| exit 0'
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
 
 if IsUnix()
     let g:ycm_server_python_interpreter='/usr/bin/python'
@@ -346,7 +348,7 @@ Plugin 'Raimondi/delimitMate'
 inoremap {<CR> {<CR>}<C-o>O
 " Use this option to tell delimitMate which characters should be considered
 " matching pairs. Read |delimitMateAutoClose| for details.
-let delimitMate_matchpairs = "(:),[:],{:},<:>"
+let delimitMate_matchpairs = "(:),[:],{:}"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 
 Plugin 'kshenoy/vim-signature'
@@ -359,5 +361,28 @@ let marksCloseWhenSelected = 1
 " -------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required 
+filetype plugin indent on    " required
 
+
+map <F5> :call CompileRun()<CR>
+nnoremap <leader>cmd :call CompileRun()<CR>
+func! CompileRun()
+    exec "w"
+    if &filetype == 'c'
+        exec "!g++ % -o %< && ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %< && ./%<"
+    elseif &filetype == 'java'
+        exec "!javac % && java %<"
+    elseif &filetype == 'sh'
+         :!bash %
+    elseif &filetype == 'python'
+         :!"D:\Program Files (x86)\Python\python3\python.exe" %
+    elseif &filetype == 'html'
+         exec "!chrome % &"
+    elseif &filetype == 'go'
+         exec "!go build %< && go run %"
+    elseif &filetype == 'mkd'
+         exec "!~/.vim/markdown.pl % > %.html & && !chrome %.html &"
+     endif
+ endfunc
