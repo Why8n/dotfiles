@@ -339,6 +339,8 @@ endif
 
 " add support completions of java
 let g:EclimCompletionMethod = 'omnifunc'
+" add support completions of python
+let g:ycm_python_binary_path ="D:/Program\ Files\ (x86)/Python/python3/python.exe"
 
 Plugin 'Raimondi/delimitMate'
 inoremap {<CR> {<CR>}<C-o>O
