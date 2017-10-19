@@ -121,24 +121,13 @@ inoremap <c-j> <c-o>gj
 inoremap <c-k> <c-o>gk  
 
 " disable window search style
-nnoremap <C-f> /
-inoremap <C-f> <ESC>/
-vnoremap <C-f> <ESC>/<C-r><C-w>
-" command mode
-cnoremap <C-f> <C-r><C-w>
+" nnoremap <C-f> /
+" inoremap <C-f> <ESC>/
+" vnoremap <C-f> <ESC>/<C-r><C-w>
+" " command mode
+" cnoremap <C-f> <C-r><C-w>
 
 "detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
-
-"if has('win32')
-	"echo "this is windowns"
-	"set nu	
-"elseif has('unix')
-	"echo "this is unix"
-"elseif has(macunix)
-	"echo "this is mac"
-"elseif has(win32unix)
-	"echo "this is Cywin"
-"endif
 
 function! IsWin32()
 	return has('win32')
@@ -176,13 +165,30 @@ endif
 " let Vundle manage Vundle, required
  Plugin 'VundleVim/Vundle.vim'
  " -------------------------------------------------------------------------
-" add plugin here
+" add plugin here 
+Plugin 'dyng/ctrlsf.vim'
+if executable('ag')
+    let g:ctrlsf_ackprg = 'ag'
+endif
+let g:ctrlsf_case_sensitive = 'smart'
+let g:ctrlsf_default_root = 'project'
+let g:ctrlsf_default_view_mode = 'normal'
+let g:ctrlsf_position = 'left'
+let g:ctrlsf_winsize = '30%'
+
+nnoremap <C-f> :CtrlSF
+inoremap <C-f> <ESC>:CtrlSF
+vnoremap <C-f> <ESC>h:CtrlSF<Space><C-R><C-W>
+xnoremap <C-f> <ESC>h:CtrlSF<Space><C-R><C-W>
+cnoremap <C-f> CtrlSF
+
 Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 " set local working directory:current file
 let g:ctrlp_working_path_mode = 'ra'
-
+let g:ctrlp_max_files=0 
+let g:ctrlp_max_depth=40
 " exclusions
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
@@ -190,8 +196,25 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
   \ }
+" let g:ctrlp_user_command = ['.git/', 'git ls-files --cached --others  --exclude-standard %s']
+" Use a custom file listing command:
+" The Silver Searcher
+if executable('ag')
+    " Use ag over grep
+    let g:ctrlp_user_command = ['ag','ag %s -i --nocolor --nogroup --hidden
+                \ --ignore .git
+                \ --ignore .svn
+                \ --ignore .hg
+                \ --ignore .DS_Store
+                \ --ignore "**/*.pyc"
+                \ -g ""' ]
+elseif IsUnix() || IsMac()
+    let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+elseif IsWin32()
+    let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
+endif 
+
 
 Plugin 'scrooloose/nerdtree'
 nmap wm :NERDTreeToggle<CR>
@@ -314,6 +337,9 @@ elseif IsWin32()
     let g:ycm_global_ycm_extra_conf="D:/Program\ Files\ (x86)/Vim/vimfiles/.ycm_extra_conf.py"
 endif
 
+" add support completions of java
+let g:EclimCompletionMethod = 'omnifunc'
+
 Plugin 'Raimondi/delimitMate'
 inoremap {<CR> {<CR>}<C-o>O
 " Use this option to tell delimitMate which characters should be considered
@@ -324,8 +350,8 @@ au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 Plugin 'kshenoy/vim-signature'
 Plugin 'vim-scripts/Marks-Browser'
 nmap <silent> <leader>mb :MarksBrowser<cr>
-" the browser window not close itself after you jump to a mark
-let marksCloseWhenSelected = 0
+" the browser window close itself after you jump to a mark
+let marksCloseWhenSelected = 1
 
 
 " -------------------------------------------------------------------------
