@@ -1,0 +1,147 @@
+" change leader \ to ;
+let mapleader=';'
+set number
+set relativenumber
+" no backup
+set noundofile
+set nobackup
+set noswapfile
+"  real time search result shown
+set incsearch
+" 搜索到文件两端时不重新搜索
+set nowrapscan
+" 不突出显示当前行
+set nocursorline
+" Use spaces instead of tabs
+set expandtab
+" 1 tab = 4 spaces
+" Set <<  and >> shift width 4
+set shiftwidth=4
+set tabstop=4
+" Be smart when using tabs
+set smarttab
+
+" 不设定在插入状态无法用退格键和 Delete 键删除回车符
+set backspace=indent,eol,start
+set whichwrap+=<,>,h,l
+" Ignore case when searching
+set ignorecase
+" When searching try to be samrt about cases
+set smartcase
+" Highlight search results
+set hlsearch
+ " Realtime search show
+ set incsearch
+ " Show matching brackets when text indicator is over them
+ set showmatch
+ set showmode
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Enable syntax highlighting
+syntax enable
+" auto syntax highlight
+syntax on
+
+" Allow to switch buffers without saving
+set hidden
+
+" 智能缩进
+set smartindent
+
+" set cmd window height :( cmd )
+set cmdheight=1
+" 在被分割的窗口间显示空白，便于阅读
+" set fillchars=vert:\ ,stl:\ ,stlnc:\
+
+" encoding setting
+set enc=utf-8
+set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+
+" Ctrl+a
+nmap <silent> <C-a> ggvG$
+
+" 选中状态下 Ctrl+c 复制
+vnoremap <c-c> "+y
+
+" Ctrl+v
+nmap <silent> <C-v> "+p
+
+
+nmap wh <C-w>h
+nmap wl <C-w>l
+nmap wj <C-w>j
+nmap wk <C-w>k
+
+" Fast quiting without saving
+nmap <leader>q :q!<cr>
+
+" cusor mvoement in insertmode
+inoremap <c-h> <left>
+inoremap <c-l> <right>
+inoremap <c-j> <up>
+inoremap <c-k> <down>
+
+" disable window search style
+" nnoremap <C-f> /
+" inoremap <C-f> <ESC>/
+" vnoremap <C-f> <ESC>/<C-r><C-w>
+" " command mode
+" cnoremap <C-f> <C-r><C-w>
+
+
+" ==================================================
+" Show all the provided actions via `:actionlist`
+" ==================================================
+
+" built in search looks better
+map <C-f> <ESC>:action Find<CR>
+
+" comment
+nnoremap <Leader>cc :action CommentByLineComment<CR>
+" uncomment
+
+
+nnoremap <Leader>br :action ToggleLineBreakpoint<CR>
+" see all breakpoints
+nnoremap <Leader>abr :action ViewBreakpoints<CR>
+
+nnoremap <Leader>fs :action ToggleFullScreen<CR>
+
+nnoremap <C-n> :action GotoClass<CR>
+inoremap <C-n> <ESC>:action GotoClass<CR>
+
+nnoremap <C-o> :action GotoDeclaration<CR>
+inoremap <C-o> <ESC>:action GotoDeclaration<CR>
+
+nnoremap <S-S> :action SearchEverywhere<CR>
+inoremap <S-S> <ESC>:action SearchEverywhere<CR>
+
+nnoremap <C-S-n> :action GotoFile<CR>
+inoremap <C-S-n> <ESC>:action GotoFile<CR>
+" mean going to see the real implementation,aka method
+nnoremap <Leader>gi :action GotoImplementation<CR>
+
+nnoremap <Leader>su :action ShowUsages<CR>
+nnoremap <Leader>fu :action FindUsages<CR>
+
+nnoremap <Leader>oi :action OptimizeImports<CR>
+
+nnoremap <Leader>cmd :action ChooseRunConfiguration<CR>
+
+nnoremap <Leader>sel :action ActivateTerminalToolWindow<CR>
+
+nnoremap <Leader><space> a<space><ESC>:action CodeCompletion<CR>
+
+noremap <tab> gt
+noremap <S-tab> gT
+
+" ==================================================
+" Emulated Vim Plugins
+" ==================================================
+set surround
+
