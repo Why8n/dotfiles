@@ -103,8 +103,8 @@ map <C-f> <ESC>:action Find<CR>
 
 " comment
 nnoremap <Leader>cc :action CommentByLineComment<CR>
-" uncomment
-
+" pretend :) uncomment 
+nnoremap <Leader>cu :action CommentByLineComment<CR>
 
 nnoremap <Leader>br :action ToggleLineBreakpoint<CR>
 " see all breakpoints
@@ -137,6 +137,7 @@ nnoremap <Leader>sel :action ActivateTerminalToolWindow<CR>
 
 nnoremap <Leader><space> a<space><ESC>:action CodeCompletion<CR>
 
+" Tab operation
 noremap <tab> gt
 noremap <S-tab> gT
 
