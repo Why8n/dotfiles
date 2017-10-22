@@ -26,7 +26,6 @@ set shiftwidth=4
 set tabstop=4
 " Be smart when using tabs
 set smarttab
-colorscheme SolarizedDark
 
  " 检测文件类型
 " filetype on
@@ -356,6 +355,14 @@ Plugin 'vim-scripts/Marks-Browser'
 nmap <silent> <leader>mb :MarksBrowser<cr>
 " the browser window close itself after you jump to a mark
 let marksCloseWhenSelected = 1
+
+" scheme for console
+" Plugin 'jnurmine/Zenburn'
+if has('gui_running')
+    colorscheme SolarizedDark
+else
+    colorscheme zenburn
+endif
 
 
 " -------------------------------------------------------------------------
