@@ -3,4 +3,4 @@
 !vimfiles/
 vimfiles/*
 !vimfiles/colors/
-!_ideavimrc
+!ideavim/
