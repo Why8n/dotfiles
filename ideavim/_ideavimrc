@@ -97,10 +97,50 @@ inoremap <c-k> <down>
 " ==================================================
 " Show all the provided actions via `:actionlist`
 " ==================================================
+nnoremap <Leader>su :action ShowUsages<CR>
+nnoremap <Leader>fu :action FindUsages<CR>
+nnoremap <Leader><space> a<space><ESC>:action CodeCompletion<CR>
+inoremap <Leader><space> <space><ESC>:action CodeCompletion<CR>
+" <C-N>
+nnoremap <C-n> :action GotoClass<CR>
+inoremap <C-n> <ESC>:action GotoClass<CR>
+nnoremap <leader>gc :action GotoClass<CR>
+inoremap <leader>gc <ESC>:action GotoClass<CR>
+" <C-S-N>
+nnoremap <C-S-n> :action GotoFile<CR>
+inoremap <C-S-n> <ESC>:action GotoFile<CR>
+
+" <C-o>
+nnoremap <C-o> :action OverrideMethods<CR>
+" <C-F12>
+nnoremap <leader>ss :action FileStructurePopup<CR>
+" <C-P>
+nnoremap <C-P> :action ParameterInfo<CR>
+inoremap <C-P> <ESC>:action ParameterInfo<CR>a
+" <C-Q>
+nnoremap <C-q> :action QuickJavaDoc<CR>
+
+" <C-H> Hierarchy Class
+nnoremap <C-H> :action TypeHierarchy<CR>
+" <C-S-H> Hierarchy Method
+nnoremap <C-S-H> :action MethodHierarchy<CR>
+nnoremap <leader>hm :action MethodHierarchy<CR>
+" as mouse clicked
+nnoremap <leader>gd :action GotoDeclaration<CR>
+inoremap <leader>gd <ESC>:action GotoDeclaration<CR>
+" mean going to see the real implementation,aka method
+nnoremap <Leader>gi :action GotoImplementation<CR>
+
+" back
+nnoremap <leader>gb :action Back<CR>
+" forward
+nnoremap <leader>fw :action Forward<CR>
+
+nnoremap <Leader>oi :action OptimizeImports<CR>
+nnoremap <space>oi :action OptimizeImports<CR>
 
 " built in search looks better
 map <C-f> <ESC>:action Find<CR>
-
 " comment
 nnoremap <Leader>cc :action CommentByLineComment<CR>
 " pretend :) uncomment 
@@ -112,30 +152,13 @@ nnoremap <Leader>abr :action ViewBreakpoints<CR>
 
 nnoremap <Leader>fs :action ToggleFullScreen<CR>
 
-nnoremap <C-n> :action GotoClass<CR>
-inoremap <C-n> <ESC>:action GotoClass<CR>
-
-nnoremap <C-o> :action GotoDeclaration<CR>
-inoremap <C-o> <ESC>:action GotoDeclaration<CR>
-
-nnoremap <S-S> :action SearchEverywhere<CR>
-inoremap <S-S> <ESC>:action SearchEverywhere<CR>
-
-nnoremap <C-S-n> :action GotoFile<CR>
-inoremap <C-S-n> <ESC>:action GotoFile<CR>
-" mean going to see the real implementation,aka method
-nnoremap <Leader>gi :action GotoImplementation<CR>
-
-nnoremap <Leader>su :action ShowUsages<CR>
-nnoremap <Leader>fu :action FindUsages<CR>
-
-nnoremap <Leader>oi :action OptimizeImports<CR>
+nnoremap <leader>sew :action SearchEverywhere<CR>
 
 nnoremap <Leader>cmd :action ChooseRunConfiguration<CR>
 
 nnoremap <Leader>sel :action ActivateTerminalToolWindow<CR>
-
-nnoremap <Leader><space> a<space><ESC>:action CodeCompletion<CR>
+" <C-S-F<F4>> close windows just popup
+nnoremap <leader>cw :action CloseActiveTab<CR>
 
 " Tab operation
 noremap <tab> gt
