@@ -135,6 +135,11 @@ nnoremap <Leader>gi :action GotoImplementation<CR>
 nnoremap <leader>gb :action Back<CR>
 " forward
 nnoremap <leader>fw :action Forward<CR>
+" <C-A-L>
+nnoremap <C-A-l> :action ReformatCode<CR>
+inoremap <C-A-l> <ESC>:action ReformatCode<CR>a
+nnoremap <leader>fm :action ReformatCode<CR>
+inoremap <leader>fm <ESC>:action ReformatCode<CR>a
 
 nnoremap <Leader>oi :action OptimizeImports<CR>
 nnoremap <space>oi :action OptimizeImports<CR>
