@@ -106,6 +106,8 @@ nnoremap <C-n> :action GotoClass<CR>
 inoremap <C-n> <ESC>:action GotoClass<CR>
 nnoremap <leader>gc :action GotoClass<CR>
 inoremap <leader>gc <ESC>:action GotoClass<CR>
+" <C-e>
+nnoremap <leader>cf :action RecentFiles<CR>
 " <C-S-N>
 nnoremap <C-S-n> :action GotoFile<CR>
 inoremap <C-S-n> <ESC>:action GotoFile<CR>
