@@ -364,6 +364,7 @@ else
     colorscheme zenburn
 endif
 
+Plugin 'udalov/kotlin-vim'
 
 " -------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
@@ -390,6 +391,12 @@ func! CompileRun()
         exec "!g++ % -o %< && ./%<"
     elseif &filetype == 'java'
         exec "!javac % && java %<"
+    elseif &filetype == 'kotlin'
+        if IsWin32()
+            exec "!kotlinc % -include-runtime -d %<.jar && java -jar %<.jar && del %<.jar"
+        else
+            exec "!kotlinc % -include-runtime -d %<.jar && java -jar %<.jar && rm %<.jar"
+        endif
     elseif &filetype == 'sh'
          :!bash %
     elseif &filetype == 'python'
