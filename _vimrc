@@ -219,9 +219,9 @@ Plugin 'scrooloose/nerdtree'
 nmap wm :NERDTreeToggle<CR>
 let NERDTreeWinPos='left'
 let NERDTreeWinSize=30
-" 当不带参数打开Vim时自动加载项目树
+" 当不带参数打开Vim时自动加载项目树 -- no
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " 当所有文件关闭时关闭项目树窗格
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " 不显示这些文件
@@ -407,7 +407,7 @@ func! CompileRun()
          exec "!~/.vim/markdown.pl % > %.html & && !chrome %.html &"
     elseif &filetype == 'sh'
          :!bash %
-    elseif &filetype == 'dosbatch'
+    elseif &filetype == 'bat'
         exec "!cmd /c %"
      endif
  endfunc
