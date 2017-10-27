@@ -397,8 +397,6 @@ func! CompileRun()
         else
             exec "!kotlinc % -include-runtime -d %<.jar && java -jar %<.jar && rm %<.jar"
         endif
-    elseif &filetype == 'sh'
-         :!bash %
     elseif &filetype == 'python'
          :!"D:\Program Files (x86)\Python\python3\python.exe" %
     elseif &filetype == 'html'
@@ -407,5 +405,9 @@ func! CompileRun()
          exec "!go build %< && go run %"
     elseif &filetype == 'mkd'
          exec "!~/.vim/markdown.pl % > %.html & && !chrome %.html &"
+    elseif &filetype == 'sh'
+         :!bash %
+    elseif &filetype == 'dosbatch'
+        exec "!cmd /c %"
      endif
  endfunc
