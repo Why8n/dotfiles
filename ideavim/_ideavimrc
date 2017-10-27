@@ -166,6 +166,8 @@ nnoremap <Leader>cmd :action ChooseRunConfiguration<CR>
 nnoremap <Leader>sel :action ActivateTerminalToolWindow<CR>
 " <C-S-F<F4>> close windows just popup
 nnoremap <leader>cw :action CloseActiveTab<CR>
+" <C-j>
+inoremap <C-j> <ESC>:action InsertLiveTemplate<CR>
 
 " Tab operation
 noremap <tab> gt
