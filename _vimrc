@@ -407,7 +407,7 @@ func! CompileRun()
          exec "!~/.vim/markdown.pl % > %.html & && !chrome %.html &"
     elseif &filetype == 'sh'
          :!bash %
-    elseif &filetype == 'bat'
+    elseif &filetype == 'dosbatch'
         exec "!cmd /c %"
      endif
  endfunc

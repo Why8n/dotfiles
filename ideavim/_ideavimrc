@@ -70,6 +70,7 @@ vnoremap <c-c> "+y
 
 " Ctrl+v
 nmap <silent> <C-v> "+p
+imap <silent> <C-v> <C-o>"+p
 
 
 nmap wh <C-w>h
@@ -101,6 +102,8 @@ nnoremap <Leader>su :action ShowUsages<CR>
 nnoremap <Leader>fu :action FindUsages<CR>
 nnoremap <Leader><space> a<space><ESC>:action CodeCompletion<CR>
 inoremap <Leader><space> <space><ESC>:action CodeCompletion<CR>
+" cut
+vnoremap <C-x> "+d
 " <C-N>
 nnoremap <C-n> :action GotoClass<CR>
 inoremap <C-n> <ESC>:action GotoClass<CR>
