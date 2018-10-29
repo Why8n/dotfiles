@@ -1,11 +1,39 @@
+"detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
 
-source $VIMRUNTIME/mswin.vim
-behave mswin
+function! IsWin32()
+	return has('win32')
+endfunction
+
+function! IsWin32Unix()
+	return has('win32unix')
+endfunction
+
+function! IsUnix()
+	return has('unix')
+endfunction
+
+function! IsMac()
+	return has('macunix')
+endfunction
+
+" global configurations
+if IsWin32()
+    let g:python ='"D:/Program Files (x86)/Python/python3/python.exe"'
+    let g:ycm_extra_conf="D:/Program\ Files\ (x86)/Vim/vimfiles/.ycm_extra_conf.py"
+    let g:chrome = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+elseif IsUnix() || IsWin32Unix() || IsMac()
+    let g:python ='/usr/bin/python'
+    let g:ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+    let g:chrome = '/usr/bin/chrome'
+endif
+
+" let g:python ='"D:/Program Files (x86)/Python/python3/python.exe"'
+" let g:python = IsWin32() ? '"D:/Program Files (x86)/Python/python3/python.exe"' : '/usr/bin/python'
 
 " reload vimrc
 nnoremap <C-l> :source $MYVIMRC<CR>
 " change leader \ to ;
-let mapleader=';'
+let mapleader=' '
 set number
 set relativenumber
 " no backup
@@ -90,7 +118,9 @@ nmap <silent> <C-a> ggvG$
 vnoremap <c-c> "+y
 
 " Ctrl+v
-nmap <silent> <C-v> "+p
+nnoremap <silent> <C-v> "+p
+inoremap <silent> <C-v> <C-r>+
+
 
 
 "switch windows
@@ -103,6 +133,18 @@ nmap wl <C-w>l
 nmap wj <C-w>j
 nmap wk <C-w>k
 
+nnoremap 0p "0p
+nnoremap 0P "0P
+nnoremap 0yy "0yy
+vnoremap 0y "0y
+
+nnoremap +p "+p
+nnoremap +P "+P
+nnoremap +yy "+yy
+vnoremap +y "+y
+
+" format
+nnoremap <leader>fm gg=G''
 " auto complete brackets
 " inoremap {<CR> {<C-o>o}<C-o>O
 " inoremap ( ()<ESC>i
@@ -111,7 +153,8 @@ nmap wk <C-w>k
 " inoremap ' ''<ESC>i
 
 " Fast quiting without saving
-nmap <leader>q :q!<cr>
+nmap <leader>q :q<cr>
+nmap <leader>w :w<cr>
 
 " cusor mvoement in insertmode
 inoremap <c-h> <left>
@@ -125,24 +168,6 @@ inoremap <c-k> <c-o>gk
 " vnoremap <C-f> <ESC>/<C-r><C-w>
 " " command mode
 " cnoremap <C-f> <C-r><C-w>
-
-"detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
-
-function! IsWin32()
-	return has('win32')
-endfunction
-
-function! IsWin32Unix()
-	return has('win32unix')
-endfunction
-
-function! IsUnix()
-	return has('unix')
-endfunction
-
-function! IsMac()
-	return has('macunix')
-endfunction
 
 
 " vundle configurations
@@ -175,11 +200,14 @@ let g:ctrlsf_default_view_mode = 'normal'
 let g:ctrlsf_position = 'left'
 let g:ctrlsf_winsize = '30%'
 
-nnoremap <C-f> :CtrlSF
-inoremap <C-f> <ESC>:CtrlSF
-vnoremap <C-f> <ESC>h:CtrlSF<Space><C-R><C-W>
-xnoremap <C-f> <ESC>h:CtrlSF<Space><C-R><C-W>
-cnoremap <C-f> CtrlSF
+nnoremap <C-f> :CtrlSF<Space>
+inoremap <C-f> <ESC>:CtrlSF<Space>
+" visiual and select mode
+vnoremap <C-f> "1y:CtrlSF<Space><C-R>1 
+" visiual mode
+"xnoremap <C-f> :CtrlSF<Space> 
+" command line mode
+cnoremap <C-f> CtrlSF 
 
 Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
@@ -265,10 +293,12 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
+vmap <C-b> <leader>cc
+
 " markdown
 Plugin 'iamcco/markdown-preview.vim'
 " path to the chrome or the command to open chrome(or other modern browsers)
-let g:mkdp_path_to_chrome = 'C:\Program Files (x86)\Google\Chrome\Application\chrome'
+let g:mkdp_path_to_chrome = g:chrome
 
 " set to 1, the vim will open the preview window once enter the markdown
 " buffer
@@ -304,44 +334,39 @@ imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
 " augroup END
 " let g:airline_section_x = '%{PencilMode()}'
 
-Plugin 'Valloric/YouCompleteMe'
-let g:ycm_key_invoke_completion = '<M-/>' "default <C-Space>,modify to alt+/
-" 自动补全配置
-set completeopt=longest,menu " "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
+"Plugin 'Valloric/YouCompleteMe'
+"let g:ycm_key_invoke_completion = '<M-/>' "default <C-Space>,modify to alt+/
+"" 自动补全配置
+"set completeopt=longest,menu " "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
+"
+""youcompleteme  默认tab  s-tab 和自动补全冲突
+"let g:ycm_key_list_select_completion=['<c-n>']
+"let g:ycm_key_list_select_completion = ['<Down>']
+"let g:ycm_key_list_previous_completion=['<c-p>']
+"let g:ycm_key_list_previous_completion = ['<Up>']
+"let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
+"
+"let g:ycm_min_num_of_chars_for_completion = 1
+""在注释输入中也能补全
+"let g:ycm_complete_in_comments = 1
+""在字符串输入中也能补全
+"let g:ycm_complete_in_strings = 1
+""注释和字符串中的文字也会被收入补全
+"let g:ycm_collect_identifiers_from_comments_and_strings = 0
+"" 让YouCompleteMe同时利用原来的ctags
+"let g:ycm_collect_identifiers_from_tag_files = 1  
+"let g:clang_user_options='|| exit 0'
+"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
 
-"youcompleteme  默认tab  s-tab 和自动补全冲突
-let g:ycm_key_list_select_completion=['<c-n>']
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion=['<c-p>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
-
-let g:ycm_min_num_of_chars_for_completion = 1
-"在注释输入中也能补全
-let g:ycm_complete_in_comments = 1
-"在字符串输入中也能补全
-let g:ycm_complete_in_strings = 1
-"注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
-" 让YouCompleteMe同时利用原来的ctags
-let g:ycm_collect_identifiers_from_tag_files = 1  
-let g:clang_user_options='|| exit 0'
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
-
-if IsUnix()
-    let g:ycm_server_python_interpreter='/usr/bin/python'
-    let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-elseif IsWin32()
-    let g:ycm_server_python_interpreter="D:/Program\ Files\ (x86)/Python/python2/python.exe"
-    let g:ycm_global_ycm_extra_conf="D:/Program\ Files\ (x86)/Vim/vimfiles/.ycm_extra_conf.py"
-endif
+let g:ycm_server_python_interpreter=g:python
+let g:ycm_global_ycm_extra_conf= g:ycm_extra_conf
 
 " add support completions of java
 let g:EclimCompletionMethod = 'omnifunc'
 " add support completions of python
-let g:ycm_python_binary_path ="D:/Program\ Files\ (x86)/Python/python3/python.exe"
+let g:ycm_python_binary_path =g:python
 
 Plugin 'Raimondi/delimitMate'
 inoremap {<CR> {<CR>}<C-o>O
@@ -371,16 +396,6 @@ Plugin 'udalov/kotlin-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-"python with virtualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
-
 map <F5> :call CompileRun()<CR>
 nnoremap <leader>cmd :call CompileRun()<CR>
 func! CompileRun()
@@ -398,7 +413,7 @@ func! CompileRun()
             exec "!kotlinc % -include-runtime -d %<.jar && java -jar %<.jar && rm %<.jar"
         endif
     elseif &filetype == 'python'
-         :!"D:\Program Files (x86)\Python\python3\python.exe" %
+         exec "!".g:python." %"
     elseif &filetype == 'html'
          exec "!chrome % &"
     elseif &filetype == 'go'
