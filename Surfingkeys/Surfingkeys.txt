@@ -1,0 +1,49 @@
+
+settings.smoothScroll = true;
+settings.scrollStepSize = 80;
+
+//close tab
+map('q','x');
+
+//reopen tab
+unmap('u');
+map('Q','X');
+map('u','X')
+
+//sound
+unmap('ss');
+map('ss','<Alt-m>');
+
+//tab
+unmap('t');
+map('t','on');
+
+//close left tabs
+map('cl','gx0');
+map('cr','gx$');
+
+//switch tab
+map('gt','R');
+map('>','R');
+map('<','E');
+
+//go back
+unmap('gb');
+map('gb','S');
+//forwark
+unmap('gf');
+map('gf','D');
+
+//history
+map('<Ctrl-h>','oh');
+
+//youku hide danmu
+mapkey('as', 'hide danmu', function() {
+    const reYouku = /youku/i;
+    const url = window.location.href;
+    if(reYoutku.test(url)){
+        document.getElementsByClassName("dmicon")[0].click();
+        return;
+    }
+});
+
