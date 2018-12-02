@@ -1,47 +1,47 @@
+"detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
 
-source $VIMRUNTIME/mswin.vim
-behave mswin
+
+function! IsWin32()
+    return has('win32')
+endfunction
+
+function! IsWin32Unix()
+    return has('win32unix')
+endfunction
+
+function! IsUnix()
+    return has('unix')
+endfunction
+
+function! IsMac()
+    return has('macunix')
+endfunction
+
+" global configurations
+if IsWin32()
+    " source $VIMRUNTIME/general.vim
+    source $userprofile/general.vim
+    let g:python ='"D:/Program Files (x86)/Python/python3/python.exe"'
+    let g:ycm_extra_conf="D:/Program\ Files\ (x86)/Vim/vimfiles/.ycm_extra_conf.py"
+    let g:chrome = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
+elseif IsUnix() || IsWin32Unix() || IsMac()
+    source ~/general.vim
+    let g:python ='/usr/bin/python'
+    let g:ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+    let g:chrome = '/usr/bin/chrome'
+endif
+
+
+" let g:python ='"D:/Program Files (x86)/Python/python3/python.exe"'
+" let g:python = IsWin32() ? '"D:/Program Files (x86)/Python/python3/python.exe"' : '/usr/bin/python'
 
 " reload vimrc
 nnoremap <C-l> :source $MYVIMRC<CR>
-" change leader \ to ;
-let mapleader=';'
-set number
-set relativenumber
 " no backup
 set noundofile
 set nobackup
 set noswapfile
-"  real time search result shown
-set incsearch
-" 搜索到文件两端时不重新搜索
-set nowrapscan
-" 不突出显示当前行
-set nocursorline
-" Use spaces instead of tabs
-set expandtab
-" 1 tab = 4 spaces
-" Set <<  and >> shift width 4
-set shiftwidth=4
-set tabstop=4
-" Be smart when using tabs
-set smarttab
 
- " 检测文件类型
-" filetype on
-" 不设定在插入状态无法用退格键和 Delete 键删除回车符
-set backspace=indent,eol,start
-set whichwrap+=<,>,h,l
-" Ignore case when searching
-set ignorecase
-" When searching try to be samrt about cases
-set smartcase
-" Highlight search results
-set hlsearch
- " Realtime search show
- set incsearch
- " Show matching brackets when text indicator is over them
- set showmatch
 
 " No annoying sound on errors
 set noerrorbells
@@ -49,25 +49,10 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Enable syntax highlighting
-syntax enable
-" auto syntax highlight
-syntax on
-
-" Allow to switch buffers without saving
-set hidden
-
-" 智能缩进
-set smartindent
-
 " set cmd window height :( cmd )
 set cmdheight=1
 " 在被分割的窗口间显示空白，便于阅读
 set fillchars=vert:\ ,stl:\ ,stlnc:\
-
-" encoding setting
-set enc=utf-8
-set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 
 " remove gui
 set guioptions-=m  "remove menu bar
@@ -77,31 +62,10 @@ set guioptions-=L  "remove left-hand scroll bar
 
 " Disable arrow movement, resize splits instead.
 " if get(g:, 'elite_mode')
-    nnoremap <Up>    :resize +2<CR>
-    nnoremap <Down>  :resize -2<CR>
-    nnoremap <Left>  :vertical resize +2<CR>
-    nnoremap <Right> :vertical resize -2<CR>
-" endif
-
-" Ctrl+a
-nmap <silent> <C-a> ggvG$
-
-" 选中状态下 Ctrl+c 复制
-vnoremap <c-c> "+y
-
-" Ctrl+v
-nmap <silent> <C-v> "+p
-
-
-"switch windows
-"nnoremap <C-h> <C-w>h
-"nnoremap <C-l> <C-w>l
-"nnoremap <C-j> <C-w>j
-"nnoremap <C-k> <C-w>k
-nmap wh <C-w>h
-nmap wl <C-w>l
-nmap wj <C-w>j
-nmap wk <C-w>k
+nnoremap <Up>    :resize +2<CR>
+nnoremap <Down>  :resize -2<CR>
+nnoremap <Left>  :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
 
 " auto complete brackets
 " inoremap {<CR> {<C-o>o}<C-o>O
@@ -110,14 +74,6 @@ nmap wk <C-w>k
 " inoremap " ""<ESC>i
 " inoremap ' ''<ESC>i
 
-" Fast quiting without saving
-nmap <leader>q :q!<cr>
-
-" cusor mvoement in insertmode
-inoremap <c-h> <left>
-inoremap <c-l> <right>
-inoremap <c-j> <c-o>gj
-inoremap <c-k> <c-o>gk
 
 " disable window search style
 " nnoremap <C-f> /
@@ -126,24 +82,6 @@ inoremap <c-k> <c-o>gk
 " " command mode
 " cnoremap <C-f> <C-r><C-w>
 
-"detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
-
-function! IsWin32()
-	return has('win32')
-endfunction
-
-function! IsWin32Unix()
-	return has('win32unix')
-endfunction
-
-function! IsUnix()
-	return has('unix')
-endfunction
-
-function! IsMac()
-	return has('macunix')
-endfunction
-
 
 " vundle configurations
 set nocompatible              " be iMproved, required
@@ -151,19 +89,19 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 if IsWin32()
-	set rtp+=$VIM/vimfiles/bundle/Vundle.vim
-	call vundle#begin('$VIM/vimfiles/bundle/')
+    set rtp+=$VIM/vimfiles/bundle/Vundle.vim
+    call vundle#begin('$VIM/vimfiles/bundle/')
 elseif IsUnix() || IsWin32Unix() || IsMac()
-	set rtp+=~/.vim/bundle/Vundle.vim
-	call vundle#begin()
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
 endif
 
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
- Plugin 'VundleVim/Vundle.vim'
- " -------------------------------------------------------------------------
+Plugin 'VundleVim/Vundle.vim'
+" -------------------------------------------------------------------------
 " add plugin here
 Plugin 'dyng/ctrlsf.vim'
 if executable('ag')
@@ -175,11 +113,14 @@ let g:ctrlsf_default_view_mode = 'normal'
 let g:ctrlsf_position = 'left'
 let g:ctrlsf_winsize = '30%'
 
-nnoremap <C-f> :CtrlSF
-inoremap <C-f> <ESC>:CtrlSF
-vnoremap <C-f> <ESC>h:CtrlSF<Space><C-R><C-W>
-xnoremap <C-f> <ESC>h:CtrlSF<Space><C-R><C-W>
-cnoremap <C-f> CtrlSF
+nnoremap <C-f> :CtrlSF<Space>
+inoremap <C-f> <ESC>:CtrlSF<Space>
+" visiual and select mode
+vnoremap <C-f> "1y:CtrlSF<Space><C-R>1 
+" visiual mode
+"xnoremap <C-f> :CtrlSF<Space> 
+" command line mode
+cnoremap <C-f> CtrlSF 
 
 Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
@@ -193,9 +134,9 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
+            \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+            \ 'file': '\v\.(exe|so|dll)$',
+            \ }
 " let g:ctrlp_user_command = ['.git/', 'git ls-files --cached --others  --exclude-standard %s']
 " Use a custom file listing command:
 " The Silver Searcher
@@ -258,17 +199,19 @@ let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
 " Add your own custom formats or override the defaults
- let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
- let g:NERDCustomDelimiters = { 'java': { 'left': '//'} }
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+let g:NERDCustomDelimiters = { 'java': { 'left': '//'} }
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
+vmap <C-b> <leader>cc
+
 " markdown
 Plugin 'iamcco/markdown-preview.vim'
 " path to the chrome or the command to open chrome(or other modern browsers)
-let g:mkdp_path_to_chrome = 'C:\Program Files (x86)\Google\Chrome\Application\chrome'
+let g:mkdp_path_to_chrome = g:chrome
 
 " set to 1, the vim will open the preview window once enter the markdown
 " buffer
@@ -304,44 +247,39 @@ imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
 " augroup END
 " let g:airline_section_x = '%{PencilMode()}'
 
-Plugin 'Valloric/YouCompleteMe'
-let g:ycm_key_invoke_completion = '<M-/>' "default <C-Space>,modify to alt+/
-" 自动补全配置
-set completeopt=longest,menu " "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
+"Plugin 'Valloric/YouCompleteMe'
+"let g:ycm_key_invoke_completion = '<M-/>' "default <C-Space>,modify to alt+/
+"" 自动补全配置
+"set completeopt=longest,menu " "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
+"
+""youcompleteme  默认tab  s-tab 和自动补全冲突
+"let g:ycm_key_list_select_completion=['<c-n>']
+"let g:ycm_key_list_select_completion = ['<Down>']
+"let g:ycm_key_list_previous_completion=['<c-p>']
+"let g:ycm_key_list_previous_completion = ['<Up>']
+"let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
+"
+"let g:ycm_min_num_of_chars_for_completion = 1
+""在注释输入中也能补全
+"let g:ycm_complete_in_comments = 1
+""在字符串输入中也能补全
+"let g:ycm_complete_in_strings = 1
+""注释和字符串中的文字也会被收入补全
+"let g:ycm_collect_identifiers_from_comments_and_strings = 0
+"" 让YouCompleteMe同时利用原来的ctags
+"let g:ycm_collect_identifiers_from_tag_files = 1  
+"let g:clang_user_options='|| exit 0'
+"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
 
-"youcompleteme  默认tab  s-tab 和自动补全冲突
-let g:ycm_key_list_select_completion=['<c-n>']
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion=['<c-p>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
-
-let g:ycm_min_num_of_chars_for_completion = 1
-"在注释输入中也能补全
-let g:ycm_complete_in_comments = 1
-"在字符串输入中也能补全
-let g:ycm_complete_in_strings = 1
-"注释和字符串中的文字也会被收入补全
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
-" 让YouCompleteMe同时利用原来的ctags
-let g:ycm_collect_identifiers_from_tag_files = 1  
-let g:clang_user_options='|| exit 0'
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
-
-if IsUnix()
-    let g:ycm_server_python_interpreter='/usr/bin/python'
-    let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-elseif IsWin32()
-    let g:ycm_server_python_interpreter="D:/Program\ Files\ (x86)/Python/python2/python.exe"
-    let g:ycm_global_ycm_extra_conf="D:/Program\ Files\ (x86)/Vim/vimfiles/.ycm_extra_conf.py"
-endif
+let g:ycm_server_python_interpreter=g:python
+let g:ycm_global_ycm_extra_conf= g:ycm_extra_conf
 
 " add support completions of java
 let g:EclimCompletionMethod = 'omnifunc'
 " add support completions of python
-let g:ycm_python_binary_path ="D:/Program\ Files\ (x86)/Python/python3/python.exe"
+let g:ycm_python_binary_path =g:python
 
 Plugin 'Raimondi/delimitMate'
 inoremap {<CR> {<CR>}<C-o>O
@@ -371,16 +309,6 @@ Plugin 'udalov/kotlin-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-"python with virtualenv support
-py << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
-
 map <F5> :call CompileRun()<CR>
 nnoremap <leader>cmd :call CompileRun()<CR>
 func! CompileRun()
@@ -398,16 +326,16 @@ func! CompileRun()
             exec "!kotlinc % -include-runtime -d %<.jar && java -jar %<.jar && rm %<.jar"
         endif
     elseif &filetype == 'python'
-         :!"D:\Program Files (x86)\Python\python3\python.exe" %
+        exec "!".g:python." %"
     elseif &filetype == 'html'
-         exec "!chrome % &"
+        exec "!chrome % &"
     elseif &filetype == 'go'
-         exec "!go build %< && go run %"
+        exec "!go build %< && go run %"
     elseif &filetype == 'mkd'
-         exec "!~/.vim/markdown.pl % > %.html & && !chrome %.html &"
+        exec "!~/.vim/markdown.pl % > %.html & && !chrome %.html &"
     elseif &filetype == 'sh'
-         :!bash %
+        :!bash %
     elseif &filetype == 'dosbatch'
         exec "!cmd /c %"
-     endif
- endfunc
+    endif
+endfunc
