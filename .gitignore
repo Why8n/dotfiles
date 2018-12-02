@@ -5,3 +5,4 @@ vimfiles/*
 !vimfiles/colors/
 !ideavim/
 !*.vim
+!vs2017
