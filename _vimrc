@@ -1,75 +1,47 @@
 "detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
 
+
 function! IsWin32()
-	return has('win32')
+    return has('win32')
 endfunction
 
 function! IsWin32Unix()
-	return has('win32unix')
+    return has('win32unix')
 endfunction
 
 function! IsUnix()
-	return has('unix')
+    return has('unix')
 endfunction
 
 function! IsMac()
-	return has('macunix')
+    return has('macunix')
 endfunction
 
 " global configurations
 if IsWin32()
+    " source $VIMRUNTIME/general.vim
+    source $userprofile/general.vim
     let g:python ='"D:/Program Files (x86)/Python/python3/python.exe"'
     let g:ycm_extra_conf="D:/Program\ Files\ (x86)/Vim/vimfiles/.ycm_extra_conf.py"
     let g:chrome = 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
 elseif IsUnix() || IsWin32Unix() || IsMac()
+    source ~/general.vim
     let g:python ='/usr/bin/python'
     let g:ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
     let g:chrome = '/usr/bin/chrome'
 endif
+
 
 " let g:python ='"D:/Program Files (x86)/Python/python3/python.exe"'
 " let g:python = IsWin32() ? '"D:/Program Files (x86)/Python/python3/python.exe"' : '/usr/bin/python'
 
 " reload vimrc
 nnoremap <C-l> :source $MYVIMRC<CR>
-" change leader \ to ;
-let mapleader=' '
-set number
-set relativenumber
 " no backup
 set noundofile
 set nobackup
 set noswapfile
-"  real time search result shown
-set incsearch
-" 搜索到文件两端时不重新搜索
-set nowrapscan
-" 不突出显示当前行
-set nocursorline
-" Use spaces instead of tabs
-set expandtab
-" 1 tab = 4 spaces
-" Set <<  and >> shift width 4
-set shiftwidth=4
-set tabstop=4
-" Be smart when using tabs
-set smarttab
 
- " 检测文件类型
-" filetype on
-" 不设定在插入状态无法用退格键和 Delete 键删除回车符
-set backspace=indent,eol,start
-set whichwrap+=<,>,h,l
-" Ignore case when searching
-set ignorecase
-" When searching try to be samrt about cases
-set smartcase
-" Highlight search results
-set hlsearch
- " Realtime search show
- set incsearch
- " Show matching brackets when text indicator is over them
- set showmatch
 
 " No annoying sound on errors
 set noerrorbells
@@ -77,25 +49,10 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Enable syntax highlighting
-syntax enable
-" auto syntax highlight
-syntax on
-
-" Allow to switch buffers without saving
-set hidden
-
-" 智能缩进
-set smartindent
-
 " set cmd window height :( cmd )
 set cmdheight=1
 " 在被分割的窗口间显示空白，便于阅读
 set fillchars=vert:\ ,stl:\ ,stlnc:\
-
-" encoding setting
-set enc=utf-8
-set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 
 " remove gui
 set guioptions-=m  "remove menu bar
@@ -105,46 +62,11 @@ set guioptions-=L  "remove left-hand scroll bar
 
 " Disable arrow movement, resize splits instead.
 " if get(g:, 'elite_mode')
-    nnoremap <Up>    :resize +2<CR>
-    nnoremap <Down>  :resize -2<CR>
-    nnoremap <Left>  :vertical resize +2<CR>
-    nnoremap <Right> :vertical resize -2<CR>
-" endif
+nnoremap <Up>    :resize +2<CR>
+nnoremap <Down>  :resize -2<CR>
+nnoremap <Left>  :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
 
-" Ctrl+a
-nmap <silent> <C-a> ggvG$
-
-" 选中状态下 Ctrl+c 复制
-vnoremap <c-c> "+y
-
-" Ctrl+v
-nnoremap <silent> <C-v> "+p
-inoremap <silent> <C-v> <C-r>+
-
-
-
-"switch windows
-"nnoremap <C-h> <C-w>h
-"nnoremap <C-l> <C-w>l
-"nnoremap <C-j> <C-w>j
-"nnoremap <C-k> <C-w>k
-nmap wh <C-w>h
-nmap wl <C-w>l
-nmap wj <C-w>j
-nmap wk <C-w>k
-
-nnoremap 0p "0p
-nnoremap 0P "0P
-nnoremap 0yy "0yy
-vnoremap 0y "0y
-
-nnoremap +p "+p
-nnoremap +P "+P
-nnoremap +yy "+yy
-vnoremap +y "+y
-
-" format
-nnoremap <leader>fm gg=G''
 " auto complete brackets
 " inoremap {<CR> {<C-o>o}<C-o>O
 " inoremap ( ()<ESC>i
@@ -152,15 +74,6 @@ nnoremap <leader>fm gg=G''
 " inoremap " ""<ESC>i
 " inoremap ' ''<ESC>i
 
-" Fast quiting without saving
-nmap <leader>q :q<cr>
-nmap <leader>w :w<cr>
-
-" cusor mvoement in insertmode
-inoremap <c-h> <left>
-inoremap <c-l> <right>
-inoremap <c-j> <c-o>gj
-inoremap <c-k> <c-o>gk
 
 " disable window search style
 " nnoremap <C-f> /
@@ -176,19 +89,19 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 if IsWin32()
-	set rtp+=$VIM/vimfiles/bundle/Vundle.vim
-	call vundle#begin('$VIM/vimfiles/bundle/')
+    set rtp+=$VIM/vimfiles/bundle/Vundle.vim
+    call vundle#begin('$VIM/vimfiles/bundle/')
 elseif IsUnix() || IsWin32Unix() || IsMac()
-	set rtp+=~/.vim/bundle/Vundle.vim
-	call vundle#begin()
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
 endif
 
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
- Plugin 'VundleVim/Vundle.vim'
- " -------------------------------------------------------------------------
+Plugin 'VundleVim/Vundle.vim'
+" -------------------------------------------------------------------------
 " add plugin here
 Plugin 'dyng/ctrlsf.vim'
 if executable('ag')
@@ -221,9 +134,9 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
+            \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+            \ 'file': '\v\.(exe|so|dll)$',
+            \ }
 " let g:ctrlp_user_command = ['.git/', 'git ls-files --cached --others  --exclude-standard %s']
 " Use a custom file listing command:
 " The Silver Searcher
@@ -286,8 +199,8 @@ let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
 " Add your own custom formats or override the defaults
- let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
- let g:NERDCustomDelimiters = { 'java': { 'left': '//'} }
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+let g:NERDCustomDelimiters = { 'java': { 'left': '//'} }
 " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
@@ -413,16 +326,16 @@ func! CompileRun()
             exec "!kotlinc % -include-runtime -d %<.jar && java -jar %<.jar && rm %<.jar"
         endif
     elseif &filetype == 'python'
-         exec "!".g:python." %"
+        exec "!".g:python." %"
     elseif &filetype == 'html'
-         exec "!chrome % &"
+        exec "!chrome % &"
     elseif &filetype == 'go'
-         exec "!go build %< && go run %"
+        exec "!go build %< && go run %"
     elseif &filetype == 'mkd'
-         exec "!~/.vim/markdown.pl % > %.html & && !chrome %.html &"
+        exec "!~/.vim/markdown.pl % > %.html & && !chrome %.html &"
     elseif &filetype == 'sh'
-         :!bash %
+        :!bash %
     elseif &filetype == 'dosbatch'
         exec "!cmd /c %"
-     endif
- endfunc
+    endif
+endfunc

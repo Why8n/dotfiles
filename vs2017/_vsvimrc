@@ -1,0 +1,53 @@
+source ./general.vim
+
+"comment
+:vnoremap <leader>cc :s/^/\/\/<cr>         
+:nnoremap <leader>cc :s/^/\/\/<cr>         
+:vnoremap <leader>cu :s/\/\//<cr>         
+:nnoremap <leader>cu :s/\/\//<cr>
+
+nnoremap <leader>su :vsc Edit.FindAllReferences<cr>
+nnoremap <leader>fu :vsc Edit.FindAllReferences<cr>
+
+" cut
+vnoremap <C-x> :vsc Edit.Cut<cr>
+nnoremap <C-x> :vsc Edit.LineCut<cr>
+" <C-P>
+nnoremap <C-P> :vsc Edit.ParameterInfo<cr>
+inoremap <C-P> <C-o>:vsc Edit.ParameterInfo<cr>
+" <C-Q>
+" nnoremap <C-q> :action QuickJavaDoc<CR>
+
+" as mouse clicked
+nnoremap <leader>gd :vsc Edit.GoToDeclaration <C-r><C-w><cr>
+inoremap <leader>gd <ESC>:vsc Edit.GoToDeclaration <C-r><C-w><cr>
+
+" back
+nnoremap <leader>gb :vsc View.NavigateBackward<CR> 
+" forward
+nnoremap <leader>fw :vsc View.NavigateForward<cr>
+" <C-A-L> format
+nnoremap <C-A-l> :vsc Edit.FormatDocument<CR>
+vnoremap <C-A-l> :vsc Edit.FormatSelection<CR>
+nnoremap <leader>fm :vsc Edit.FormatDocument<CR>
+vnoremap <leader>fm :vsc Edit.FormatSelection<CR>
+
+" built in search looks better
+nnoremap <C-f> :vsc Edit.FindinFiles<cr>
+
+" breakpoint
+nnoremap <leader>br :vsc Debug.ToggleBreakpoint<cr>
+" see all breakpoints
+nnoremap <leader>abr :vsc Debug.Breakpoints<cr>
+
+nnoremap <leader>fs :vsc View.FullScreen<cr>
+
+" nnoremap <leader>sew :action SearchEverywhere<CR>
+
+nnoremap <leader>cmd :vsc Debug.Start<cr>
+
+" <C-R>
+nnoremap <C-r> :vsc Redo<CR>
+
+" open folder
+nnoremap <leader>ex :vsc File.OpenContainingFolder<cr>
