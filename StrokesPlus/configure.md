@@ -18,6 +18,8 @@
 |close_all_tab(will close chrome)       |Ctrl+Shift+w  |acSendKeys("^+w")|
 |window maximize    | ALT+Space+X     |acMaximizeOrRestoreWindow(nil, gsx, gsy)|
 |window minimize  | ALT+Space+X     |acMinimizeWindow(nil, gsx, gsy) 
+|switch to right tab   | Ctrl+Tab    |   acSendKeys("^{TAB}")  |
+|switch to left tab   | Ctrl+Shift+Tab    |   acSendKeys("^+{TAB}")  |
 
 
 
