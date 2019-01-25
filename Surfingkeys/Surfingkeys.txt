@@ -23,7 +23,9 @@ map('acl','gx0');
 map('acr','gx$');
 //close a tab
 map('cl','gxt');
+map('c<','gxt');
 map('cr','gxT');
+map('c>','gxT');
 
 
 //switch tab
