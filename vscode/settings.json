@@ -60,7 +60,7 @@
     },
     {
       "before": ["<C-a>"],
-      "after": ["g", "g", "v", "G"]
+      "after": ["g", "g", "V", "G"]
     },
     {
       "before": ["<C-x>"],
