@@ -111,8 +111,7 @@
   "bracket-pair-colorizer-2.activeScopeCSS": [
     "borderStyle : solid",
     "borderWidth : 1px",
-    "borderColor : {color}; opacity: 0.5",
-    "backgroundColor:{color}"
+    "borderColor : {color}; opacity: 1",
   ],
   "bracket-pair-colorizer-2.showBracketsInGutter": true,
   "bracket-pair-colorizer-2.showHorizontalScopeLine": false,
