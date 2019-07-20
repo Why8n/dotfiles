@@ -1,6 +1,4 @@
-"detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript
-
-
+"detected os:https://vi.stackexchange.com/questions/2572/detect-os-in-vimscript 
 function! IsWin32()
     return has('win32')
 endfunction
@@ -20,6 +18,7 @@ endfunction
 " global configurations
 if IsWin32()
     " source $VIMRUNTIME/general.vim
+    "  C:/Users/<user>/general.vim
     source $userprofile/general.vim
     let g:python ='"D:/Program Files (x86)/Python/python3/python.exe"'
     let g:ycm_extra_conf="D:/Program\ Files\ (x86)/Vim/vimfiles/.ycm_extra_conf.py"
@@ -82,28 +81,18 @@ nnoremap <Right> :vertical resize -2<CR>
 " " command mode
 " cnoremap <C-f> <C-r><C-w>
 
-
-" vundle configurations
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
+" plug-vim configurations
+" set the runtime path for package manager tool
 if IsWin32()
-    set rtp+=$VIM/vimfiles/bundle/Vundle.vim
-    call vundle#begin('$VIM/vimfiles/bundle/')
+    call plug#begin('$VIM/vimfiles/plugged/')
 elseif IsUnix() || IsWin32Unix() || IsMac()
-    set rtp+=~/.vim/bundle/Vundle.vim
-    call vundle#begin()
+    call plug#begin('~/.vim/plugged')
 endif
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+"
 " -------------------------------------------------------------------------
 " add plugin here
-Plugin 'dyng/ctrlsf.vim'
+Plug 'dyng/ctrlsf.vim'
 if executable('ag')
     let g:ctrlsf_ackprg = 'ag'
 endif
@@ -122,7 +111,7 @@ vnoremap <C-f> "1y:CtrlSF<Space><C-R>1
 " command line mode
 cnoremap <C-f> CtrlSF 
 
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 " set local working directory:current file
@@ -156,7 +145,7 @@ elseif IsWin32()
 endif
 
 
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 nmap wm :NERDTreeToggle<CR>
 let NERDTreeWinPos='left'
 let NERDTreeWinSize=30
@@ -172,11 +161,11 @@ let NERDTreeMinimalUI=1
 "Refresh both CtrlP and NERDTree
 nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>:CtrlPClearCache<cr>
 
-Plugin 'vim-airline/vim-airline'
-"Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 
-Plugin 'easymotion/vim-easymotion'
-Plugin 'vim-syntastic/syntastic'
+Plug 'easymotion/vim-easymotion'
+Plug 'vim-syntastic/syntastic'
 " syntastic default config
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -188,8 +177,8 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 map <F2> :SyntasticToggleMode<CR>
 
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdcommenter'
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
@@ -209,7 +198,7 @@ let g:NERDTrimTrailingWhitespace = 1
 vmap <C-b> <leader>cc
 
 " markdown
-Plugin 'iamcco/markdown-preview.vim'
+Plug 'iamcco/markdown-preview.vim',{ 'for': 'markdown' }
 " path to the chrome or the command to open chrome(or other modern browsers)
 let g:mkdp_path_to_chrome = g:chrome
 
@@ -239,7 +228,7 @@ nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode
 imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
 
 
-" Plugin 'reedes/vim-pencil'
+" Plug 'reedes/vim-pencil'
 " augroup pencil
 "   autocmd!
 "   autocmd FileType markdown,mkd,md call pencil#init()
@@ -247,7 +236,7 @@ imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
 " augroup END
 " let g:airline_section_x = '%{PencilMode()}'
 
-"Plugin 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 "let g:ycm_key_invoke_completion = '<M-/>' "default <C-Space>,modify to alt+/
 "" 自动补全配置
 "set completeopt=longest,menu " "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
@@ -281,33 +270,33 @@ let g:EclimCompletionMethod = 'omnifunc'
 " add support completions of python
 let g:ycm_python_binary_path =g:python
 
-Plugin 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 inoremap {<CR> {<CR>}<C-o>O
 " Use this option to tell delimitMate which characters should be considered
 " matching pairs. Read |delimitMateAutoClose| for details.
 let delimitMate_matchpairs = "(:),[:],{:}"
 au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
 
-Plugin 'kshenoy/vim-signature'
-Plugin 'vim-scripts/Marks-Browser'
+Plug 'kshenoy/vim-signature'
+Plug 'vim-scripts/Marks-Browser'
 nmap <silent> <leader>mb :MarksBrowser<cr>
 " the browser window close itself after you jump to a mark
 let marksCloseWhenSelected = 1
 
 " scheme for console
-" Plugin 'jnurmine/Zenburn'
+" Plug 'jnurmine/Zenburn'
 if has('gui_running')
     colorscheme SolarizedDark
 else
     colorscheme zenburn
 endif
 
-Plugin 'udalov/kotlin-vim'
+Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 
 " -------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+" Initialize plugin system
+call plug#end()
 
 map <F5> :call CompileRun()<CR>
 nnoremap <leader>cmd :call CompileRun()<CR>
