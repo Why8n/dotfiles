@@ -1,0 +1,199 @@
+{
+  //  - onWindowChange: A dirty file is automatically saved when the window loses focus
+  // "files.autoSave": "onFocusChange",
+  // Controls the font size in pixels.
+  "editor.fontSize": 14,
+  // The number of spaces a tab is equal to. This setting is overridden based on the file contents when `editor.detectIndentation` is on.
+  "editor.tabSize": 4,
+  // Configure glob patterns for excluding files and folders. For example, the files explorer decides which files and folders to show or hide based on this setting. Read more about glob patterns [here](https://code.visualstudio.com/docs/editor/codebasics#_advanced-search-options).
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true
+  },
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+  // input method
+  "vim.autoSwitchInputMethod.enable": true,
+  "vim.autoSwitchInputMethod.defaultIM": "1033",
+  "vim.autoSwitchInputMethod.obtainIMCmd": "D:\\apps\\im-select.exe",
+  "vim.autoSwitchInputMethod.switchIMCmd": "D:\\apps\\im-select.exe {im}",
+  //vim plugin
+  "vim.leader": "<space>",
+  "vim.hlsearch": true,
+  "vim.ignorecase": true,
+  "vim.smartcase": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  // do override vscode default ctrl operations
+  "vim.useCtrlKeys": true,
+  //key handled by vscode
+  "vim.handleKeys": {
+    // "<C-a>": false,
+    "<C-f>": false
+  },
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "q"],
+      "commands": ["workbench.action.closeActiveEditor"]
+    },
+    {
+      "before": ["<leader>", "w"],
+      "commands": ["workbench.action.files.save"]
+    },
+    {
+      "before": ["<leader>", "c", "c"],
+      "commands": ["editor.action.addCommentLine"]
+    },
+    {
+      "before": ["<leader>", "c", "u"],
+      "commands": ["editor.action.removeCommentLine"]
+    },
+    {
+      "before": ["<leader>", "f", "m"],
+      "commands": ["editor.action.format"]
+    },
+    {
+      "before": ["<C-a>"],
+      "after": ["g", "g", "V", "G"]
+    },
+    {
+      "before": ["<C-x>"],
+      "commands": ["editor.action.clipboardCutAction"]
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": ["<C-x>"],
+      "after": ["\"", "+", "d"]
+    },
+    {
+      "before": ["<leader>", "c", "c"],
+      "commands": ["editor.action.addCommentLine"]
+    },
+    {
+      "before": ["<leader>", "c", "u"],
+      "commands": ["editor.action.removeCommentLine"]
+    },
+    {
+      "before": ["<leader>", "f", "m"],
+      //using prettier
+      "commands": ["editor.action.formatSelection"]
+    }
+  ],
+  //easymotion
+  "vim.easymotion": true,
+  //sneak disable,cuz i want the default s function
+  "vim.sneak": false,
+  "vim.sneakUseIgnorecaseAndSmartcase": true,
+  //surround
+  "vim.surround": true,
+  "python.jediEnabled": false,
+  // code runner
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.saveAllFilesBeforeRun": true,
+  "code-runner.saveFileBeforeRun": true,
+  "code-runner.preserveFocus": true,
+  "code-runner.ignoreSelection": false,
+  //top right execute icon
+  "code-runner.showRunIconInEditorTitleMenu": true,
+  //bracket-pair-colorizer-2
+  "bracket-pair-colorizer-2.forceUniqueOpeningColor": true,
+  "bracket-pair-colorizer-2.forceIterationColorCycle": true,
+  "bracket-pair-colorizer-2.colorMode": "Consecutive",
+  "editor.matchBrackets": false,
+  "bracket-pair-colorizer-2.highlightActiveScope": true,
+  "bracket-pair-colorizer-2.activeScopeCSS": [
+    "borderStyle : solid",
+    "borderWidth : 1px",
+    "borderColor : {color}; opacity: 1",
+  ],
+  "bracket-pair-colorizer-2.showBracketsInGutter": true,
+  "bracket-pair-colorizer-2.showHorizontalScopeLine": false,
+  "bracket-pair-colorizer-2.showVerticalScopeLine": true,
+  // todo highlight
+  "todohighlight.isEnable": true,
+  "todohighlight.isCaseSensitive": true,
+  "todohighlight.include": [
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.html",
+    "**/*.php",
+    "**/*.css",
+    "**/*.scss",
+    "**/*.py",
+    "**/*.java",
+    "**/*.kt",
+    "**/*.h",
+    "**/*.c",
+    "**/*.cpp"
+  ],
+  "todohighlight.exclude": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.vscode/**",
+    "**/.github/**",
+    "**/_output/**",
+    "**/*.min.*",
+    "**/*.map",
+    "**/.next/**"
+  ],
+  "todohighlight.maxFilesForSearch": 5120,
+  "todohighlight.toggleURI": false,
+  //vscode-icons
+  "workbench.iconTheme": "vscode-icons",
+  // auto close tag
+  "auto-close-tag.enableAutoCloseTag": true,
+  "auto-close-tag.enableAutoCloseSelfClosingTag": true,
+  "auto-close-tag.activationOnLanguage": [
+    "xml",
+    "php",
+    "blade",
+    "ejs",
+    "jinja",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "plaintext",
+    "markdown",
+    "vue",
+    "liquid",
+    "erb",
+    "lang-cfml",
+    "cfml",
+    "HTML (Eex)"
+  ],
+  //settins sync
+  "sync.gist": "7500c2b706adda4f9b85325f6615f0ed",
+  "window.zoomLevel": 0,
+  //eslint
+  "eslint.enable": true,
+  "eslint.options": {
+    "configFile": "C:/Users/10417/.eslintrc.js",
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "html",
+      "jsx",
+      "vue",
+      {
+        "language": "html",
+        "autoFix": true
+      }
+    ]
+  },
+  //   prettier
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": true
+}

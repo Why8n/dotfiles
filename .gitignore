@@ -7,4 +7,6 @@ vimfiles/*
 !*.vim
 !vs2017
 !Surfingkeys
+!StrokesPlus
+!vscode/settings.json
 !.vimrc

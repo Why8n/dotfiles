@@ -19,8 +19,14 @@ unmap('t');
 map('t','on');
 
 //close left tabs
-map('cl','gx0');
-map('cr','gx$');
+map('acl','gx0');
+map('acr','gx$');
+//close a tab
+map('cl','gxt');
+map('c<','gxt');
+map('cr','gxT');
+map('c>','gxT');
+
 
 //switch tab
 map('gt','R');
