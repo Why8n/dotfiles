@@ -7,3 +7,4 @@ vimfiles/*
 !*.vim
 !vs2017
 !Surfingkeys
+!.vimrc
