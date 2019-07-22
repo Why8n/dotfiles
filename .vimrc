@@ -93,7 +93,7 @@ endif
 source ~/general.vim
     
 " reload vimrc
-nnoremap <C-l> :source $MYVIMRC<CR>
+map <C-l> :source $MYVIMRC<CR>
 " no backup
 set noundofile
 set nobackup
@@ -119,10 +119,10 @@ set guioptions-=L  "remove left-hand scroll bar
 
 " Disable arrow movement, resize splits instead.
 " if get(g:, 'elite_mode')
-nnoremap <Up>    :resize +2<CR>
-nnoremap <Down>  :resize -2<CR>
-nnoremap <Left>  :vertical resize +2<CR>
-nnoremap <Right> :vertical resize -2<CR>
+map <Up>    :resize +2<CR>
+map <Down>  :resize -2<CR>
+map <Left>  :vertical resize +2<CR>
+map <Right> :vertical resize -2<CR>
 
 " auto complete brackets
 " inoremap {<CR> {<C-o>o}<C-o>O
@@ -144,7 +144,7 @@ call plug#begin(g:plugins_path)
 "
 " -------------------------------------------------------------------------
 " add plugin here
-Plug 'dyng/ctrlsf.vim'
+" Plug 'dyng/ctrlsf.vim'
 Plug 'ctrlpvim/ctrlp.vim', {'on':'CtrlP'}
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
@@ -213,6 +213,9 @@ if has('nvim')
     Plug 'ncm2/ncm2-match-highlight'
     Plug 'ncm2/ncm2-markdown-subscope'
 endif
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 " -------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 " Initialize plugin system
@@ -237,9 +240,8 @@ if (has("nvim"))
     " make comments to be in italic
     let g:enable_italic_font = 1
     " make background transparent
-    " todo::
-    " let g:hybrid_transparent_background = 1
-    " let g:airline_theme = "hybrid"
+    let g:hybrid_transparent_background = 1
+    let g:airline_theme = "hybrid"
 endif
 
 "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
@@ -253,23 +255,26 @@ endif
 " -------------
 "  ctrlsf
 " -------------
-if executable('ag')
-    let g:ctrlsf_ackprg = 'ag'
-endif
-let g:ctrlsf_case_sensitive = 'smart'
-let g:ctrlsf_default_root = 'project'
-let g:ctrlsf_default_view_mode = 'normal'
-let g:ctrlsf_position = 'left'
-let g:ctrlsf_winsize = '30%'
+" if executable('ag')
+"     let g:ctrlsf_ackprg = 'ag'
+" endif
+" let g:ctrlsf_case_sensitive = 'smart'
+" let g:ctrlsf_default_root = 'project'
+" let g:ctrlsf_default_view_mode = 'normal'
+" let g:ctrlsf_position = 'left'
+" let g:ctrlsf_winsize = '30%'
 
-nnoremap <C-f> :CtrlSF<Space>
-inoremap <C-f> <ESC>:CtrlSF<Space>
+" nnoremap <C-f> :CtrlSF<Space>
+" inoremap <C-f> <ESC>:CtrlSF<Space>
+"
+
+"
 " visiual and select mode
-vnoremap <C-f> "1y:CtrlSF<Space><C-R>1 
+" vnoremap <C-f> "1y:CtrlSF<Space><C-R>1
 " visiual mode
 "xnoremap <C-f> :CtrlSF<Space> 
 " command line mode
-cnoremap <C-f> CtrlSF 
+" cnoremap <C-f> CtrlSF
 
 " ------------
 " ctrlp
@@ -445,17 +450,15 @@ let g:mkdp_port = ''
 " ${name} will be replace with the file name
 let g:mkdp_page_title = '¡¸${name}¡¹'
 
-nmap <silent> <F8> <Plug>MarkdownPreview        " for normal mode
-imap <silent> <F8> <Plug>MarkdownPreview        " for insert mode
-nmap <silent> <F9> <Plug>MarkdownPreviewStop    " for normal mode
-imap <silent> <F9> <Plug>MarkdownPreviewStop    " for insert mode
+map <silent> <F8> <Plug>MarkdownPreview       
+map <silent> <F9> <Plug>MarkdownPreviewStop  
 
 " -----------------
 " vim-table-mode
 " -----------------
 
 " ÅäÖÃ¿ì½Ý¼ü
-nnoremap <Leader>tm :TableModeToggle<CR>
+nmap <Leader>tm :TableModeToggle<CR>
 " markdown-compatible tables
 let g:table_mode_corner='|'
 
@@ -504,9 +507,9 @@ let g:indentLine_conceallevel = 2
 " ncm2 configuration
 " -------------
 if has('nvim')
-    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-    inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>": "\<CR>")
+    " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    " inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>": "\<CR>")
     autocmd BufEnter * call ncm2#enable_for_buffer()
     set completeopt=noinsert,menuone,noselect
     let ncm2#popup_delay = 5
@@ -679,7 +682,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 
 map <F5> :call CompileRun()<CR>
-nnoremap <leader>cmd :call CompileRun()<CR>
+nmap <leader>cmd :call CompileRun()<CR>
 func! CompileRun()
     exec "w"
     if &filetype == 'c'
@@ -695,7 +698,7 @@ func! CompileRun()
             exec "!kotlinc % -include-runtime -d %<.jar && java -jar %<.jar && rm %<.jar"
         endif
     elseif &filetype == 'python'
-        exec "!".g:python3_host_prog" %"
+        exec "!\"".g:python3_host_prog."\" %"
     elseif &filetype == 'html'
         exec "!chrome % &"
     elseif &filetype == 'go'

@@ -57,12 +57,12 @@ set nocursorline
 " Use spaces instead of tabs
 
 " Tab operation
-noremap <tab> gt
-noremap <S-tab> gT
+map <tab> gt
+map <S-tab> gT
 
 " format
-nnoremap <leader>fm gg=G''
-vnoremap <leader>fm =
+nmap <silent> <leader>fm gg=G''
+vmap <leader>fm =
 
 " Fast quiting without saving
 nmap <leader>q :q<cr>
@@ -82,11 +82,11 @@ nmap <leader>w :w<cr>
 nnoremap <silent> <C-a> ggvG$
 
 " 选中状态下 Ctrl+c 复制
-vnoremap <c-c> "+y
+vmap <C-c> "+y
 
 " Ctrl+v
-nnoremap <silent> <C-v> "+p
-inoremap <silent> <C-v> <C-r>+
+nmap <silent> <C-v> "+p
+imap <silent> <C-v> <C-r>+
 
 " Ctrl+x
 nmap <silent> <C-x> "+dd
@@ -107,3 +107,6 @@ nmap wk <C-w>k
 set so=5
 
 set autochdir
+set cursorline
+set showcmd
+set wildmenu
