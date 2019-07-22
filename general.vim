@@ -7,6 +7,7 @@ set relativenumber
 set hlsearch
 "  real time search result shown
 set incsearch
+map <LEADER><CR> :nohlsearch<CR>
 " Ignore case when searching
 set ignorecase
 " When searching try to be samrt about cases
@@ -87,6 +88,10 @@ vnoremap <c-c> "+y
 nnoremap <silent> <C-v> "+p
 inoremap <silent> <C-v> <C-r>+
 
+" Ctrl+x
+nmap <silent> <C-x> "+dd
+vmap <silent> <C-x> "+d
+
 
 "switch windows
 " nnoremap <C-h> <C-w>h
@@ -100,3 +105,5 @@ nmap wk <C-w>k
 
 " 屏幕滚动时在光标上下方保留5行预览代码
 set so=5
+
+set autochdir
