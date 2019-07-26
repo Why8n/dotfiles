@@ -77,11 +77,14 @@ if IsWin32()
     " custom plugin install path,so that vim and neovim can shared the same
     " plugins (notice in windows: ~/.vim = c:\Users\<user>\.vim)
     let g:plugins_path = 'D:\config\.vim\plugged'
+    " ctags_bin
+    let g:ctags_path = 'D:\config\ctags\ctags.exe'
 elseif IsUnix() || IsWin32Unix() || IsMac()
     let g:python3_host_prog ='/usr/bin/python'
     let g:ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
     let g:chrome = '/usr/bin/chrome'
     let g:plugins_path = '~/.vim/plugged'
+    let g:ctags_path = '/usr/bin/ctags'
 endif
 
 
@@ -103,7 +106,7 @@ set noswapfile
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
-set t_vb=
+set vb t_vb= " turn off visual bell,error flash
 set tm=500
 
 " set cmd window height :( cmd )
@@ -116,6 +119,22 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
+
+" Fixing Vim's Background Color Erase for 256-color tmux and GNU screen
+if !empty(&t_ut)
+  " see http://snk.tuxfamily.org/log/vim-256color-bce.html
+  let &t_ut=''
+endif
+
+" x显示末尾空格
+set list
+set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~
+set showbreak=\\ " [bonus]
+
+" jump to last known cursor position when reopen a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
 
 " Disable arrow movement, resize splits instead.
 " if get(g:, 'elite_mode')
@@ -145,7 +164,8 @@ call plug#begin(g:plugins_path)
 " -------------------------------------------------------------------------
 " add plugin here
 " Plug 'dyng/ctrlsf.vim'
-Plug 'ctrlpvim/ctrlp.vim', {'on':'CtrlP'}
+" way too slow on huge files,TODO::delete
+Plug 'ctrlpvim/ctrlp.vim', {'on':'CtrlP'} 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -216,6 +236,9 @@ endif
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
+Plug 'mbbill/undotree'
+Plug 'tpope/vim-repeat'
 " -------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 " Initialize plugin system
@@ -226,15 +249,17 @@ if has('gui_running')
     colorscheme SolarizedDark
 else
     " colorscheme zenburn
-	set background=dark
+    set background=dark
 	colorscheme hybrid_reverse
+    highlight Visual cterm=NONE ctermbg=0 ctermfg=NONE guibg=Grey40
 endif
 
 if (has("nvim"))
 	"For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
 	let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-	set background=dark
+    set background=dark
 	colorscheme hybrid_reverse
+    highlight Visual cterm=NONE ctermbg=0 ctermfg=NONE guibg=Grey30
     " making functions and language controls to be bolded
     let g:enable_bold_font = 1
     " make comments to be in italic
@@ -263,18 +288,17 @@ endif
 " let g:ctrlsf_default_view_mode = 'normal'
 " let g:ctrlsf_position = 'left'
 " let g:ctrlsf_winsize = '30%'
-
-" nnoremap <C-f> :CtrlSF<Space>
-" inoremap <C-f> <ESC>:CtrlSF<Space>
+"
+" nmap <C-f> :CtrlSF <C-r><C-w>
+" imap <C-f> <ESC>:CtrlSF<Space>
+" " visiual and select mode
+" vmap <C-f> "1y:CtrlSF<Space><C-R>1<CR>
+" " visiual mode
+" " xnoremap <C-f> :CtrlSF<Space>
+" " command line mode
+" cmap <C-f> CtrlSF<Space>
 "
 
-"
-" visiual and select mode
-" vnoremap <C-f> "1y:CtrlSF<Space><C-R>1
-" visiual mode
-"xnoremap <C-f> :CtrlSF<Space> 
-" command line mode
-" cnoremap <C-f> CtrlSF
 
 " ------------
 " ctrlp
@@ -453,6 +477,8 @@ let g:mkdp_page_title = '「${name}」'
 map <silent> <F8> <Plug>MarkdownPreview       
 map <silent> <F9> <Plug>MarkdownPreviewStop  
 
+nmap <silent> <Leader>md <Plug>MarkdownPreview
+
 " -----------------
 " vim-table-mode
 " -----------------
@@ -515,7 +541,7 @@ if has('nvim')
     let ncm2#popup_delay = 5
     let g:ncm2#matcher = "substrfuzzy"
     let g:ncm2_jedi#python_version = 3
-    let g:ncm2#match_highlight = 'sans-serif'
+    " let g:ncm2#match_highlight = 'sans-serif'
 
 endif
 
@@ -588,6 +614,33 @@ let g:ycm_python_binary_path =g:python3_host_prog
 "
 "
 " -----------------------
+"  vim-signature
+" -----------------------
+"
+let g:SignatureMap = {
+        \ 'Leader'             :  "m",
+        \ 'PlaceNextMark'      :  "m,",
+        \ 'ToggleMarkAtLine'   :  "m.",
+        \ 'PurgeMarksAtLine'   :  "m-",
+        \ 'DeleteMark'         :  "dm",
+        \ 'PurgeMarks'         :  "dm/",
+        \ 'PurgeMarkers'       :  "m<BS>",
+        \ 'GotoNextLineAlpha'  :  "']",
+        \ 'GotoPrevLineAlpha'  :  "'[",
+        \ 'GotoNextSpotAlpha'  :  "`]",
+        \ 'GotoPrevSpotAlpha'  :  "`[",
+        \ 'GotoNextLineByPos'  :  "]<Leader>",
+        \ 'GotoPrevLineByPos'  :  "[<Leader>",
+        \ 'GotoNextSpotByPos'  :  "]`",
+        \ 'GotoPrevSpotByPos'  :  "[`",
+        \ 'GotoNextMarker'     :  "]-",
+        \ 'GotoPrevMarker'     :  "[-",
+        \ 'GotoNextMarkerAny'  :  "]=",
+        \ 'GotoPrevMarkerAny'  :  "[=",
+        \ 'ListBufferMarks'    :  "m/",
+        \ 'ListBufferMarkers'  :  "m?"
+        \ }
+" -----------------------
 "  marks-browers
 "  -----------------------
 nmap <silent> <leader>mb :MarksBrowser<cr>
@@ -651,8 +704,8 @@ let g:gyo_width=80
 let g:goyo_height='85%'
 let g:goyo_linenr=0
 
-nmap <Leader>ll :Goyo<CR>
-xmap <Leader>ll :Goyo<CR>
+nmap <Leader>gy :Goyo<CR>
+xmap <Leader>gy :Goyo<CR>
 
 "进入goyo模式后自动触发limelight,退出后则关闭
 function! s:goyo_enter()
@@ -675,6 +728,66 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+
+" ------------------
+" tagbar
+" ------------------
+map <silent> <leader>tb :TagbarOpenAutoClose<CR>
+let g:tagbar_ctags_bin = g:ctags_path
+
+
+" --------------------
+" undotree
+" --------------------
+nnoremap <Leader>ud :UndotreeToggle<CR>
+" 持久化历史记录
+" if has("persistent_undo")
+"     set undodir=$HOME."/.undodir"
+"     set undofile
+" endif
+"
+"
+" ------------------------
+" fzf
+" ------------------------
+if has('nvim') || has('gui_running')
+  let $FZF_DEFAULT_OPTS .= ' --inline-info'
+endif
+
+" Hide statusline of terminal buffer
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+" In Neovim, you can set up fzf window using a Vim command
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+" let g:fzf_layout = { 'window': '10new' }
+
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
+xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR> 
+
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+nnoremap <silent> <Leader>rg       :Rg <C-R><C-W><CR>
+xnoremap <silent> <Leader>rg       y:Rg <C-R>"<CR> 
+
+nnoremap <silent> <Leader>fz       :Files<CR>
+" -------------------
+" tpope/vim-repeat
+" -------------------
+silent! call repeat#set("\<Plug>MarkdownPreview", v:count)
 
 
 " ===plugins configurations end

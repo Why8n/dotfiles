@@ -25,7 +25,10 @@ set smarttab
 
 set nocompatible
 " 检测文件类型
-" filetype on
+filetype on
+filetype indent on 
+filetype plugin on 
+filetype plugin indent on 
 " 不设定在插入状态无法用退格键和 Delete 键删除回车符
 set backspace=indent,eol,start
 set whichwrap+=<,>,h,l
@@ -46,9 +49,15 @@ set cmdheight=1
 " 在被分割的窗口间显示空白，便于阅读
 set fillchars=vert:\ ,stl:\ ,stlnc:\
 
-" encoding setting
-set enc=utf-8
-set fencs=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+" --------------------
+" vim涉及字符显示的选项有三个，fileencoding文件字符编码，encoding缓冲区字符编码，termencoding终端字符编码。  
+"
+" 　　vim显示字符的顺序:（探测文件编码，从fileencodings里面选择最合适的编码赋值给fileencoding）按fileencoding编码读取文件->将读取到的内容转成encoding编码->将encoding编码转换成termencoding打印到终端->终端(我们平时主要使用的是securecrt)按设置的编码(一般是utf8)显示字符。
+" --------------------
+set encoding=utf-8
+set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
+set fileencoding=utf-8
+set termencoding=utf-8
 
 "搜索到文件两端时不重新搜索
 " set nowrapscan
@@ -65,8 +74,9 @@ nmap <silent> <leader>fm gg=G''
 vmap <leader>fm =
 
 " Fast quiting without saving
-nmap <leader>q :q<cr>
-nmap <leader>w :w<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader><leader>qq :q!<cr>
+nnoremap <leader>w :w<cr>
 
 " cusor mvoement in insertmode
 " inoremap <c-h> <left>
@@ -87,6 +97,8 @@ vmap <C-c> "+y
 " Ctrl+v
 nmap <silent> <C-v> "+p
 imap <silent> <C-v> <C-r>+
+" 命令行模式
+cmap <C-v> <C-r>+
 
 " Ctrl+x
 nmap <silent> <C-x> "+dd
@@ -110,3 +122,10 @@ set autochdir
 set cursorline
 set showcmd
 set wildmenu
+" 使能鼠标操作
+set mouse=a
+
+" 设置锚点
+map <Leader><Leader>m <Esc>/<++><CR>:nohlsearch<CR>c4l
+
+nnoremap <Leader><Leader>a A
