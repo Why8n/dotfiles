@@ -18,10 +18,10 @@ endfunction
 
 function! DownPlugVimAndInstall(path)
     if empty(glob(a:path))
-        let cmd = 'curl -fLo "'.a:path.'" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        let cmd = '!curl -fLo "'.a:path.'" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
         " silent !curl -fLo '~/.config/nvim/autoload/plug.vim' --create-dirs
         "   \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        execute "silent !" .l:cmd
+        execute l:cmd
         autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
     endif
 endfunction
@@ -49,9 +49,9 @@ endfunction
 
 function! DownPlugVim2Linux()
     if has('nvim')
-        call DownPlugVim2Linux4nvim('~/.config/nvim/autoload/plug.vim')
+        call DownPlugVim2Linux4nvim($HOME.'/.config/nvim/autoload/plug.vim')
     else
-        call DownPlugVim2Linux4vim('~/.vim/autoload/plug.vim')
+        call DownPlugVim2Linux4vim($HOME.'/.vim/autoload/plug.vim')
     endif
 endfunction
 
