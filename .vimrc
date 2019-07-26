@@ -111,7 +111,7 @@ set tm=500
 
 " set cmd window height :( cmd )
 set cmdheight=1
-" ÔÚ±»·Ö¸îµÄ´°¿Ú¼äÏÔÊ¾¿Õ°×£¬±ãÓÚÔÄ¶Á
+" åœ¨è¢«åˆ†å‰²çš„çª—å£é—´æ˜¾ç¤ºç©ºç™½ï¼Œä¾¿äºé˜…è¯»
 set fillchars=vert:\ ,stl:\ ,stlnc:\
 
 " remove gui
@@ -126,7 +126,7 @@ if !empty(&t_ut)
   let &t_ut=''
 endif
 
-" xÏÔÊ¾Ä©Î²¿Õ¸ñ
+" xæ˜¾ç¤ºæœ«å°¾ç©ºæ ¼
 set list
 set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~
 set showbreak=\\ " [bonus]
@@ -210,13 +210,13 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/limelight.vim'
 " distraction free writing mode
 Plug 'junegunn/goyo.vim' 
-" ÎÄ±¾¶ÔÆë²å¼ş
+" æ–‡æœ¬å¯¹é½æ’ä»¶
 Plug 'godlygeek/tabular'
 
 " Find And Replace Vim plugin
 Plug 'brooth/far.vim'
 
-" Ëõ½øÖ¸Ê¾Ïß
+" ç¼©è¿›æŒ‡ç¤ºçº¿
 Plug 'Yggdroot/indentLine'
 
 " scheme for console
@@ -230,7 +230,7 @@ if has('nvim')
     Plug 'ncm2/ncm2-jedi'
     Plug 'ncm2/ncm2-bufword'
     Plug 'ncm2/ncm2-path'
-    Plug 'ncm2/ncm2-match-highlight'
+    " Plug 'ncm2/ncm2-match-highlight'
     Plug 'ncm2/ncm2-markdown-subscope'
 endif
 
@@ -341,14 +341,14 @@ endif
 nmap wm :NERDTreeToggle<CR>
 let NERDTreeWinPos='left'
 let NERDTreeWinSize=30
-" µ±²»´ø²ÎÊı´ò¿ªVimÊ±×Ô¶¯¼ÓÔØÏîÄ¿Ê÷ -- no
+" å½“ä¸å¸¦å‚æ•°æ‰“å¼€Vimæ—¶è‡ªåŠ¨åŠ è½½é¡¹ç›®æ ‘ -- no
 autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" µ±ËùÓĞÎÄ¼ş¹Ø±ÕÊ±¹Ø±ÕÏîÄ¿Ê÷´°¸ñ
+" å½“æ‰€æœ‰æ–‡ä»¶å…³é—­æ—¶å…³é—­é¡¹ç›®æ ‘çª—æ ¼
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-" ²»ÏÔÊ¾ÕâĞ©ÎÄ¼ş
+" ä¸æ˜¾ç¤ºè¿™äº›æ–‡ä»¶
 let NERDTreeIgnore=['\.pyc$', '\~$', 'node_modules'] "ignore files in NERDTree
-" ²»ÏÔÊ¾ÏîÄ¿Ê÷ÉÏ¶îÍâµÄĞÅÏ¢£¬ÀıÈç°ïÖú¡¢ÌáÊ¾Ê²Ã´µÄ
+" ä¸æ˜¾ç¤ºé¡¹ç›®æ ‘ä¸Šé¢å¤–çš„ä¿¡æ¯ï¼Œä¾‹å¦‚å¸®åŠ©ã€æç¤ºä»€ä¹ˆçš„
 let NERDTreeMinimalUI=1
 "Refresh both CtrlP and NERDTree
 nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>:CtrlPClearCache<cr>
@@ -472,7 +472,7 @@ let g:mkdp_port = ''
 
 " preview page title
 " ${name} will be replace with the file name
-let g:mkdp_page_title = '¡¸${name}¡¹'
+let g:mkdp_page_title = 'ã€Œ${name}ã€'
 
 map <silent> <F8> <Plug>MarkdownPreview       
 map <silent> <F9> <Plug>MarkdownPreviewStop  
@@ -483,7 +483,7 @@ nmap <silent> <Leader>md <Plug>MarkdownPreview
 " vim-table-mode
 " -----------------
 
-" ÅäÖÃ¿ì½İ¼ü
+" é…ç½®å¿«æ·é”®
 nmap <Leader>tm :TableModeToggle<CR>
 " markdown-compatible tables
 let g:table_mode_corner='|'
@@ -494,11 +494,11 @@ function! s:isAtStartOfLine(mapping)
   let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
   return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
 endfunction
-" ²åÈëÄ£Ê½ÏÂ£¬°´ || Ê¹ÄÜ²å¼ş
+" æ’å…¥æ¨¡å¼ä¸‹ï¼ŒæŒ‰ || ä½¿èƒ½æ’ä»¶
 inoreabbrev <expr> <bar><bar>
           \ <SID>isAtStartOfLine('\|\|') ?
           \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
-" ²åÈëÄ£Ê½ÏÂ£¬°´ __ Ê§ÄÜ²å¼ş
+" æ’å…¥æ¨¡å¼ä¸‹ï¼ŒæŒ‰ __ å¤±èƒ½æ’ä»¶
 inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
           \ '<c-o>:silent! TableModeDisable<cr>' : '__'
@@ -524,7 +524,7 @@ let g:indentLine_color_dark = 1 " (default: 2)
 let g:indentLine_bgcolor_term = 202
 
 " let g:indentLine_char = 'c'
-" let g:indentLine_char_list = ['|', '0„7', '©ª', '©®']
+" let g:indentLine_char_list = ['|', 'Â¦', 'â”†', 'â”Š']
 " change conceal behaviour
 let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
@@ -570,29 +570,29 @@ endif
 "YouCompleteMe
 "----------------------------
 "let g:ycm_key_invoke_completion = '<M-/>' "default <C-Space>,modify to alt+/
-"" ×Ô¶¯²¹È«ÅäÖÃ
-"set completeopt=longest,menu " "ÈÃVimµÄ²¹È«²Ëµ¥ĞĞÎªÓëÒ»°ãIDEÒ»ÖÂ(²Î¿¼VimTip1228)
-"autocmd InsertLeave * if pumvisible() == 0|pclose|endif "Àë¿ª²åÈëÄ£Ê½ºó×Ô¶¯¹Ø±ÕÔ¤ÀÀ´°¿Ú
-"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"    "»Ø³µ¼´Ñ¡ÖĞµ±Ç°Ïî
+"" è‡ªåŠ¨è¡¥å…¨é…ç½®
+"set completeopt=longest,menu " "è®©Vimçš„è¡¥å…¨èœå•è¡Œä¸ºä¸ä¸€èˆ¬IDEä¸€è‡´(å‚è€ƒVimTip1228)
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif "ç¦»å¼€æ’å…¥æ¨¡å¼åè‡ªåŠ¨å…³é—­é¢„è§ˆçª—å£
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"    "å›è½¦å³é€‰ä¸­å½“å‰é¡¹
 "
-""youcompleteme  Ä¬ÈÏtab  s-tab ºÍ×Ô¶¯²¹È«³åÍ»
+""youcompleteme  é»˜è®¤tab  s-tab å’Œè‡ªåŠ¨è¡¥å…¨å†²çª
 "let g:ycm_key_list_select_completion=['<c-n>']
 "let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
 "let g:ycm_key_list_previous_completion = ['<Up>']
-"let g:ycm_confirm_extra_conf=0 "¹Ø±Õ¼ÓÔØ.ycm_extra_conf.pyÌáÊ¾
+"let g:ycm_confirm_extra_conf=0 "å…³é—­åŠ è½½.ycm_extra_conf.pyæç¤º
 "
 "let g:ycm_min_num_of_chars_for_completion = 1
-""ÔÚ×¢ÊÍÊäÈëÖĞÒ²ÄÜ²¹È«
+""åœ¨æ³¨é‡Šè¾“å…¥ä¸­ä¹Ÿèƒ½è¡¥å…¨
 "let g:ycm_complete_in_comments = 1
-""ÔÚ×Ö·û´®ÊäÈëÖĞÒ²ÄÜ²¹È«
+""åœ¨å­—ç¬¦ä¸²è¾“å…¥ä¸­ä¹Ÿèƒ½è¡¥å…¨
 "let g:ycm_complete_in_strings = 1
-""×¢ÊÍºÍ×Ö·û´®ÖĞµÄÎÄ×ÖÒ²»á±»ÊÕÈë²¹È«
+""æ³¨é‡Šå’Œå­—ç¬¦ä¸²ä¸­çš„æ–‡å­—ä¹Ÿä¼šè¢«æ”¶å…¥è¡¥å…¨
 "let g:ycm_collect_identifiers_from_comments_and_strings = 0
-"" ÈÃYouCompleteMeÍ¬Ê±ÀûÓÃÔ­À´µÄctags
+"" è®©YouCompleteMeåŒæ—¶åˆ©ç”¨åŸæ¥çš„ctags
 "let g:ycm_collect_identifiers_from_tag_files = 1  
 "let g:clang_user_options='|| exit 0'
-"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " Ìø×ªµ½¶¨Òå´¦
+"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " è·³è½¬åˆ°å®šä¹‰å¤„
 
 let g:ycm_server_python_interpreter=g:python3_host_prog
 let g:ycm_global_ycm_extra_conf= g:ycm_extra_conf
@@ -707,7 +707,7 @@ let g:goyo_linenr=0
 nmap <Leader>gy :Goyo<CR>
 xmap <Leader>gy :Goyo<CR>
 
-"½øÈëgoyoÄ£Ê½ºó×Ô¶¯´¥·¢limelight,ÍË³öºóÔò¹Ø±Õ
+"è¿›å…¥goyoæ¨¡å¼åè‡ªåŠ¨è§¦å‘limelight,é€€å‡ºååˆ™å…³é—­
 function! s:goyo_enter()
   if executable('tmux') && strlen($TMUX)
     silent !tmux set status off
@@ -741,7 +741,7 @@ let g:tagbar_ctags_bin = g:ctags_path
 " undotree
 " --------------------
 nnoremap <Leader>ud :UndotreeToggle<CR>
-" ³Ö¾Ã»¯ÀúÊ·¼ÇÂ¼
+" æŒä¹…åŒ–å†å²è®°å½•
 " if has("persistent_undo")
 "     set undodir=$HOME."/.undodir"
 "     set undofile
