@@ -239,6 +239,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-repeat'
+Plug 'itchyny/vim-cursorword'
+
+" autocomlete by AI
+Plug 'zxqfl/tabnine-vim', { 'for': ['go','java', 'php', 'html', 'javascript', 'css', 'less','scss','cpp','c','javascript','kotlin','python','dart'] }
+
+Plug 'posva/vim-vue'
+
 " -------------------------------------------------------------------------
 " All of your Plugins must be added before the following line
 " Initialize plugin system
