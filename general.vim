@@ -75,7 +75,7 @@ vmap <leader>fm =
 
 " Fast quiting without saving
 nnoremap <leader>q :q<cr>
-nnoremap <leader><leader>qq :q!<cr>
+nnoremap <leader><leader>q :q!<cr>
 nnoremap <leader>w :w<cr>
 
 " cusor mvoement in insertmode
@@ -126,6 +126,11 @@ set wildmenu
 set mouse=a
 
 " 设置锚点
-map <Leader><Leader>m <Esc>/<++><CR>:nohlsearch<CR>c4l
+map <Leader><Leader>m <Esc>/<><CR>:nohlsearch<CR>2s
+" shift+enter to append suffix
+autocmd FileType * nnoremap <S-CR> <ESC>o
+autocmd FileType * inoremap <S-CR> <ESC>o
+autocmd FileType c,cpp,java,javascript nnoremap <S-CR> <ESC>A;<CR>
+autocmd FileType c,cpp,java,javascript inoremap <S-CR> <ESC>A;<CR>
 
-nnoremap <Leader><Leader>a A
+
