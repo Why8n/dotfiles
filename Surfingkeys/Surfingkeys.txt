@@ -45,11 +45,8 @@ map('<Ctrl-h>','oh');
 
 //youku hide danmu
 mapkey('as', 'hide danmu', function() {
-    const reYouku = /youku/i;
-    const url = window.location.href;
-    if(reYoutku.test(url)){
-        document.getElementsByClassName("dmicon")[0].click();
-        return;
-    }
-});
+    document.getElementsByClassName("dmicon")[0].click();
+},{domain:/youku\.com/i});
 
+// unmap all for specific sites
+unmapAllExcept([],/freecodecamp.org|keybr.com|typingclub.com/)
