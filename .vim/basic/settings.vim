@@ -1,20 +1,21 @@
 " change leader \ to ;
 let mapleader=' '
+set nocompatible
 
 set nu
 set relativenumber
+
 " Highlight search results
 set hlsearch
 "  real time search result shown
 set incsearch
-map <LEADER><CR> :nohlsearch<CR>
 " Ignore case when searching
 set ignorecase
 " When searching try to be samrt about cases
 set smartcase
 " Show matching brackets when text indicator is over them
 set showmatch
-" 搜索到文件两端时不重新搜索
+
 set expandtab
 " 1 tab = 4 spaces
 " Set <<  and >> shift width 4
@@ -23,7 +24,6 @@ set tabstop=4
 " Be smart when using tabs
 set smarttab
 
-set nocompatible
 " 检测文件类型
 filetype on
 filetype indent on 
@@ -63,74 +63,13 @@ set termencoding=utf-8
 " set nowrapscan
 " 不突出显示当前行
 set nocursorline
-" Use spaces instead of tabs
-
-" Tab operation
-map <tab> gt
-map <S-tab> gT
-
-" format
-nmap <silent> <leader>fm gg=G''
-vmap <leader>fm =
-
-" Fast quiting without saving
-nnoremap <leader>q :q<cr>
-nnoremap <leader><leader>q :q!<cr>
-nnoremap <leader>w :w<cr>
-
-" cusor mvoement in insertmode
-" inoremap <c-h> <left>
-" inoremap <c-l> <right>
-" inoremap <c-j> <c-o>gj
-" inoremap <c-k> <c-o>gk
-" inoremap <c-j> <up>
-" inoremap <c-k> <down>
-
-
-
-" Ctrl+a
-nnoremap <silent> <C-a> ggvG$
-
-" 选中状态下 Ctrl+c 复制
-vmap <C-c> "+y
-
-" Ctrl+v
-nmap <silent> <C-v> "+p
-imap <silent> <C-v> <C-r>+
-" 命令行模式
-cmap <C-v> <C-r>+
-
-" Ctrl+x
-nmap <silent> <C-x> "+dd
-vmap <silent> <C-x> "+d
-
-
-"switch windows
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-l> <C-w>l
-"nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-nmap wh <C-w>h
-nmap wl <C-w>l
-nmap wj <C-w>j
-nmap wk <C-w>k
-
 " 屏幕滚动时在光标上下方保留5行预览代码
 set so=5
 
 set autochdir
-set cursorline
 set showcmd
 set wildmenu
 " 使能鼠标操作
 set mouse=a
 
-" 设置锚点
-map <Leader><Leader>m <Esc>/<><CR>:nohlsearch<CR>2s
-" shift+enter to append suffix
-autocmd FileType * nnoremap <S-CR> <ESC>o
-autocmd FileType * inoremap <S-CR> <ESC>o
-autocmd FileType c,cpp,java,javascript nnoremap <S-CR> <ESC>A;<CR>
-autocmd FileType c,cpp,java,javascript inoremap <S-CR> <ESC>A;<CR>
-
-
+" Use spaces instead of tabs
