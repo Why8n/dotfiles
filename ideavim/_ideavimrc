@@ -1,4 +1,5 @@
-source ./general.vim
+source ~/.vim/basic/settings.vim
+source ~/.vim/basic/mappings.vim
 
 " no backup
 set noundofile
