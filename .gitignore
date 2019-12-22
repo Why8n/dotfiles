@@ -11,3 +11,4 @@ vimfiles/*
 !StrokesPlus
 !vscode/settings.json
 !.vimrc
+!ReadMe.md
