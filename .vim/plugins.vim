@@ -84,32 +84,30 @@ function s:installVimPlugins()
 endfunction
 
 function s:installNvimPlugins()
-    " ----------------
-    " === language ===
-    " ----------------
-    "  completion
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " Plug 'ncm2/ncm2'
-    " Plug 'roxma/nvim-yarp'
-    " Plug 'ncm2/ncm2-jedi'
-    " Plug 'ncm2/ncm2-bufword'
-    " Plug 'ncm2/ncm2-path'
-    " " Plug 'ncm2/ncm2-match-highlight'
-    " Plug 'ncm2/ncm2-markdown-subscope'
-	" Python
-    " Semantic Highlighting for Python in Neovim
-	Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
-
+    source ~/.vim/neovim/plugins.vim
 endfunction
 
+function s:installVimAndConfig()
+    call plug#begin('~/.vim/plugged')
+        call s:installVimPlugins()
+    call plug#end()
 
-call plug#begin('~/.vim/plugged')
-	call s:installVimPlugins()
-    if has('nvim')
+    source ~/.vim/plugins_configuration.vim
+endfunction
+
+function s:installNvimAndConfig()
+    call plug#begin('~/.vim/plugged')
+        call s:installVimPlugins()
         call s:installNvimPlugins()
-    endif
-call plug#end()
+    call plug#end()
 
+    source ~/.vim/plugins_configuration.vim
+    source ~/.vim/neovim/plugins_configuration.vim
+endfunction
 
+if has('nvim')
+    call s:installNvimAndConfig()
+else
+    call s:installVimAndConfig()
+endif 
 
-source ~/.vim/plugins_configuration.vim

@@ -72,4 +72,4 @@ set wildmenu
 " 使能鼠标操作
 set mouse=a
 
-" Use spaces instead of tabs
+set ff=unix
