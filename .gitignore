@@ -4,8 +4,7 @@
 vimfiles/*
 !vimfiles/colors/
 !ideavim/
-!*.vim
-.vim/plugged
+!.vim/
 !vs2017
 !Surfingkeys
 !StrokesPlus
