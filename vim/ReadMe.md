@@ -6,6 +6,7 @@ Installation
 ```
 $ git clone https://github.com/Why8n/dotfiles.git
 $ cd dotfiles/vim
+$ chmod +x ./bootstrap.sh
 $ ./bootstrap.sh
 ```
 
