@@ -11,3 +11,4 @@ vimfiles/*
 !vscode/settings.json
 !.vimrc
 !ReadMe.md
+.netrwhist
