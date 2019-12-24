@@ -81,14 +81,14 @@ endif
 nmap wm :NERDTreeToggle<CR>
 let NERDTreeWinPos='left'
 let NERDTreeWinSize=30
-" µ±²»´ø²ÎÊı´ò¿ªVimÊ±×Ô¶¯¼ÓÔØÏîÄ¿Ê÷ -- no
+" å½“ä¸å¸¦å‚æ•°æ‰“å¼€Vimæ—¶è‡ªåŠ¨åŠ è½½é¡¹ç›®æ ‘ -- no
 autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" µ±ËùÓĞÎÄ¼ş¹Ø±ÕÊ±¹Ø±ÕÏîÄ¿Ê÷´°¸ñ
+" å½“æ‰€æœ‰æ–‡ä»¶å…³é—­æ—¶å…³é—­é¡¹ç›®æ ‘çª—æ ¼
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-" ²»ÏÔÊ¾ÕâĞ©ÎÄ¼ş
+" ä¸æ˜¾ç¤ºè¿™äº›æ–‡ä»¶
 let NERDTreeIgnore=['\.pyc$', '\~$', 'node_modules'] "ignore files in NERDTree
-" ²»ÏÔÊ¾ÏîÄ¿Ê÷ÉÏ¶îÍâµÄĞÅÏ¢£¬ÀıÈç°ïÖú¡¢ÌáÊ¾Ê²Ã´µÄ
+" ä¸æ˜¾ç¤ºé¡¹ç›®æ ‘ä¸Šé¢å¤–çš„ä¿¡æ¯ï¼Œä¾‹å¦‚å¸®åŠ©ã€æç¤ºä»€ä¹ˆçš„
 let NERDTreeMinimalUI=1
 "Refresh both CtrlP and NERDTree
 nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>:CtrlPClearCache<cr>
@@ -205,6 +205,7 @@ let g:mkdp_preview_options = {
 let g:mkdp_markdown_css = ''
 
 " use a custom highlight style must absolute path
+" let g:mkdp_highlight_css = '~/.vim/style/solarized_dark.css'
 let g:mkdp_highlight_css = ''
 
 " use a custom port to start server or random for empty
@@ -212,7 +213,7 @@ let g:mkdp_port = ''
 
 " preview page title
 " ${name} will be replace with the file name
-let g:mkdp_page_title = '¡¸${name}¡¹'
+let g:mkdp_page_title = 'ã€Œ${name}ã€'
 
 map <silent> <F8> <Plug>MarkdownPreview       
 map <silent> <F9> <Plug>MarkdownPreviewStop  
@@ -223,7 +224,7 @@ nmap <silent> <Leader>md <Plug>MarkdownPreview
 " vim-table-mode
 " -----------------
 
-" ÅäÖÃ¿ì½İ¼ü
+" é…ç½®å¿«æ·é”®
 nmap <Leader>tm :TableModeToggle<CR>
 " markdown-compatible tables
 let g:table_mode_corner='|'
@@ -234,11 +235,11 @@ function! s:isAtStartOfLine(mapping)
   let comment_pattern = '\V' . escape(substitute(&l:commentstring, '%s.*$', '', ''), '\')
   return (text_before_cursor =~? '^' . ('\v(' . comment_pattern . '\v)?') . '\s*\v' . mapping_pattern . '\v$')
 endfunction
-" ²åÈëÄ£Ê½ÏÂ£¬°´ || Ê¹ÄÜ²å¼ş
+" æ’å…¥æ¨¡å¼ä¸‹ï¼ŒæŒ‰ || ä½¿èƒ½æ’ä»¶
 inoreabbrev <expr> <bar><bar>
           \ <SID>isAtStartOfLine('\|\|') ?
           \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
-" ²åÈëÄ£Ê½ÏÂ£¬°´ __ Ê§ÄÜ²å¼ş
+" æ’å…¥æ¨¡å¼ä¸‹ï¼ŒæŒ‰ __ å¤±èƒ½æ’ä»¶
 inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
           \ '<c-o>:silent! TableModeDisable<cr>' : '__'
@@ -264,7 +265,7 @@ let g:indentLine_color_dark = 1 " (default: 2)
 let g:indentLine_bgcolor_term = 202
 
 " let g:indentLine_char = 'c'
-" let g:indentLine_char_list = ['|', '|', '©ª', '©®']
+" let g:indentLine_char_list = ['|', '|', 'â”†', 'â”Š']
 " change conceal behaviour
 let g:indentLine_concealcursor = 'inc'
 let g:indentLine_conceallevel = 2
@@ -294,29 +295,29 @@ let g:indentLine_conceallevel = 2
 "YouCompleteMe
 "----------------------------
 "let g:ycm_key_invoke_completion = '<M-/>' "default <C-Space>,modify to alt+/
-"" ×Ô¶¯²¹È«ÅäÖÃ
-"set completeopt=longest,menu " "ÈÃVimµÄ²¹È«²Ëµ¥ĞĞÎªÓëÒ»°ãIDEÒ»ÖÂ(²Î¿¼VimTip1228)
-"autocmd InsertLeave * if pumvisible() == 0|pclose|endif "Àë¿ª²åÈëÄ£Ê½ºó×Ô¶¯¹Ø±ÕÔ¤ÀÀ´°¿Ú
-"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"    "»Ø³µ¼´Ñ¡ÖĞµ±Ç°Ïî
+"" è‡ªåŠ¨è¡¥å…¨é…ç½®
+"set completeopt=longest,menu " "è®©Vimçš„è¡¥å…¨èœå•è¡Œä¸ºä¸ä¸€èˆ¬IDEä¸€è‡´(å‚è€ƒVimTip1228)
+"autocmd InsertLeave * if pumvisible() == 0|pclose|endif "ç¦»å¼€æ’å…¥æ¨¡å¼åè‡ªåŠ¨å…³é—­é¢„è§ˆçª—å£
+"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"    "å›è½¦å³é€‰ä¸­å½“å‰é¡¹
 "
-""youcompleteme  Ä¬ÈÏtab  s-tab ºÍ×Ô¶¯²¹È«³åÍ»
+""youcompleteme  é»˜è®¤tab  s-tab å’Œè‡ªåŠ¨è¡¥å…¨å†²çª
 "let g:ycm_key_list_select_completion=['<c-n>']
 "let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
 "let g:ycm_key_list_previous_completion = ['<Up>']
-"let g:ycm_confirm_extra_conf=0 "¹Ø±Õ¼ÓÔØ.ycm_extra_conf.pyÌáÊ¾
+"let g:ycm_confirm_extra_conf=0 "å…³é—­åŠ è½½.ycm_extra_conf.pyæç¤º
 "
 "let g:ycm_min_num_of_chars_for_completion = 1
-""ÔÚ×¢ÊÍÊäÈëÖĞÒ²ÄÜ²¹È«
+""åœ¨æ³¨é‡Šè¾“å…¥ä¸­ä¹Ÿèƒ½è¡¥å…¨
 "let g:ycm_complete_in_comments = 1
-""ÔÚ×Ö·û´®ÊäÈëÖĞÒ²ÄÜ²¹È«
+""åœ¨å­—ç¬¦ä¸²è¾“å…¥ä¸­ä¹Ÿèƒ½è¡¥å…¨
 "let g:ycm_complete_in_strings = 1
-""×¢ÊÍºÍ×Ö·û´®ÖĞµÄÎÄ×ÖÒ²»á±»ÊÕÈë²¹È«
+""æ³¨é‡Šå’Œå­—ç¬¦ä¸²ä¸­çš„æ–‡å­—ä¹Ÿä¼šè¢«æ”¶å…¥è¡¥å…¨
 "let g:ycm_collect_identifiers_from_comments_and_strings = 0
-"" ÈÃYouCompleteMeÍ¬Ê±ÀûÓÃÔ­À´µÄctags
+"" è®©YouCompleteMeåŒæ—¶åˆ©ç”¨åŸæ¥çš„ctags
 "let g:ycm_collect_identifiers_from_tag_files = 1  
 "let g:clang_user_options='|| exit 0'
-"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " Ìø×ªµ½¶¨Òå´¦
+"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " è·³è½¬åˆ°å®šä¹‰å¤„
 
 let g:ycm_server_python_interpreter=g:python3_host_prog
 let g:ycm_global_ycm_extra_conf= g:ycm_extra_conf
@@ -431,7 +432,7 @@ let g:goyo_linenr=0
 nmap <Leader>gy :Goyo<CR>
 xmap <Leader>gy :Goyo<CR>
 
-"½øÈëgoyoÄ£Ê½ºó×Ô¶¯´¥·¢limelight,ÍË³öºóÔò¹Ø±Õ
+"è¿›å…¥goyoæ¨¡å¼åè‡ªåŠ¨è§¦å‘limelight,é€€å‡ºååˆ™å…³é—­
 function! s:goyo_enter()
   if executable('tmux') && strlen($TMUX)
     silent !tmux set status off
@@ -465,7 +466,7 @@ let g:tagbar_ctags_bin = g:ctags_path
 " undotree
 " --------------------
 nnoremap <Leader>ud :UndotreeToggle<CR>
-" ³Ö¾Ã»¯ÀúÊ·¼ÇÂ¼
+" æŒä¹…åŒ–å†å²è®°å½•
 " if has("persistent_undo")
 "     set undodir=$HOME."/.undodir"
 "     set undofile
@@ -512,3 +513,144 @@ nnoremap <silent> <Leader>fz       :Files<CR>
 " tpope/vim-repeat
 " -------------------
 silent! call repeat#set("\<Plug>MarkdownPreview", v:count)
+
+" -------------------
+" coc.nvim
+" -------------------
+let g:coc_global_extensions = ['coc-tsserver','coc-html','coc-css', 'coc-json','coc-vetur',
+            \ 'coc-java','coc-python','coc-flutter',
+            \ 'coc-emmet','coc-snippets','coc-xml','coc-yaml',
+            \ 'coc-markdownlint','coc-highlight']
+
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Use tab for trigger completion with characters ahead and navigate.
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+vmap <leader>fm  <Plug>(coc-format-selected)
+nmap <leader>fm  <Plug>(coc-format)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <C-d> <Plug>(coc-range-select)
+xmap <silent> <C-d> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+nmap <silent> <leader>h :pclose<cr>
+
+

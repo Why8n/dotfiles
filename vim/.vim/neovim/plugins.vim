@@ -2,7 +2,6 @@
 " === language ===
 " ----------------
 "  completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'ncm2/ncm2'
 " Plug 'roxma/nvim-yarp'
 " Plug 'ncm2/ncm2-jedi'

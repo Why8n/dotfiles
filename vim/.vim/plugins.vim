@@ -1,4 +1,4 @@
-function s:installVimPlugins()
+function! s:installVimPlugins()
 	" Plug 'dyng/ctrlsf.vim'
 	" way too slow on huge files
 	" Plug 'ctrlpvim/ctrlp.vim', {'on':'CtrlP'} 
@@ -62,6 +62,7 @@ function s:installVimPlugins()
     " === language ===
     " ----------------
     " completion
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	"Plug 'Valloric/YouCompleteMe'
 	" autocomlete by AI
 	" Plug 'zxqfl/tabnine-vim', { 'for': ['go','java', 'php', 'html', 'javascript', 'css', 'less','scss','cpp','c','javascript','kotlin','python','dart'] }
@@ -83,11 +84,11 @@ function s:installVimPlugins()
 	Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 endfunction
 
-function s:installNvimPlugins()
+function! s:installNvimPlugins()
     source ~/.vim/neovim/plugins.vim
 endfunction
 
-function s:installVimAndConfig()
+function! s:installVimAndConfig()
     call plug#begin('~/.vim/plugged')
         call s:installVimPlugins()
     call plug#end()
@@ -95,7 +96,7 @@ function s:installVimAndConfig()
     source ~/.vim/plugins_configuration.vim
 endfunction
 
-function s:installNvimAndConfig()
+function! s:installNvimAndConfig()
     call plug#begin('~/.vim/plugged')
         call s:installVimPlugins()
         call s:installNvimPlugins()
