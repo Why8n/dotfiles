@@ -67,6 +67,10 @@ function! DownPlugVim2Linux4nvim(path)
     call DownPlugVimAndInstall(a:path)
 endfunction
     
+function! DownPlugVim2Linux4vim(path)
+    call DownPlugVimAndInstall(a:path)
+endfunction
+    
 function! DownPlugVim2Windows()
     if has('nvim')
         call DownPlugVim2Windows4nvim($USERPROFILE.'/AppData/Local/nvim/autoload/plug.vim')

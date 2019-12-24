@@ -1,5 +1,6 @@
 /*
 !vim
+autoload
 vimfiles/*
 !vimfiles/colors/
 !ideavim/
