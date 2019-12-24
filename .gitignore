@@ -1,14 +1,11 @@
 /*
-!_vimrc
-!vimfiles/
+!vim
 vimfiles/*
 !vimfiles/colors/
 !ideavim/
-!.vim/
 !vs2017
 !Surfingkeys
 !StrokesPlus
 !vscode/settings.json
-!.vimrc
 !ReadMe.md
 .netrwhist
