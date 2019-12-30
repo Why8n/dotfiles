@@ -19,7 +19,7 @@ $ bootstrap.bat
 
 2. open `vim`/`nvim`,type`:PlugInstall`
 
-3. open 'vim'/'nvim',type`:CocConfig`,and input below:
+3. open `vim`/`nvim`,type`:CocConfig`,and input below:
 ```
 {
     // Enable preselect feature on neovim, default: `true`
