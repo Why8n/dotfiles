@@ -1,9 +1,10 @@
 source ~/.vim/utils.vim
+call DownPlugVimIfNotExists()
+
 source ~/.vim/basic/settings.vim
 source ~/.vim/basic/mappings.vim
 
 " Auto download vim-plug for the first time
-call DownPlugVimIfNotExists()
 
 if IsWin32()
 	source ~/.vim/os/config4windows.vim

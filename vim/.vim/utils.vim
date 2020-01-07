@@ -45,54 +45,58 @@ endfunc
 
 
 
-function! DownPlugVimAndInstall(path)
-    if empty(glob(a:path))
-        let cmd = '!curl -fLo "'.a:path.'" --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-        " silent !curl -fLo '~/.config/nvim/autoload/plug.vim' --create-dirs
-        "   \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        execute l:cmd
-        autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+function! s:DownPlugVimAndInstall(path)
+    if !filereadable(a:path)
+        " curl version >= 7.52.0
+        if !executable("curl") 
+            echoerr "You have to install curl or first install vim-plug yourself!"
+            execute "q!"
+        endif
+        echo "Installing Vim-Plug..."
+        echo ""
+        exec "!\curl --connect-timeout 10 --retry-delay 0 --retry 10 --retry-connrefused -fLo " .a:path. " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+
+        autocmd VimEnter * PlugInstall --sync
     endif
 endfunction
 
-function! DownPlugVim2Windows4nvim(path)
-    call DownPlugVimAndInstall(a:path)
+function! s:DownPlugVim2Windows4nvim(path)
+    call s:DownPlugVimAndInstall(a:path)
 endfunction
 
-function! DownPlugVim2Windows4vim(path)
-    call DownPlugVimAndInstall(a:path)
+function! s:DownPlugVim2Windows4vim(path)
+    call s:DownPlugVimAndInstall(a:path)
 endfunction
 
-function! DownPlugVim2Linux4nvim(path)
-    call DownPlugVimAndInstall(a:path)
+function! s:DownPlugVim2Linux4nvim(path)
+    call s:DownPlugVimAndInstall(a:path)
 endfunction
     
-function! DownPlugVim2Linux4vim(path)
-    call DownPlugVimAndInstall(a:path)
+function! s:DownPlugVim2Linux4vim(path)
+    call s:DownPlugVimAndInstall(a:path)
 endfunction
     
-function! DownPlugVim2Windows()
+function! s:DownPlugVim2Windows()
     if has('nvim')
-        call DownPlugVim2Windows4nvim($USERPROFILE.'/AppData/Local/nvim/autoload/plug.vim')
+        call s:DownPlugVim2Windows4nvim($USERPROFILE.'/AppData/Local/nvim/autoload/plug.vim')
     else
-        call DownPlugVim2Windows4vim($VIM.'/vimfiles/autoload/plug.vim')
+        call s:DownPlugVim2Windows4vim($VIM.'/vimfiles/autoload/plug.vim')
     endif
 endfunction
 
-
-function! DownPlugVim2Linux()
+function! s:DownPlugVim2Linux()
     if has('nvim')
-        call DownPlugVim2Linux4nvim($HOME.'/.config/nvim/autoload/plug.vim')
+        call s:DownPlugVim2Linux4nvim($HOME.'/.config/nvim/autoload/plug.vim')
     else
-        call DownPlugVim2Linux4vim($HOME.'/.vim/autoload/plug.vim')
+        call s:DownPlugVim2Linux4vim($HOME.'/.vim/autoload/plug.vim')
     endif
 endfunction
 
 function! DownPlugVimIfNotExists()
     if IsWin32()
-        call DownPlugVim2Windows()
+        call s:DownPlugVim2Windows()
     elseif IsUnix() || IsWin32Unix() || IsMac()
-        call DownPlugVim2Linux()
+        call s:DownPlugVim2Linux()
     endif
 endfunction
 
