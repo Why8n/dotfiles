@@ -1,7 +1,7 @@
 source ~/.vim/init.vim
 
 " reload vimrc
-map <C-l> :source $MYVIMRC<CR>
+" map <C-l> :source $MYVIMRC<CR>
 " no backup
 set noundofile
 set nobackup
@@ -63,3 +63,5 @@ map <Right> :vertical resize -2<CR>
 " " command mode
 " cnoremap <C-f> <C-r><C-w>
 
+set ruler
+set t_Co=256

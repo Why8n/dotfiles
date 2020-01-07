@@ -16,13 +16,14 @@ set smartcase
 " Show matching brackets when text indicator is over them
 set showmatch
 
-set expandtab
 " 1 tab = 4 spaces
 " Set <<  and >> shift width 4
 set shiftwidth=4
 set tabstop=4
+set softtabstop=0
 " Be smart when using tabs
 set smarttab
+set expandtab
 
 " 检测文件类型
 filetype on
@@ -57,12 +58,13 @@ set fillchars=vert:\ ,stl:\ ,stlnc:\
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,shift-jis,gb18030,gbk,gb2312,cp936
 set fileencoding=utf-8
-set termencoding=utf-8
 
 "搜索到文件两端时不重新搜索
 " set nowrapscan
 " 不突出显示当前行
 set nocursorline
+" Disable the blinking cursor.
+set gcr=a:blinkon0
 " 屏幕滚动时在光标上下方保留5行预览代码
 set so=5
 
@@ -72,4 +74,11 @@ set wildmenu
 " 使能鼠标操作
 set mouse=a
 
+" fileformat
 set ff=unix
+" fileformats
+set ffs=unix,dos,mac
+
+" search will center on the line it's found in.
+" nnoremap n nzzzv
+" nnoremap N Nzzzv

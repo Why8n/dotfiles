@@ -8,9 +8,12 @@ nmap <silent> <leader>fm gg=G''
 vmap <leader>fm =
 
 " Fast quiting without saving
-nnoremap <leader>q :q<cr>
-nnoremap <leader><leader>q :q!<cr>
+nnoremap <silent> <leader>q :q<cr>
+nnoremap <silent> <leader><leader>q :q!<cr>
 nnoremap <leader>w :w<cr>
+nnoremap <silent> <leader><leader>o :only<cr>
+" close previews window
+nnoremap <silent> <leader><leader>p :-quit<cr>
 
 " cusor mvoement in insertmode
 " inoremap <c-h> <left>
@@ -39,15 +42,11 @@ nmap <silent> <C-x> "+dd
 vmap <silent> <C-x> "+d
 
 
-"switch windows
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-l> <C-w>l
-"nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-nmap wh <C-w>h
-nmap wl <C-w>l
-nmap wj <C-w>j
-nmap wk <C-w>k
+"" Switching windows
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+noremap <C-h> <C-w>h
 
 " 设置锚点
 map <Leader><Leader>m <Esc>/<><CR>:nohlsearch<CR>2s
