@@ -3,23 +3,24 @@ function! s:installVimPlugins()
 	" way too slow on huge files
 	" Plug 'ctrlpvim/ctrlp.vim', {'on':'CtrlP'} 
 	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+    Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'easymotion/vim-easymotion'
 	Plug 'vim-syntastic/syntastic'
 	Plug 'tpope/vim-surround'
-	Plug 'scrooloose/nerdcommenter'
+    Plug 'scrooloose/nerdcommenter'
 	" Plug 'Raimondi/delimitMate'
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'terryma/vim-multiple-cursors'
-	" ÀıΩ¯÷∏ æœﬂ
+	" Áº©ËøõÊåáÁ§∫Á∫ø
 	Plug 'Yggdroot/indentLine'
 
 	" Hyperfocus-writing in Vim
 	Plug 'junegunn/limelight.vim'
 	" distraction free writing mode
 	Plug 'junegunn/goyo.vim' 
-	" Œƒ±æ∂‘∆Î≤Âº˛
+	" ÊñáÊú¨ÂØπÈΩêÊèí‰ª∂
 	Plug 'godlygeek/tabular'
 
 	" Find And Replace Vim plugin
@@ -63,6 +64,7 @@ function! s:installVimPlugins()
     " ----------------
     " completion
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'chemzqm/vim-run', {'on': 'Run'}
 	"Plug 'Valloric/YouCompleteMe'
 	" autocomlete by AI
 	" Plug 'zxqfl/tabnine-vim', { 'for': ['go','java', 'php', 'html', 'javascript', 'css', 'less','scss','cpp','c','javascript','kotlin','python','dart'] }
@@ -70,10 +72,11 @@ function! s:installVimPlugins()
     
     " frontend
 	" HTML, CSS, JavaScript, PHP, JSON, etc.
-	Plug 'elzr/vim-json'
+	" Plug 'elzr/vim-json'
 	Plug 'hail2u/vim-css3-syntax'
+    " color preview
 	Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-	Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
+	" Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
 	Plug 'mattn/emmet-vim'
 	Plug 'posva/vim-vue'
 

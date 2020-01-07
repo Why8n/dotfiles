@@ -78,7 +78,7 @@ endif
 " ------------
 " nerdtree
 " ------------
-nmap wm :NERDTreeToggle<CR>
+nmap <leader>wm :NERDTreeToggle<CR>
 let NERDTreeWinPos='left'
 let NERDTreeWinSize=30
 " 当不带参数打开Vim时自动加载项目树 -- no
@@ -86,8 +86,8 @@ autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " 当所有文件关闭时关闭项目树窗格
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-" 不显示这些文件
-let NERDTreeIgnore=['\.pyc$', '\~$', 'node_modules'] "ignore files in NERDTree
+"ignore files in NERDTree
+let NERDTreeIgnore=['\.pyc$', '\~$', 'node_modules','\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
 " 不显示项目树上额外的信息，例如帮助、提示什么的
 let NERDTreeMinimalUI=1
 "Refresh both CtrlP and NERDTree
@@ -128,7 +128,8 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-vmap <C-b> <leader>cc
+nmap <C-/> <leader>c<space>
+vmap <C-/> <leader>c<space>
 
 " -----------------------
 " markdown-preview.nvim
@@ -517,10 +518,14 @@ silent! call repeat#set("\<Plug>MarkdownPreview", v:count)
 " -------------------
 " coc.nvim
 " -------------------
-let g:coc_global_extensions = ['coc-tsserver','coc-html','coc-css', 'coc-json','coc-vetur',
+let g:coc_global_extensions = [
+            \ 'coc-tsserver','coc-html','coc-css','coc-vetur',
             \ 'coc-java','coc-python','coc-flutter',
             \ 'coc-emmet','coc-snippets','coc-xml','coc-yaml',
-            \ 'coc-markdownlint','coc-highlight']
+            \ 'coc-markdownlint','coc-highlight',
+            \ 'coc-pairs',
+            \ 'coc-prettier',
+            \]
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -653,4 +658,13 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 nmap <silent> <leader>h :pclose<cr>
 
-
+" -------------------
+" vim.run
+" -------------------
+let g:vim_run_command_map = {
+  \'javascript': 'node',
+  \'python': 'python',
+  \'java': 'java',
+  \'html': 'chrome',
+  \'dosbatch': 'cmd',
+  \}
