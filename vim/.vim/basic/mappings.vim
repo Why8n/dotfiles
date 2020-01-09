@@ -8,9 +8,9 @@ nmap <silent> <leader>fm gg=G''
 vmap <leader>fm =
 
 " Fast quiting without saving
-nnoremap <silent> <leader>q :q<cr>
+nnoremap <silent> <leader>qq :q<cr>
 nnoremap <silent> <leader><leader>q :q!<cr>
-nnoremap <leader>w :w<cr>
+nnoremap <leader>ww :w<cr>
 nnoremap <silent> <leader><leader>o :only<cr>
 " close previews window
 nnoremap <silent> <leader><leader>p :-quit<cr>
@@ -23,8 +23,6 @@ nnoremap <silent> <leader><leader>p :-quit<cr>
 " inoremap <c-j> <up>
 " inoremap <c-k> <down>
 
-
-
 " Ctrl+a
 nnoremap <silent> <C-a> ggvG$
 
@@ -34,7 +32,7 @@ vmap <C-c> "+y
 " Ctrl+v
 nmap <silent> <C-v> "+p
 imap <silent> <C-v> <C-r>+
-" 命令行模式
+vmap <silent> <C-v> d"+P
 cmap <C-v> <C-r>+
 
 " Ctrl+x

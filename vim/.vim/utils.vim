@@ -1,3 +1,10 @@
+" source directory recursively
+function! SourceDir(path)
+    for file in split(globpath(a:path,'*.vim'), '\n')
+        execute 'source' fnameescape(file)
+    endfor
+endfunction
+
 function! IsWin32()
     return has('win32')
 endfunction
@@ -99,4 +106,3 @@ function! DownPlugVimIfNotExists()
         call s:DownPlugVim2Linux()
     endif
 endfunction
-

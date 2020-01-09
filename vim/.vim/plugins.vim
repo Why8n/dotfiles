@@ -91,7 +91,7 @@ function! s:installNvimPlugins()
     source ~/.vim/neovim/plugins.vim
 endfunction
 
-function! s:installVimAndConfig()
+function! InstallVimAndConfig()
     call plug#begin('~/.vim/plugged')
         call s:installVimPlugins()
     call plug#end()
@@ -99,7 +99,7 @@ function! s:installVimAndConfig()
     source ~/.vim/plugins_configuration.vim
 endfunction
 
-function! s:installNvimAndConfig()
+function! InstallNvimAndConfig()
     call plug#begin('~/.vim/plugged')
         call s:installVimPlugins()
         call s:installNvimPlugins()
@@ -108,10 +108,3 @@ function! s:installNvimAndConfig()
     source ~/.vim/plugins_configuration.vim
     source ~/.vim/neovim/plugins_configuration.vim
 endfunction
-
-if has('nvim')
-    call s:installNvimAndConfig()
-else
-    call s:installVimAndConfig()
-endif 
-
