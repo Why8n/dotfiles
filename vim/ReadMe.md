@@ -17,12 +17,7 @@ $ cd dotfiles\vim
 $ bootstrap.bat
 ```
 
-2. open `vim`/`nvim`,type`:PlugInstall`
-**notice**:with 'nvim',remember to add '.vimrc' to neovim's `init.vim`:
-```
-" ...
-source ~/.vimrc
-```
+2. open `vim`/`nvim`
 
 3. open `vim`/`nvim`,type`:CocConfig`,and input below:
 ```

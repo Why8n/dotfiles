@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ln -rs .vim ~/.vim
-ln -rs .vimrc ~/.vimrc
+ln -rs .vimrc ~/.config/nvim/init.vim
 
 
 
