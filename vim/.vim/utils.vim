@@ -1,3 +1,21 @@
+
+function! s:createDirIfNotExists(dir)
+    let l:newDir = expand(a:dir)
+    if !isdirectory(expand(l:newDir))
+        let confirmation=confirm("Create a new directory?", "&Yes\n&No")
+        if confirmation == 1
+            call mkdir(expand(l:newDir), 'p')
+            echom 'Created a new directory:' l:newDir
+        endif
+    endif
+endfunction
+
+function! CacheFile()
+    call s:createDirIfNotExists('~/.vim/temp')
+    let l:cacheFile = expand('~/.vim/temp/lastfile.swp')
+    execute 'w!' l:cacheFile
+endfunction
+
 " source directory recursively
 function! SourceDir(path)
     for file in split(globpath(a:path,'*.vim'), '\n')
@@ -49,8 +67,6 @@ func! CompileRun()
         exec "!cmd /c %"
     endif
 endfunc
-
-
 
 function! s:DownPlugVimAndInstall(path)
     if !filereadable(a:path)

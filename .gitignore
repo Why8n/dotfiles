@@ -10,3 +10,4 @@ vimfiles/*
 !vscode/settings.json
 !ReadMe.md
 .netrwhist
+temp

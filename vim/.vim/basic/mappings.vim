@@ -8,9 +8,9 @@ nmap <silent> <leader>fm gg=G''
 vmap <leader>fm =
 
 " Fast quiting without saving
-nnoremap <silent> <leader>qq :q<cr>
+nnoremap <silent> <leader>q :q<cr>
 nnoremap <silent> <leader><leader>q :q!<cr>
-nnoremap <leader>ww :w<cr>
+nnoremap <leader>w :w<cr>
 nnoremap <silent> <leader><leader>o :only<cr>
 " close previews window
 nnoremap <silent> <leader><leader>p :-quit<cr>
@@ -31,7 +31,7 @@ vmap <C-c> "+y
 
 " Ctrl+v
 nmap <silent> <C-v> "+p
-imap <silent> <C-v> <C-r>+
+imap <silent> <C-v> <C-r><C-p>+
 vmap <silent> <C-v> d"+P
 cmap <C-v> <C-r>+
 
