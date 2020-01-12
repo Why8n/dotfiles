@@ -69,4 +69,5 @@ nmap <leader>cmd :call CompileRun()<CR>
 
 " backup current file when forced exit
 nnoremap <silent> <leader><leader>q :call CacheFile()<esc>:q!<cr>
-
+" auto switch to current file directory when enter a new file
+autocmd BufEnter * lcd %:p:h

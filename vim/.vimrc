@@ -63,5 +63,4 @@ map <Right> :vertical resize -2<CR>
 " " command mode
 " cnoremap <C-f> <C-r><C-w>
 
-set ruler
 set t_Co=256

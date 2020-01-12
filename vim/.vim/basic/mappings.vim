@@ -1,4 +1,4 @@
-map <LEADER><CR> :nohlsearch<CR>
+map <silent> <LEADER><CR> :nohlsearch<CR>
 " Tab operation
 map <tab> gt
 map <S-tab> gT
@@ -53,3 +53,8 @@ autocmd FileType * nnoremap <S-CR> <ESC>o
 autocmd FileType * inoremap <S-CR> <ESC>o
 autocmd FileType c,cpp,java,javascript nnoremap <S-CR> <ESC>A;<CR>
 autocmd FileType c,cpp,java,javascript inoremap <S-CR> <ESC>A;<CR>
+
+" open a blank new file on the right panel
+nnoremap <leader>vs :bo vnew<cr>
+nnoremap <leader>ev :botright vs $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
