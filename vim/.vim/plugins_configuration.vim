@@ -78,7 +78,6 @@ endif
 " ------------
 " nerdtree
 " ------------
-nmap <leader>nt :NERDTreeToggle<CR>
 let NERDTreeWinPos='left'
 let NERDTreeWinSize=30
 " 当不带参数打开Vim时自动加载项目树 -- no
@@ -92,6 +91,24 @@ let NERDTreeIgnore=['\.pyc$', '\~$', 'node_modules','\.rbc$', '\~$', '\.pyc$', '
 let NERDTreeMinimalUI=1
 "Refresh both CtrlP and NERDTree
 " nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>:CtrlPClearCache<cr>
+
+" returns true iff is NERDTree open/active
+" function! s:isNTOpen()
+"     return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+" endfunction
+"
+" " switch to current file directory
+" function! SyncTree()
+"     if s:isNTOpen()
+"         NERDTreeClose
+"     else
+"         NERDTreeCWD
+"     endif
+" endfunction
+
+autocmd BufEnter * lcd %:p:h
+nnoremap <leader>nc :NERDTreeCWD<cr> 
+nnoremap <leader>nt :NERDTreeToggle<cr>
 
 " --------------
 "  syntastic
@@ -669,3 +686,9 @@ let g:vim_run_command_map = {
   \'html': 'chrome',
   \'dosbatch': 'cmd',
   \}
+
+" -------------------
+" smartim
+" -------------------
+" let g:smartim_default = '1033'
+

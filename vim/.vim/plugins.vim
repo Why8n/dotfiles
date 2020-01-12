@@ -2,8 +2,8 @@ function! s:installVimPlugins()
 	" Plug 'dyng/ctrlsf.vim'
 	" way too slow on huge files
 	" Plug 'ctrlpvim/ctrlp.vim', {'on':'CtrlP'} 
-	Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-    Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
+	Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle','NERDTreeCWD'] }
+    Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeCWD' }
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'easymotion/vim-easymotion'
@@ -36,12 +36,13 @@ function! s:installVimPlugins()
 	" --------------------------
 	"=== switch input method ===
 	" --------------------------
-	Plug 'https://github.com/vim-scripts/fcitx.vim.git'
+	" Plug 'https://github.com/vim-scripts/fcitx.vim.git'
+    " Plug 'ybian/smartim'
 
 	" ----------------
 	" === markdown ===
 	" ----------------
-	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() },'for':['markdown','vim-plug']}
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() },'for':['markdown','vim-plug']}
 	" markdown table improvment
 	Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 	" Plug 'reedes/vim-pencil'
