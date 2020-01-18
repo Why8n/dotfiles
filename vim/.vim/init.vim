@@ -64,8 +64,8 @@ elseif IsUnix() || IsWin32Unix() || IsMac()
 endif
 
 " others
-map <F5> :call CompileRun()<CR>
-nmap <leader>cmd :call CompileRun()<CR>
+" map <F5> :call CompileRun()<CR>
+" nmap <leader>cmd :call CompileRun()<CR>
 
 " backup current file when forced exit
 nnoremap <silent> <leader><leader>q :call CacheFile()<esc>:q!<cr>

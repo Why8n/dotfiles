@@ -86,6 +86,9 @@ function! s:installVimPlugins()
 
     " Android
 	Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
+
+    " http
+    Plug 'nicwest/vim-http', {'on': ['Http','Http!']}
 endfunction
 
 function! s:installNvimPlugins()

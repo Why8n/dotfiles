@@ -1,6 +1,5 @@
 " change leader \ to ;
-" let mapleader=' '
-let mapleader=','
+let mapleader=' '
 set nocompatible
 
 set nu
@@ -71,8 +70,9 @@ set so=5
 
 set autochdir
 set showcmd
-" 增强模式中的命令行自动完成操作
+" command line auto complete
 set wildmenu
+set wildmode=full
 " 使能鼠标操作
 set mouse=a
 
@@ -95,13 +95,3 @@ set ruler
 set rulerformat=%15(%c%V\ %p%%%)
 " 自动重新读入
 set autoread
-
-
-onoremap ib :<c-u>normal! f(vib<cr>
-onoremap ab :<c-u>normal! f(vab<cr>
-onoremap i( :<c-u>normal! f(vi(<cr>
-onoremap a( :<c-u>normal! f(va(<cr>
-onoremap i{ :<c-u>normal! f{vi{<cr>
-onoremap a{ :<c-u>normal! f{va{<cr>
-onoremap i[ :<c-u>normal! f[vi[<cr>
-onoremap a[ :<c-u>normal! f[va[<cr>

@@ -18,7 +18,7 @@ endfunction
 
 " source directory recursively
 function! SourceDir(path)
-    for file in split(globpath(a:path,'*.vim'), '\n')
+    for file in split(globpath(a:path,'**/*.vim'), '\n')
         execute 'source' fnameescape(file)
     endfor
 endfunction

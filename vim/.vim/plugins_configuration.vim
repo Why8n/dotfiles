@@ -518,14 +518,14 @@ nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
 xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR> 
 
 
-command! -bang -nargs=* Rg
+command! -bang -nargs=* Rgrep
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
-nnoremap <silent> <Leader>rg       :Rg <C-R><C-W><CR>
-xnoremap <silent> <Leader>rg       y:Rg <C-R>"<CR> 
+nnoremap <silent> <Leader>rg       :Rgrep <C-R><C-W><CR>
+xnoremap <silent> <Leader>rg       y:Rgrep <C-R>"<CR> 
 
 nnoremap <silent> <Leader>fz       :Files<CR>
 " -------------------
@@ -540,7 +540,7 @@ let g:coc_global_extensions = [
             \ 'coc-tsserver','coc-html','coc-css','coc-vetur',
             \ 'coc-java','coc-python','coc-flutter',
             \ 'coc-emmet','coc-snippets','coc-xml','coc-yaml',
-            \ 'coc-markdownlint','coc-highlight',
+            \ 'coc-highlight',
             \ 'coc-pairs',
             \ 'coc-prettier',
             \]
@@ -591,10 +591,10 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -687,8 +687,16 @@ let g:vim_run_command_map = {
   \'dosbatch': 'cmd',
   \}
 
+nnoremap <leader>cmd :Run<cr>
+vnoremap <leader>cmd :Run<cr>
+
 " -------------------
-" smartim
+" vim-http
 " -------------------
-" let g:smartim_default = '1033'
+" clean a request before sending it to curl
+let g:vim_http_clean_before_do = 1
+" response shown on vertical window
+let g:vim_http_split_vertically = 1
+" response buffers overwriten
+let g:vim_http_tempbuffer = 1
 
