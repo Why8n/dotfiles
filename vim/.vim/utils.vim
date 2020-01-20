@@ -1,4 +1,7 @@
-
+" reset all settings
+function! Reset()
+    mapclear
+endfunction
 function! s:createDirIfNotExists(dir)
     let l:newDir = expand(a:dir)
     if !isdirectory(expand(l:newDir))

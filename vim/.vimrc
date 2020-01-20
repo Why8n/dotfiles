@@ -64,3 +64,64 @@ map <Right> :vertical resize -2<CR>
 " cnoremap <C-f> <C-r><C-w>
 
 set t_Co=256
+
+
+
+
+" Vimscript file settings ---------------------- {{{
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+
+function s:isFileExists()
+    return strlen(expand('%'))
+endfunction
+
+function! AutoSave()
+    if s:isFileExists()
+        augroup autoSave
+            autocmd!
+            autocmd FocusLost <buffer> silent write
+        augroup END
+    endif
+endfunction
+" auto save when edit a exist file 
+autocmd BufReadPost * call AutoSave()
+
+" todo::remvoe
+" Eng: 1033
+" Chn: 2052
+" function! s:imSwitcher(en)
+"     let en = system('im-select') =~? '1033'
+"     echom 'en = '.en
+"     if xor(a:en, en)
+"         call system('im-select locale')
+"     endif
+" endfunction
+"
+" augroup ImSwitcher
+"     autocmd!
+"     au InsertEnter * call <SID>imSwitcher(0)
+"     au InsertLeave * call <SID>imSwitcher(1)
+    " au CmdlineEnter * call <SID>imSwitcher(0)
+    " au CmdlineLeave * call <SID>imSwitcher(1)
+" augroup END
+    
+" let g:curImMode = 1033
+" function! s:imSwitcher(mode)
+"     let g:curImMode = system('im-select')
+"     if a:mode ==? 1033
+"         call system('im-select 1033')
+"     elseif a:mode ==? 2052
+"         echom 'enter insert mode'
+"         call system('im-select 2052')
+"     endif
+" endfunction
+"
+" augroup ImSwitcher
+"     autocmd!
+"     autocmd InsertEnter * :call <SID>imSwitcher(g:curImMode)
+"     autocmd InsertLeave * :call <SID>imSwitcher(1033)
+" augroup END

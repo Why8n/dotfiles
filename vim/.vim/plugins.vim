@@ -3,7 +3,7 @@ function! s:installVimPlugins()
 	" way too slow on huge files
 	" Plug 'ctrlpvim/ctrlp.vim', {'on':'CtrlP'} 
 	Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle','NERDTreeCWD'] }
-    Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeCWD' }
+    Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':['NERDTreeToggle','NERDTreeCWD'] }
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'easymotion/vim-easymotion'
@@ -74,7 +74,7 @@ function! s:installVimPlugins()
     " frontend
 	" HTML, CSS, JavaScript, PHP, JSON, etc.
 	" Plug 'elzr/vim-json'
-	Plug 'hail2u/vim-css3-syntax'
+	Plug 'hail2u/vim-css3-syntax', {'on': 'SyntasticToggleMode'}
     " color preview
 	Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 	" Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }

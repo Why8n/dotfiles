@@ -106,7 +106,7 @@ let NERDTreeMinimalUI=1
 "     endif
 " endfunction
 
-autocmd BufEnter * lcd %:p:h
+" autocmd BufEnter * lcd %:p:h
 nnoremap <leader>nc :NERDTreeCWD<cr> 
 nnoremap <leader>nt :NERDTreeToggle<cr>
 
@@ -123,7 +123,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-map <F2> :SyntasticToggleMode<CR>
+nnoremap <leader>sy :SyntasticToggleMode<CR>
 
 
 " ---------------
@@ -397,11 +397,11 @@ let marksCloseWhenSelected = 1
 " ----------------------
 let g:multi_cursor_use_default_mapping=0
 " Default mapping
-let g:multi_cursor_start_word_key      = '<C-n>'
-let g:multi_cursor_select_all_word_key = '<A-n>'
-let g:multi_cursor_start_key           = 'g<C-n>'
-let g:multi_cursor_select_all_key      = 'g<A-n>'
-let g:multi_cursor_next_key            = '<C-n>'
+let g:multi_cursor_start_word_key      = '<C-m>'
+let g:multi_cursor_select_all_word_key = '<A-m>'
+let g:multi_cursor_start_key           = 'g<C-m>'
+let g:multi_cursor_select_all_key      = 'g<A-m>'
+let g:multi_cursor_next_key            = '<C-m>'
 let g:multi_cursor_prev_key            = '<C-p>'
 let g:multi_cursor_skip_key            = '<C-x>'
 let g:multi_cursor_quit_key            = '<Esc>'
@@ -528,6 +528,15 @@ nnoremap <silent> <Leader>rg       :Rgrep <C-R><C-W><CR>
 xnoremap <silent> <Leader>rg       y:Rgrep <C-R>"<CR> 
 
 nnoremap <silent> <Leader>fz       :Files<CR>
+nnoremap <silent> <C-n> :call fzf#vim#files(<SID>getProjectDir())<CR>
+nnoremap <F2> :call <SID>setProjectDir(expand('%:p:h'))<CR>
+function! s:getProjectDir()
+    return get(g:,'project_path',expand('%:p:h'))
+endfunction
+function! s:setProjectDir(path)
+    let g:project_path = a:path
+    echom 'set project directory: ' . a:path
+endfunction
 " -------------------
 " tpope/vim-repeat
 " -------------------
