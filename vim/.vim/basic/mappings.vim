@@ -37,16 +37,16 @@ nnoremap <Leader>H <C-w>H
 nnoremap <Leader>K <C-w>K
 nnoremap <Leader>J <C-w>J
 
-onoremap <silent> ib :<c-u>execute "normal! f)vib"<cr>
-onoremap <silent> ab :<c-u>execute "normal! f)vab"<cr>
-onoremap <silent> i( :<c-u>execute "normal! f)vi("<cr>
-onoremap <silent> a( :<c-u>execute "normal! f)va("<cr>
-onoremap <silent> iB :<c-u>execute "normal! /}\<lt>cr>vi{" \| nohlsearch<cr>
-onoremap <silent> aB :<c-u>execute "normal! /}\<lt>cr>va{" \| nohlsearch<cr>
-onoremap <silent> i{ :<c-u>execute "normal! /}\<lt>cr>vi{" \| nohlsearch<cr>
-onoremap <silent> a{ :<c-u>execute "normal! /}\<lt>cr>va{" \| nohlsearch<cr>
-onoremap <silent> i[ :<c-u>execute "normal! f]vi["<cr>
-onoremap <silent> a[ :<c-u>execute "normal! f]va["<cr>
+" onoremap <silent> ib :<c-u>execute "normal! f)vib"<cr>
+" onoremap <silent> ab :<c-u>execute "normal! f)vab"<cr>
+" onoremap <silent> i( :<c-u>execute "normal! f)vi("<cr>
+" onoremap <silent> a( :<c-u>execute "normal! f)va("<cr>
+" onoremap <silent> iB :<c-u>execute "normal! /}\<lt>cr>vi{" \| nohlsearch<cr>
+" onoremap <silent> aB :<c-u>execute "normal! /}\<lt>cr>va{" \| nohlsearch<cr>
+" onoremap <silent> i{ :<c-u>execute "normal! /}\<lt>cr>vi{" \| nohlsearch<cr>
+" onoremap <silent> a{ :<c-u>execute "normal! /}\<lt>cr>va{" \| nohlsearch<cr>
+" onoremap <silent> i[ :<c-u>execute "normal! f]vi["<cr>
+" onoremap <silent> a[ :<c-u>execute "normal! f]va["<cr>
 
 " 设置锚点
 map <Leader><Leader>m <Esc>/<><CR>:nohlsearch<CR>2s
