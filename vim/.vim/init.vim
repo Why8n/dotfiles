@@ -1,5 +1,5 @@
 source ~/.vim/utils.vim
-call Reset()
+" call Reset()
 " Auto download vim-plug for the first time
 call DownPlugVimIfNotExists()
 
