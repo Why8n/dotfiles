@@ -89,6 +89,27 @@ function! s:installVimPlugins()
 
     " http
     Plug 'nicwest/vim-http', {'on': ['Http','Http!']}
+
+    " format
+    Plug 'prettier/vim-prettier', {
+    \ 'do': 'npm install',
+    \ 'branch': 'release/1.x',
+    \ 'for': [
+      \ 'javascript',
+      \ 'typescript',
+      \ 'css',
+      \ 'less',
+      \ 'scss',
+      \ 'json',
+      \ 'graphql',
+      \ 'markdown',
+      \ 'vue',
+      \ 'lua',
+      \ 'php',
+      \ 'python',
+      \ 'ruby',
+      \ 'html',
+      \ 'swift' ] }
 endfunction
 
 function! s:installNvimPlugins()

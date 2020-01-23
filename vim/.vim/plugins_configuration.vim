@@ -221,7 +221,7 @@ let g:mkdp_preview_options = {
 
 " use a custom markdown style must be absolute path
 " sindresorhus/github-markdown-css --> minimal markdown style of github
-let g:mkdp_markdown_css = '~/.vim/css/github-markdown.css'
+let g:mkdp_markdown_css = '~/.vim/other/css/github-markdown.css'
 
 " use a custom highlight style must absolute path
 " let g:mkdp_highlight_css = '~/.vim/style/solarized_dark.css'
@@ -551,7 +551,6 @@ let g:coc_global_extensions = [
             \ 'coc-emmet','coc-snippets','coc-xml','coc-yaml',
             \ 'coc-highlight',
             \ 'coc-pairs',
-            \ 'coc-prettier',
             \]
 
 " if hidden is not set, TextEdit might fail.
@@ -709,3 +708,23 @@ let g:vim_http_split_vertically = 1
 " response buffers overwriten
 let g:vim_http_tempbuffer = 1
 
+
+" -------------------
+" vim-prettier
+" -------------------
+" Disable auto formatting of files that have "@format" tag
+let g:prettier#autoformat = 0
+" print semicolons
+" Prettier default: true
+let g:prettier#config#semi = 'true'
+" single quotes over double quotes
+" Prettier default: false
+let g:prettier#config#single_quote = 'true'
+" print spaces between brackets
+" Prettier default: true
+let g:prettier#config#bracket_spacing = 'true'
+" none|es5|all
+" Prettier default: none
+let g:prettier#config#trailing_comma = 'all'
+nnoremap <leader>pt :PrettierAsync<cr>
+vnoremap <leader>pt :PrettierAsync<cr>

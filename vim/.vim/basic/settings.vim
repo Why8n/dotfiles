@@ -66,7 +66,7 @@ set nocursorline
 " Disable the blinking cursor.
 set gcr=a:blinkon0
 " 屏幕滚动时在光标上下方保留5行预览代码
-set so=5
+set so=3
 
 set autochdir
 set showcmd
