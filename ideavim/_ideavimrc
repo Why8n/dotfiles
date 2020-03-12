@@ -27,9 +27,15 @@ nnoremap <Leader>su :action ShowUsages<CR>
 nnoremap <Leader>fu :action FindUsages<CR>
 nnoremap <Leader><space> a<space><ESC>:action CodeCompletion<CR>
 inoremap <Leader><space> <space><ESC>:action CodeCompletion<CR>
+" copy
+vnoremap <C-c> :action $Copy<CR>
+" paste
+nnoremap <C-v> :action $Paste<CR>
+inoremap <C-v> <C-o>:action $Paste<CR>
+vnoremap <C-v> "_d:action $Paste<CR>
 " cut
 vnoremap <C-x> "+d
-nnoremap <C-x> :action Cut<CR>
+nnoremap <C-x> :action $Cut<CR>
 " <C-N>
 nnoremap <C-n> :action GotoClass<CR>
 inoremap <C-n> <ESC>:action GotoClass<CR>
@@ -99,7 +105,7 @@ nnoremap <leader>cw :action CloseActiveTab<CR>
 inoremap <C-j> <ESC>:action InsertLiveTemplate<CR>
 
 " <C-R>
-nnoremap <C-r> :action Redo<CR>
+nnoremap <C-r> :action $Redo<CR>
 
 
 " ==================================================
