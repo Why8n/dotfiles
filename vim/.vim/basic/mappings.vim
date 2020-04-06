@@ -8,14 +8,16 @@ nmap <silent> <leader>fm gg=G''
 vmap <leader>fm =
 
 " Fast quiting without saving
-nnoremap <silent> <leader>q :q<cr>
-nnoremap <silent> <leader><leader>q :q!<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader><leader>q :q!<cr>
 nnoremap <leader>w :w<cr>
-nnoremap <silent> <leader><leader>o :only<cr>
+nnoremap <leader><leader>o :only<cr>
 " delete all buffers except current
 nnoremap <leader><leader>O :w \| %bd \| e#<cr>
+" force close current buffer
+nnoremap <leader>bd :bd!<cr>
 " close previews window
-nnoremap <silent> <leader><leader>p :-quit<cr>
+nnoremap <leader><leader>p :-quit<cr>
 
 " cusor mvoement in insertmode
 " inoremap <c-h> <left>
@@ -55,7 +57,7 @@ autocmd FileType * nnoremap <S-CR> <ESC>o
 autocmd FileType * inoremap <S-CR> <ESC>o
 autocmd FileType c,cpp,java,javascript nnoremap <S-CR> <ESC>A;<CR>
 autocmd FileType c,cpp,java,javascript inoremap <S-CR> <ESC>A;<CR>
-
+autocmd FileType c,cpp,java,javascript nnoremap <Leader>; mpA;<ESC>`p
 " open a blank new file on the right panel
 nnoremap <leader>vs :bo vnew<cr>
 " nnoremap <leader>hs :new<cr>

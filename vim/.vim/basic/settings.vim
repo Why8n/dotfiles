@@ -87,7 +87,7 @@ set ffs=unix,dos,mac
 
 set history=200
 " disable continuation of comments to the next line
-set formatoptions-=cro
+setlocal formatoptions-=cro
 " show commands on status bar
 set showcmd
 " 标尺(右下角显示百分比)

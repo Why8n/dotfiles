@@ -43,10 +43,10 @@ endif
 
 " Disable arrow movement, resize splits instead.
 " if get(g:, 'elite_mode')
-map <Up>    :resize +2<CR>
-map <Down>  :resize -2<CR>
-map <Left>  :vertical resize +2<CR>
-map <Right> :vertical resize -2<CR>
+nnoremap <Up>    :resize +2<CR>
+nnoremap <Down>  :resize -2<CR>
+nnoremap <Left>  :vertical resize +2<CR>
+nnoremap <Right> :vertical resize -2<CR>
 
 " auto complete brackets
 " inoremap {<CR> {<C-o>o}<C-o>O

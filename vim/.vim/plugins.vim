@@ -7,6 +7,7 @@ function! s:installVimPlugins()
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'easymotion/vim-easymotion'
+    Plug 'unblevable/quick-scope'
 	Plug 'vim-syntastic/syntastic'
 	Plug 'tpope/vim-surround'
     Plug 'scrooloose/nerdcommenter'
