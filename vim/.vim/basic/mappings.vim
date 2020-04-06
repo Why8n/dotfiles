@@ -1,23 +1,23 @@
-map <silent> <LEADER><CR> :nohlsearch<CR>
+map <silent> <Leader><CR> :nohlsearch<CR>
 " Tab operation，map tab will cause <C-i> lose jump function
 " map <tab> gt
 " map <S-tab> gT
 
 " format
-nmap <silent> <leader>fm gg=G''
-vmap <leader>fm =
+nmap <silent> <Leader>fm gg=G''
+vmap <Leader>fm =
 
 " Fast quiting without saving
-nnoremap <leader>q :q<cr>
-nnoremap <leader><leader>q :q!<cr>
-nnoremap <leader>w :w<cr>
-nnoremap <leader><leader>o :only<cr>
+nnoremap <Leader>q :q<cr>
+nnoremap <Leader><Leader>q :q!<cr>
+nnoremap <Leader>w :w<cr>
+nnoremap <Leader><Leader>o :only<cr>
 " delete all buffers except current
-nnoremap <leader><leader>O :w \| %bd \| e#<cr>
+nnoremap <Leader><Leader>O :w \| %bd \| e#<cr>
 " force close current buffer
-nnoremap <leader>bd :bd!<cr>
+nnoremap <Leader>bd :bd!<cr>
 " close previews window
-nnoremap <leader><leader>p :-quit<cr>
+nnoremap <Leader><Leader>p :-quit<cr>
 
 " cusor mvoement in insertmode
 " inoremap <c-h> <left>
@@ -59,12 +59,15 @@ autocmd FileType c,cpp,java,javascript nnoremap <S-CR> <ESC>A;<CR>
 autocmd FileType c,cpp,java,javascript inoremap <S-CR> <ESC>A;<CR>
 autocmd FileType c,cpp,java,javascript nnoremap <Leader>; mpA;<ESC>`p
 " open a blank new file on the right panel
-nnoremap <leader>vs :bo vnew<cr>
-" nnoremap <leader>hs :new<cr>
-nnoremap <leader>ev :botright vs $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
+nnoremap <Leader>sl :rightbelow vnew<CR>
+nnoremap <Leader>sh :leftabove vnew<CR>
+nnoremap <Leader>sj :rightbelow new<CR>
+nnoremap <Leader>sk :leftabove new<CR>
+" nnoremap <Leader>hs :new<cr>
+nnoremap <Leader>ev :botright vs $MYVIMRC<cr>
+nnoremap <Leader>sv :source $MYVIMRC<cr>
 " source self
-nnoremap <leader>ss :source %<cr>
+nnoremap <Leader>ss :source %<cr>
 
 " delte the next character in insert mode
 inoremap <C-l> <ESC>ls
