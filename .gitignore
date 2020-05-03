@@ -11,3 +11,7 @@ vimfiles/*
 !ReadMe.md
 .netrwhist
 temp
+!*.*rc
+!*.ini
+!*.bat
+!*.sh

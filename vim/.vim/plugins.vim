@@ -33,6 +33,7 @@ function! s:installVimPlugins()
 	" Plug 'jnurmine/Zenburn'
 	" Plug 'kristijanhusak/vim-hybrid-material'
     Plug 'morhetz/gruvbox'
+    Plug 'schickling/vim-bufonly'
 
 	" --------------------------
 	"=== switch input method ===
@@ -56,6 +57,7 @@ function! s:installVimPlugins()
 
 	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 	Plug 'junegunn/fzf.vim'
+
 	Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
 	Plug 'mbbill/undotree'
 	Plug 'tpope/vim-repeat'

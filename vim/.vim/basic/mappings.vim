@@ -63,7 +63,7 @@ nnoremap <Leader>sl :rightbelow vnew<CR>
 nnoremap <Leader>sh :leftabove vnew<CR>
 nnoremap <Leader>sj :rightbelow new<CR>
 nnoremap <Leader>sk :leftabove new<CR>
-" nnoremap <Leader>hs :new<cr>
+" nnoremap <Leade>s:new<cr>
 nnoremap <Leader>ev :botright vs $MYVIMRC<cr>
 nnoremap <Leader>sv :source $MYVIMRC<cr>
 " source self
@@ -88,3 +88,9 @@ if(executable('rg'))
     set grepformat=%f:%l:%c:%m
     command! -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
 endif
+
+
+" fixed:Hitting enter in the quickfix window doesn't work
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+
+nnoremap <Leader>co :copen<CR>

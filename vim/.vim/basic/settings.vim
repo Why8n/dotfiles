@@ -72,7 +72,7 @@ set autochdir
 set showcmd
 " command line auto complete
 set wildmenu
-set wildmode=full
+set wildmode=longest,list,full
 " 使能鼠标操作
 set mouse=a
 
@@ -95,3 +95,6 @@ set ruler
 set rulerformat=%15(%c%V\ %p%%%)
 " 自动重新读入
 set autoread
+
+" makes popup menu smaller
+set pumheight=10

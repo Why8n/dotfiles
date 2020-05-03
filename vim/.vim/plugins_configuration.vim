@@ -105,7 +105,7 @@ let NERDTreeIgnore=['\.pyc$', '\~$', 'node_modules','\.rbc$', '\~$', '\.pyc$', '
 " 不显示项目树上额外的信息，例如帮助、提示什么的
 let NERDTreeMinimalUI=1
 "Refresh both CtrlP and NERDTree
-" nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>:CtrlPClearCache<cr>
+" nmap <Leader>r :NERDTreeFocus<CR>R<c-w><c-p>:CtrlPClearCache<CR>
 
 " returns true iff is NERDTree open/active
 " function! s:isNTOpen()
@@ -122,8 +122,8 @@ let NERDTreeMinimalUI=1
 " endfunction
 
 " autocmd BufEnter * lcd %:p:h
-nnoremap <leader>nc :NERDTreeCWD<cr> 
-nnoremap <leader>nt :NERDTreeToggle<cr>
+nnoremap <Leader>nc :NERDTreeCWD<CR> 
+nnoremap <Leader>nt :NERDTreeToggle<CR>
 
 " --------------
 "  syntastic
@@ -138,7 +138,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-nnoremap <leader>sy :SyntasticToggleMode<CR>
+nnoremap <Leader>sy :SyntasticToggleMode<CR>
 
 
 " ---------------
@@ -160,8 +160,8 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-nmap <C-/> <leader>c<space>
-vmap <C-/> <leader>c<space>
+nmap <C-/> <Leader>c<space>
+vmap <C-/> <Leader>c<space>
 
 " -----------------------
 " markdown-preview.nvim
@@ -272,11 +272,11 @@ endfunction
 " 插入模式下，按 || 使能插件
 inoreabbrev <expr> <bar><bar>
           \ <SID>isAtStartOfLine('\|\|') ?
-          \ '<c-o>:TableModeEnable<cr><bar><space><bar><left><left>' : '<bar><bar>'
+          \ '<c-o>:TableModeEnable<CR><bar><space><bar><left><left>' : '<bar><bar>'
 " 插入模式下，按 __ 失能插件
 inoreabbrev <expr> __
           \ <SID>isAtStartOfLine('__') ?
-          \ '<c-o>:silent! TableModeDisable<cr>' : '__'
+          \ '<c-o>:silent! TableModeDisable<CR>' : '__'
 
 
 " ---------------------------
@@ -351,7 +351,7 @@ let g:indentLine_conceallevel = 2
 "" 让YouCompleteMe同时利用原来的ctags
 "let g:ycm_collect_identifiers_from_tag_files = 1  
 "let g:clang_user_options='|| exit 0'
-"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
+"nnoremap <Leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
 
 let g:ycm_server_python_interpreter=g:python3_host_prog
 let g:ycm_global_ycm_extra_conf= g:ycm_extra_conf
@@ -402,7 +402,7 @@ let g:SignatureMap = {
 " -----------------------
 "  marks-browers
 "  -----------------------
-nmap <silent> <leader>mb :MarksBrowser<cr>
+nmap <silent> <Leader>mb :MarksBrowser<CR>
 " the browser window close itself after you jump to a mark
 let marksCloseWhenSelected = 1
 
@@ -492,7 +492,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " ------------------
 " tagbar
 " ------------------
-map <silent> <leader>tb :TagbarOpenAutoClose<CR>
+map <silent> <Leader>tb :TagbarOpenAutoClose<CR>
 let g:tagbar_ctags_bin = g:ctags_path
 
 
@@ -522,7 +522,31 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
 " In Neovim, you can set up fzf window using a Vim command
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_layout = { 'window': '-tabnew' }
-" let g:fzf_layout = { 'window': '10new' }
+let g:fzf_layout = { 'window': '10new' }
+" floating fzf
+if has('nvim')
+    let $FZF_DEFAULT_OPTS='--layout=reverse'
+    let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+
+    function! FloatingFZF()
+      let buf = nvim_create_buf(v:false, v:true)
+      call setbufvar(buf, '&signcolumn', 'no')
+
+      let height = &lines - 3
+      let width = float2nr(&columns - (&columns * 2 / 10))
+      let col = float2nr((&columns - width) / 2)
+
+      let opts = {
+            \ 'relative': 'editor',
+            \ 'row': 1,
+            \ 'col': col,
+            \ 'width': width,
+            \ 'height': height
+            \ }
+
+      call nvim_open_win(buf, v:true, opts)
+    endfunction
+endif
 
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
@@ -539,8 +563,10 @@ command! -bang -nargs=* Rgrep
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
-nnoremap <silent> <Leader>rg       :Rgrep <C-R><C-W><CR>
+" nnoremap <silent> <Leader>rg       :Rgrep <C-R><C-W><CR>
 xnoremap <silent> <Leader>rg       y:Rgrep <C-R>"<CR> 
+nnoremap <silent> <Leader>rg       :Rgrep<CR>
+vnoremap <silent> <Leader>rg       y:Rgrep <C-R>"<CR>
 
 nnoremap <silent> <Leader>fz       :Files<CR>
 nnoremap <silent> <C-n> :call fzf#vim#files(<SID>getProjectDir())<CR>
@@ -603,21 +629,21 @@ endfunction
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Use <CR> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gy <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gr <Plug>(coc-references)
+nmap <silent> <Leader>gd <Plug>(coc-definition)
+nmap <silent> <Leader>gy <Plug>(coc-type-definition)
+nmap <silent> <Leader>gi <Plug>(coc-implementation)
+nmap <silent> <Leader>gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -634,11 +660,11 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+nmap <Leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
-vmap <leader>fm  <Plug>(coc-format-selected)
-nmap <leader>fm  <Plug>(coc-format)
+vmap <Leader>fm  <Plug>(coc-format-selected)
+nmap <Leader>fm  <Plug>(coc-format)
 
 augroup mygroup
   autocmd!
@@ -648,14 +674,14 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+" Remap for do codeAction of selected region, ex: `<Leader>aap` for current paragraph
+xmap <Leader>a  <Plug>(coc-codeaction-selected)
+nmap <Leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <Leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
-nmap <leader>fc  <Plug>(coc-fix-current)
+nmap <Leader>fc  <Plug>(coc-fix-current)
 
 " Create mappings for function text object, requires document symbols feature of languageserver.
 xmap if <Plug>(coc-funcobj-i)
@@ -681,15 +707,15 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nnoremap <silent> <space>e  :<C-u>CocList extensions<CR>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <space>c  :<C-u>CocList commands<CR>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <space>o  :<C-u>CocList outline<CR>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<CR>
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
@@ -697,7 +723,7 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-nmap <silent> <leader>h :pclose<cr>
+nmap <silent> <Leader>h :pclose<CR>
 
 " -------------------
 " vim.run
@@ -710,8 +736,8 @@ let g:vim_run_command_map = {
   \'dosbatch': 'cmd',
   \}
 
-nnoremap <leader>cmd :Run<cr>
-vnoremap <leader>cmd :Run<cr>
+nnoremap <Leader>cmd :Run<CR>
+vnoremap <Leader>cmd :Run<CR>
 
 " -------------------
 " vim-http
@@ -741,5 +767,19 @@ let g:prettier#config#bracket_spacing = 'true'
 " none|es5|all
 " Prettier default: none
 let g:prettier#config#trailing_comma = 'all'
-nnoremap <leader>pt :PrettierAsync<cr>
-vnoremap <leader>pt :PrettierAsync<cr>
+nnoremap <Leader>pt :PrettierAsync<CR>
+vnoremap <Leader>pt :PrettierAsync<CR>
+
+
+" -------------------
+" 'schickling/vim-bufonly'
+" -------------------
+nnoremap <Leader>bo :BufOnly<CR>
+
+" -------------------
+" vim-airline/vim-airline
+" -------------------
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
