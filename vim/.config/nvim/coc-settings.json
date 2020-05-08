@@ -1,0 +1,32 @@
+{
+    // Enable preselect feature on neovim, default: `true`
+    "suggest.enablePreselect": true,
+    // Add preview option to `completeopt`, default: `false`
+    "suggest.enablePreview": false,
+    // completion automatically select the first completed
+    "suggest.noselect": false,
+    // "suggest.triggerAfterInsertEnter": true
+    "suggest.minTriggerInputLength": 2,
+    // trigger mode of auto completion: always(default),trigger,none
+    "suggest.autoTrigger": "always",
+    // support completion trigger on insert enter
+    "suggest.triggerAfterInsertEnter": true,
+    // Target to show hover information, default is floating window when possible.
+    "coc.preferences.hoverTarget": "preview",
+    // Auto close preview window on cursor move.,  default: `true`
+    "coc.preferences.previewAutoClose": false,
+    // disable automatic update,try :CocUpdate or :CocUpdateSync manually
+    //"coc.preferences.extensionUpdateCheck": "never",
+
+    // coc-explorer
+    "explorer.width": 30,
+    "explorer.floating.border.enable": true,
+    "explorer.previewAction.onHover": true,
+    "explorer.icon.enableNerdfont": true,
+    "explorer.keyMappings": {
+        "<cr>": ["expandable?", "expand", "open"],
+        "o": ["expandable?", "expand", "open"],
+        "v": "open:vsplit"
+    }
+
+}
