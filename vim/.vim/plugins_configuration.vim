@@ -93,37 +93,37 @@ endif
 " ------------
 " nerdtree
 " ------------
-let NERDTreeWinPos='left'
-let NERDTreeWinSize=30
-" 当不带参数打开Vim时自动加载项目树 -- no
-autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" 当所有文件关闭时关闭项目树窗格
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-"ignore files in NERDTree
-let NERDTreeIgnore=['\.pyc$', '\~$', 'node_modules','\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-" 不显示项目树上额外的信息，例如帮助、提示什么的
-let NERDTreeMinimalUI=1
-"Refresh both CtrlP and NERDTree
-" nmap <Leader>r :NERDTreeFocus<CR>R<c-w><c-p>:CtrlPClearCache<CR>
-
-" returns true iff is NERDTree open/active
-" function! s:isNTOpen()
-"     return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-" endfunction
+" let NERDTreeWinPos='left'
+" let NERDTreeWinSize=30
+" " 当不带参数打开Vim时自动加载项目树 -- no
+" autocmd StdinReadPre * let s:std_in=1
+" " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" " 当所有文件关闭时关闭项目树窗格
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" "ignore files in NERDTree
+" let NERDTreeIgnore=['\.pyc$', '\~$', 'node_modules','\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
+" " 不显示项目树上额外的信息，例如帮助、提示什么的
+" let NERDTreeMinimalUI=1
+" "Refresh both CtrlP and NERDTree
+" " nmap <Leader>r :NERDTreeFocus<CR>R<c-w><c-p>:CtrlPClearCache<CR>
 "
-" " switch to current file directory
-" function! SyncTree()
-"     if s:isNTOpen()
-"         NERDTreeClose
-"     else
-"         NERDTreeCWD
-"     endif
-" endfunction
-
-" autocmd BufEnter * lcd %:p:h
-nnoremap <Leader>nc :NERDTreeCWD<CR> 
-nnoremap <Leader>nt :NERDTreeToggle<CR>
+" " returns true iff is NERDTree open/active
+" " function! s:isNTOpen()
+" "     return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+" " endfunction
+" "
+" " " switch to current file directory
+" " function! SyncTree()
+" "     if s:isNTOpen()
+" "         NERDTreeClose
+" "     else
+" "         NERDTreeCWD
+" "     endif
+" " endfunction
+"
+" " autocmd BufEnter * lcd %:p:h
+" nnoremap <Leader>nc :NERDTreeCWD<CR>
+" nnoremap <Leader>nt :NERDTreeToggle<CR>
 
 " --------------
 "  syntastic
@@ -588,10 +588,11 @@ silent! call repeat#set("\<Plug>MarkdownPreview", v:count)
 " -------------------
 let g:coc_global_extensions = [
             \ 'coc-tsserver','coc-html','coc-css','coc-vetur',
-            \ 'coc-java','coc-python','coc-flutter',
+            \ 'coc-java','coc-python','coc-flutter','coc-vimlsp',
             \ 'coc-emmet','coc-snippets','coc-xml','coc-yaml',
             \ 'coc-highlight',
             \ 'coc-pairs',
+            \ 'coc-explorer',
             \]
 
 " if hidden is not set, TextEdit might fail.
@@ -724,6 +725,41 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 nmap <silent> <Leader>h :pclose<CR>
+" -------------------
+" coc-explorer
+" -------------------
+"
+let g:coc_explorer_global_presets = {
+\   '.vim': {
+\      'root-uri': '~/.vim',
+\   },
+\   'floating': {
+\      'position': 'floating',
+\   },
+\   'floatingLeftside': {
+\      'position': 'floating',
+\      'floating-position': 'left-center',
+\      'floating-width': 50,
+\   },
+\   'floatingRightside': {
+\      'position': 'floating',
+\      'floating-position': 'left-center',
+\      'floating-width': 50,
+\   },
+\   'simplify': {
+\     'file.child.template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   }
+\ }
+
+" Use preset argument to open it
+" nnoremap <space>ed   :CocCommand explorer --preset .vim<CR>
+nnoremap fm   :CocCommand explorer --preset floating<CR>
+nnoremap <silent> wm :CocCommand explorer<CR>
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+
+" List all presets
+" nnoremap <space>el :CocList explPresets
+
 
 " -------------------
 " vim.run

@@ -2,8 +2,8 @@ function! s:installVimPlugins()
 	" Plug 'dyng/ctrlsf.vim'
 	" way too slow on huge files
 	" Plug 'ctrlpvim/ctrlp.vim', {'on':'CtrlP'} 
-	Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle','NERDTreeCWD'] }
-    Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':['NERDTreeToggle','NERDTreeCWD'] }
+	" Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggld','NERDTreeCWD'] }
+    " Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':['NERDTreeToggle','NERDTreeCWD'] }
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'easymotion/vim-easymotion'
