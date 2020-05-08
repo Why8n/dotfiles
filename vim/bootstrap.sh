@@ -1,11 +1,11 @@
 #!/bin/bash
-[ -f ~/.vimrc ] && rm -v ~/.vimrc
-[ -d ~/.vim ] && rm -rfv ~/.vim
-[ -f .config/nvim/init.vim ] && rm -v .config/nvim/init.vim
+rm -v ~/.vimrc
+rm -rfv ~/.vim
+rm -v .config/nvim/init.vim
 FILE=~/.config
-if [ -d "$FILE" ]; then     
-	rm -rfv "$FILE"
-fi
+# if [ -d "$FILE" ]; then     
+rm -rfv "$FILE"
+# fi
 
 ln -rs .vim ~/.vim && echo link .vim done
 # for vim
