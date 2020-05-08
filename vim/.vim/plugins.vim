@@ -55,9 +55,8 @@ function! s:installVimPlugins()
 	Plug 'kshenoy/vim-signature'
 	Plug 'vim-scripts/Marks-Browser'
 
-	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-	Plug 'junegunn/fzf.vim'
-
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+    
 	Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
 	Plug 'mbbill/undotree'
 	Plug 'tpope/vim-repeat'
