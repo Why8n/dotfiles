@@ -5,15 +5,16 @@ Configuration
 When [terminal] has been installed,using `wt.exe` to launch it.
 
 [terminal]'s configuration file path: `$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`\
+
 specifically,the concrete path is:`C:\Users\<yourname>\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`
 
-another way to open `settings.json`` is:
+another way to open `settings.json` is:
 1. In the tab bar, click the `⌵` button to view the available shells.
 2. Click *Settings* from the dropdown list.
 
 For an introduction to the various settings, see [Using Json Settings][UsingJsonSettings]. The list of valid settings can be found in the [settings.json documentation][SettingsSchema] section.
 
-**Notice**: actually,there are two configuration files for [terminal]:`default.json` and `settings.json`.Users should only be concerned with the content of the `settings.json`,which contains their customizations.The `default.json` file is only provided as a reference of what the default settings are.To view the default settings file, click on the "Settings" button while holding the `Alt` key.
+**Notice**: actually,there are two configuration files for [terminal]:`default.json` and `settings.json`. Users should only be concerned with the content of the `settings.json`,which contains their customizations. The `default.json` file is only provided as a reference of what the default settings are. To view the default settings file, click on the "Settings" button while holding the `Alt` key.
 
 Others
 ------
@@ -34,17 +35,17 @@ Others
     ```
 
 - launch `*.exe` within `wsl`: so in **wsl**,we actually can launch `.exe`,for example:
-```bash
-> /mnt/c/Windows/System32/cmd.exe # launch cmd.exe
-```
-the above command will launch `cmd.exe`,noticed that we do have to input the complete executable program path so that the launch can be done,so to simplify this,setting below to `.bashrc`(or `.zshrc`):
-```bash
-export PATH=$PATH:/mnt/c/Windows/System32
-```
-and then,to launch `cmd.exe`,just input below:
-```bash
-> cmd.exe
-```
+    ```bash
+    > /mnt/c/Windows/System32/cmd.exe # launch cmd.exe
+    ```
+    the above command will launch `cmd.exe`,noticed that we do have to input the complete executable program path so that the launch can be done,so to simplify this,copy below to `.bashrc`(or `.zshrc`):
+    ```bash
+    export PATH=$PATH:/mnt/c/Windows/System32
+    ```
+    and then,to launch `cmd.exe`,just input below:
+    ```bash
+    > cmd.exe
+    ```
 
 [terminal]:https://github.com/microsoft/terminal
 [UsingJsonSettings]:https://github.com/microsoft/terminal/blob/master/doc/user-docs/UsingJsonSettings.md

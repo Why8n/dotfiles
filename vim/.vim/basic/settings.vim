@@ -65,6 +65,8 @@ set fileencoding=utf-8
 set nocursorline
 " Disable the blinking cursor.
 set gcr=a:blinkon0
+" set cursor appearance on insert mode
+set guicursor+=i:ver100-iCursor
 " 屏幕滚动时在光标上下方保留5行预览代码
 set so=3
 
