@@ -1,6 +1,6 @@
-" -------------
+" -----------
 " Plug 'unblevable/quick-scope'
-" -------------
+" -------------limelight_default_coefficientkkk
 " this has to be set before colorscheme
 augroup qs_colors
     autocmd!
@@ -160,8 +160,14 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-nmap <C-/> <Leader>c<space>
-vmap <C-/> <Leader>c<space>
+" nnoremap <C-/> :call NERDComment("n", "Toggle")<CR>
+if has('win32')
+    nmap <C-/> <Plug>NERDCommenterToggle
+    vmap <C-/> <Plug>NERDCommenterToggle
+else
+    nmap <C-_> <Plug>NERDCommenterToggle
+    vmap <C-_> <Plug>NERDCommenterToggle
+endif
 
 " -----------------------
 " markdown-preview.nvim
@@ -593,6 +599,8 @@ let g:coc_global_extensions = [
             \ 'coc-highlight',
             \ 'coc-pairs',
             \ 'coc-explorer',
+            \ 'coc-json',
+            \ 'coc-prettier',
             \]
 
 " if hidden is not set, TextEdit might fail.
@@ -663,10 +671,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Remap for rename current word
 nmap <Leader>rn <Plug>(coc-rename)
 
-" Remap for format selected region
-vmap <Leader>fm  <Plug>(coc-format-selected)
-nmap <Leader>fm  <Plug>(coc-format)
-
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -703,16 +707,24 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
+" -------------------
+" coc-prettier
+" -------------------
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" Remap for format selected region
+nnoremap <Leader>fm  :CocCommand prettier.formatFile<CR>
+vnoremap <Leader>fm  <Plug>(coc-format-selected)
+
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<CR>
+" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<CR>
 " Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<CR>
+" nnoremap <silent> <space>e  :<C-u>CocList extensions<CR>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<CR>
+" nnoremap <silent> <space>c  :<C-u>CocList commands<CR>
 " Find symbol of current document
 nnoremap <silent> <space>o  :<C-u>CocList outline<CR>
 " Search workspace symbols
@@ -722,40 +734,19 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-nmap <silent> <Leader>h :pclose<CR>
+" nmap <silent> <Leader>h :pclose<CR>
+autocmd VimEnter * silent! unmap <Leader>cl | nnoremap <Leader>cl :<C-u>CocList<CR>
 " -------------------
 " coc-explorer
 " -------------------
 "
-let g:coc_explorer_global_presets = {
-\   '.vim': {
-\      'root-uri': '~/.vim',
-\   },
-\   'floating': {
-\      'position': 'floating',
-\   },
-\   'floatingLeftside': {
-\      'position': 'floating',
-\      'floating-position': 'left-center',
-\      'floating-width': 50,
-\   },
-\   'floatingRightside': {
-\      'position': 'floating',
-\      'floating-position': 'left-center',
-\      'floating-width': 50,
-\   },
-\   'simplify': {
-\     'file.child.template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
-\   }
-\ }
-
 " Use preset argument to open it
 " nnoremap <space>ed   :CocCommand explorer --preset .vim<CR>
-nnoremap fm   :CocCommand explorer --preset floating<CR>
-nnoremap <silent> wm :CocCommand explorer<CR>
-autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+nnoremap <Leader>ef   :CocCommand explorer --preset floating<CR>
+nnoremap <silent> <Leader>ep :CocCommand explorer<CR>
+" autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
 " List all presets
 " nnoremap <space>el :CocList explPresets
@@ -819,3 +810,106 @@ nnoremap <Leader>bo :BufOnly<CR>
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
+
+
+" -------------
+" Plug 'liuchengxu/vim-which-key'
+" -------------
+" By default timeoutlen is 1000 ms
+set timeoutlen=100
+" Map leader to which_key
+nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
+" Map , to which_key
+nnoremap <silent> <localleader> :silent <c-u> :silent WhichKey  ','<CR>
+vnoremap <silent> <localleader> :silent <c-u> :silent WhichKeyVisual  ','<CR>
+
+call which_key#register(',', "g:which_key_map")
+" Define prefix dictionary
+let g:which_key_map =  {}
+" format: {char} : [{action} , {description}
+" single mappings
+let g:which_key_map['e'] = [ ':silent CocCommand explorer' , 'explorer'  ]
+let g:which_key_map['t'] = ['Rgrep' , 'search text']
+" prefix mappings
+let g:which_key_map.w = {
+      \ 'name' : '+windows' ,
+      \ 'w' : ['<C-W>w'     , 'other-window']          ,
+      \ 'd' : ['<C-W>c'     , 'delete-window']         ,
+      \ '-' : ['<C-W>s'     , 'split-window-below']    ,
+      \ '|' : ['<C-W>v'     , 'split-window-right']    ,
+      \ '2' : ['<C-W>v'     , 'layout-double-columns'] ,
+      \ 'h' : ['<C-W>h'     , 'window-left']           ,
+      \ 'j' : ['<C-W>j'     , 'window-below']          ,
+      \ 'l' : ['<C-W>l'     , 'window-right']          ,
+      \ 'k' : ['<C-W>k'     , 'window-up']             ,
+      \ 'H' : ['<C-W>5<'    , 'expand-window-left']    ,
+      \ 'J' : ['resize +5'  , 'expand-window-below']   ,
+      \ 'L' : ['<C-W>5>'    , 'expand-window-right']   ,
+      \ 'K' : ['resize -5'  , 'expand-window-up']      ,
+      \ '=' : ['<C-W>='     , 'balance-window']        ,
+      \ 's' : ['<C-W>s'     , 'split-window-below']    ,
+      \ 'v' : ['<C-W>v'     , 'split-window-below']    ,
+      \ '?' : ['Windows'    , 'fzf-window']            ,
+      \ }
+let g:which_key_map.o = {
+      \ 'name' : '+open'                  ,
+      \ 'q'    : ['copen'                 , 'open-quickfix']              ,
+      \ 'e'    : [':CocCommand explorer'  , 'coc-explorer']               ,
+      \ 'v'    : [':botright vs $MYVIMRC' , 'edit myvimrc(bottom right)'] ,
+      \ 'p'    : [':CocList explPresets' , 'show presets'] ,
+      \ }
+
+let g:which_key_map.b = {
+      \ 'name' : '+buffer' ,
+      \ '1' : ['b1'        , 'buffer 1']        ,
+      \ '2' : ['b2'        , 'buffer 2']        ,
+      \ 'd' : ['bd'        , 'delete-buffer']   ,
+      \ 'f' : ['bfirst'    , 'first-buffer']    ,
+      \ 'h' : ['Startify'  , 'home-buffer']     ,
+      \ 'l' : ['blast'     , 'last-buffer']     ,
+      \ 'n' : ['bnext'     , 'next-buffer']     ,
+      \ 'p' : ['bprevious' , 'previous-buffer'] ,
+      \ '?' : ['Buffers'   , 'fzf-buffer']      ,
+      \ 'o' : ['BufOnly'   , 'buffer only']      ,
+      \ }
+let g:which_key_map.s = {
+      \ 'name' : '+search' ,
+      \ '/' : [':History/'     , 'history'],
+      \ ';' : [':Commands'     , 'commands'],
+      \ 'a' : [':Ag'           , 'text Ag'],
+      \ 'b' : [':BLines'       , 'current buffer'],
+      \ 'B' : [':Buffers'      , 'open buffers'],
+      \ 'c' : [':Commits'      , 'commits'],
+      \ 'C' : [':BCommits'     , 'buffer commits'],
+      \ 'f' : [':Files'        , 'files'],
+      \ 'g' : [':GFiles'       , 'git files'],
+      \ 'G' : [':GFiles?'      , 'modified git files'],
+      \ 'h' : [':History'      , 'file history'],
+      \ 'H' : [':History:'     , 'command history'],
+      \ 'l' : [':Lines'        , 'lines'] ,
+      \ 'm' : [':Marks'        , 'marks'] ,
+      \ 'M' : [':Maps'         , 'normal maps'] ,
+      \ 'p' : [':Helptags'     , 'help tags'] ,
+      \ 'P' : [':Tags'         , 'project tags'],
+      \ 's' : [':Snippets'     , 'snippets'],
+      \ 'S' : [':Colors'       , 'color schemes'],
+      \ 't' : [':Rgrep'        , 'text Rg'],
+      \ 'T' : [':BTags'        , 'buffer tags'],
+      \ 'w' : [':Windows'      , 'search windows'],
+      \ 'y' : [':Filetypes'    , 'file types'],
+      \ 'z' : [':FZF'          , 'FZF'],
+      \ }
+let g:which_key_map.a = {
+      \ 'name' : '+action'      ,
+      \ 'l'    : ['CocList'     , 'coc-list']   ,
+      \ 's'    : [':source $MYVIMRC'     , 'source $MYVIMRC']   ,
+      \ 't'    : [':Tabularize' , 'tabularize'] ,
+      \}
+" floating window
+let g:which_key_use_floating_win = 0
+" Change the colors if you want
+highlight default link WhichKey          Operator
+highlight default link WhichKeySeperator DiffAdded
+highlight default link WhichKeyGroup     Identifier
+highlight default link WhichKeyDesc      Function

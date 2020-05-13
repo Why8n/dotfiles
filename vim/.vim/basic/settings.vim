@@ -1,5 +1,6 @@
 " change leader \ to ;
 let mapleader=' '
+let g:maplocalleader = ','
 set nocompatible
 
 set nu
@@ -67,6 +68,10 @@ set nocursorline
 set gcr=a:blinkon0
 " set cursor appearance on insert mode
 set guicursor+=i:ver100-iCursor
+" set text shown normally
+" set conceallevel = 0
+" set text shown normally on cursor line
+set concealcursor = ""
 " 屏幕滚动时在光标上下方保留5行预览代码
 set so=3
 

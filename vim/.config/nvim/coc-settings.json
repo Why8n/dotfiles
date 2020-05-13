@@ -23,10 +23,25 @@
     "explorer.floating.border.enable": true,
     "explorer.previewAction.onHover": true,
     "explorer.icon.enableNerdfont": true,
+    "explorer.presets": {
+        ".vim": {
+            "root-uri": "~/.vim"
+        },
+        "floating": {
+            "position": "floating"
+        }
+    },
     "explorer.keyMappings": {
         "<cr>": ["expandable?", "expand", "open"],
-        "o": ["expandable?", "expand", "open"],
-        "v": "open:vsplit"
-    }
+        "o": "expandOrCollapse",
+        "re": "expandRecursive",
+        "v": "open:vsplit",
+        "s": "open:split",
+        "t": "open:tab",
+        ".": "toggleHidden",
+        "R": "refresh",
+        "<tab>": "actionMenu"
+    },
+    // coc-prettier
 
 }

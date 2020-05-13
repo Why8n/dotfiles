@@ -113,6 +113,8 @@ function! s:installVimPlugins()
       \ 'ruby',
       \ 'html',
       \ 'swift' ] }
+
+    Plug 'liuchengxu/vim-which-key'
 endfunction
 
 function! s:installNvimPlugins()
