@@ -75,7 +75,7 @@ export ZSH="/home/whyn/.oh-my-zsh"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+# plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -127,18 +127,58 @@ zinit light-mode for \
 
 ### End of Zinit's installer chunk
 
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+# Load OMZ Git library
+zinit snippet OMZL::git.zsh
+
+# Load Git plugin from OMZ
+zinit snippet OMZP::git
+zinit cdclear -q # <- forget completions provided up to this moment
+setopt promptsubst
+
+zinit ice wait lucid
+zinit snippet OMZP::thefuck
+
+zinit ice as"completion" wait"1" lucid
+zinit snippet OMZP::adb/_adb
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+zinit ice depth=1 atload'!source ~/.p10k.zsh'
+zinit light romkatv/powerlevel10k
+
+zinit ice from"gh-r" as"program" mv"nvim* -> nvim" pick"nvim/bin/nvim" id-as"neovim"
+zinit light neovim/neovim
+
+zinit ice from"gh-r" as"program" bpick"*amd64*.deb" pick"usr/bin/bat"
+zinit light sharkdp/bat
+
+zinit ice src"bootstrap.sh" id-as"dotfiles"
+zinit light Why8n/dotfiles
+
 
 [ -f ~/.fzf.zsh  ] && source ~/.fzf.zsh
+if  command -v rg > /dev/null; then
+	export FZF_DEFAULT_COMMAND='rg --files --hidden .'
+fi
+export FZF_DEFAULT_OPTS='--height 90% --layout=reverse --bind=alt-j:down,alt-k:up,alt-i:toggle+down --border --preview 
+				"[[ $(file --mime {}) =~ binary ]]      &&
+                 echo {} is a binary file               ||
+                 (bat --style=numbers --color=always {} ||
+                  highlight -O ansi -l {}               ||
+                  coderay {}                            ||
+                  rougify {}                            ||
+                  cat {}) 2> /dev/null | head -500" 
+				  --preview-window=down'
 
-export PATH=$PATH:/mnt/c/Windows/System32
-export PATH=$PATH:/mnt/d/apps
+
+[ -d /mnt/c/Windows/System32 ] && export PATH=$PATH:/mnt/c/Windows/System32
+[ -d /mnt/d/apps ] && export PATH=$PATH:/mnt/d/apps
 # export TERM=xterm-256color
 # reset ls background for directory
 [ -f $HOME/.dircolors ] && eval $(dircolors -b $HOME/.dircolors)
 
+
 alias cls=clear
 
+# key bindings
+bindkey -s '^o' 'cd ~/program/github/dotfiles/\n'
