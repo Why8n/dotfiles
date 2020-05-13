@@ -152,8 +152,8 @@ zinit light neovim/neovim
 zinit ice from"gh-r" as"program" bpick"*amd64*.deb" pick"usr/bin/bat"
 zinit light sharkdp/bat
 
-zinit ice src"bootstrap.sh" id-as"dotfiles"
-zinit light Why8n/dotfiles
+# zinit ice id-as"dotfiles" atclone"./bootstrap.sh" atpull"%atclone"
+# zinit light Why8n/dotfiles
 
 
 [ -f ~/.fzf.zsh  ] && source ~/.fzf.zsh
