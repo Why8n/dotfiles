@@ -146,14 +146,31 @@ zinit snippet OMZP::adb/_adb
 zinit ice depth=1 atload'!source ~/.p10k.zsh'
 zinit light romkatv/powerlevel10k
 
-zinit ice from"gh-r" as"program" mv"nvim* -> nvim" pick"nvim/bin/nvim" id-as"neovim"
-zinit light neovim/neovim
+# zinit ice from"gh-r" as"program" mv"nvim* -> nvim" pick"nvim/bin/nvim" id-as"neovim" nocompletions
+# zinit light neovim/neovim
 
 zinit ice from"gh-r" as"program" bpick"*amd64*.deb" pick"usr/bin/bat"
 zinit light sharkdp/bat
 
 # zinit ice id-as"dotfiles" atclone"./bootstrap.sh" atpull"%atclone"
 # zinit light Why8n/dotfiles
+
+# zinit ice atload"./install.py" atpull"./install.py"
+# zinit light wting/autojump
+[[ -s ~/.autojump/etc/profile.d/autojump.sh  ]] && source ~/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
+
+zinit wait lucid light-mode for                                  \
+  atinit"zicompinit; zicdreplay"                                 \
+      zdharma/fast-syntax-highlighting                           \
+  atload"_zsh_autosuggest_start;bindkey '^N' autosuggest-accept" \
+      zsh-users/zsh-autosuggestions                              \
+  blockf atpull'zinit creinstall -q .'                           \
+      zsh-users/zsh-completions
+
+# zinit ice as"completion" if'[[ -n "$commands[tmux]" ]]' wait
+zinit ice as"completion" has"tmux" wait lucid
+zinit snippet https://github.com/imomaliev/tmux-bash-completion/tree/master/completions/tmux
 
 
 [ -f ~/.fzf.zsh  ] && source ~/.fzf.zsh
@@ -180,8 +197,13 @@ export FZF_DEFAULT_OPTS='--height 90% --layout=reverse --bind=alt-j:down,alt-k:u
 
 alias cls=clear
 
+# npm install --global trash-cli
+alias rm="trash"
+
 # key bindings
 bindkey -s '^o' 'cd ~/program/github/dotfiles/\n'
+# <C-n> to accept zsh-autosuggestions
+# bindkey '^N' autosuggest-accept
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
