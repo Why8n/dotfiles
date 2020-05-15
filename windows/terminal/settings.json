@@ -28,7 +28,10 @@
         "defaults":
         {
             // Put settings here that you want to apply to all profiles.
-            "fontSize": 12
+            "fontSize": 12,
+            "colorScheme": "Campbell"
+            // "acrylicOpacity": 0.8,
+            //"useAcrylic": true
         },
         "list":
         [
@@ -65,7 +68,52 @@
 
     // Add custom color schemes to this array.
     // To learn more about color schemes, visit https://aka.ms/terminal-color-schemes
-    "schemes": [],
+    "schemes": [
+        {
+            "name": "Campbell",
+            "foreground": "#CCCCCC",
+            "background": "#0C0C0C",
+            "cursorColor": "#FFFFFF",
+            "black": "#0C0C0C",
+            "red": "#C50F1F",
+            "green": "#13A10E",
+            "yellow": "#C19C00",
+            "blue": "#0037DA",
+            "purple": "#881798",
+            "cyan": "#3A96DD",
+            "white": "#CCCCCC",
+            "brightBlack": "#767676",
+            "brightRed": "#E74856",
+            "brightGreen": "#16C60C",
+            "brightYellow": "#F9F1A5",
+            "brightBlue": "#3B78FF",
+            "brightPurple": "#B4009E",
+            "brightCyan": "#61D6D6",
+            "brightWhite": "#F2F2F2"
+        },
+        {
+            "name": "Solarized Dark",
+            "foreground": "#839496",
+            "background": "#002B36",
+            "cursorColor": "#FFFFFF",
+            "black": "#073642",
+            "red": "#DC322F",
+            "green": "#859900",
+            "yellow": "#B58900",
+            "blue": "#268BD2",
+            "purple": "#D33682",
+            "cyan": "#2AA198",
+            "white": "#EEE8D5",
+            "brightBlack": "#002B36",
+            "brightRed": "#CB4B16",
+            "brightGreen": "#586E75",
+            "brightYellow": "#657B83",
+            "brightBlue": "#839496",
+            "brightPurple": "#6C71C4",
+            "brightCyan": "#93A1A1",
+            "brightWhite": "#FDF6E3"
+        }
+    ],
 
     // Add custom keybindings to this array.
     // To unbind a key combination from your defaults.json, set the command to "unbound".
@@ -76,7 +124,7 @@
         // These two lines additionally bind them to Ctrl+C and Ctrl+V.
         // To learn more about selection, visit https://aka.ms/terminal-selection
         { "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+c" },
-        { "command": "paste", "keys": "ctrl+v" },
+        // { "command": "paste", "keys": "ctrl+v" },
 
         // Press Ctrl+Shift+F to open the search box
         { "command": "find", "keys": "ctrl+shift+f" },
@@ -85,6 +133,13 @@
         // - "split": "auto" makes this pane open in the direction that provides the most surface area.
         // - "splitMode": "duplicate" makes the new pane use the focused pane's profile.
         // To learn more about panes, visit https://aka.ms/terminal-panes
-        { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" }
-    ]
+        { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" },
+        
+        // custom keybindings
+        { "command": "paste", "keys": "ctrl+shift+v" },
+        { "command": null, "keys": "ctrl+v" },
+        { "command" : null, "keys" : ["ctrl+shift+6"] }
+    ],
+    "theme": "light",
+    "rowsToScroll": 500
 }
