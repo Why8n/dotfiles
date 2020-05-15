@@ -1,6 +1,10 @@
 @echo off
+rmdir /s /q %userprofile%\.vim
 mklink /D %userprofile%\.vim %cd%\.vim
+
 REM  for vim
-mklink %userprofile%\.vimrc %cd%\.vimrc
+del %userprofile%\.vimrc
+mklink %userprofile%\.vimrc %cd%\..\.vimrc
 REM  for neovim
-mklink %appdata%\..\Local\nvim\init.vim %cd%\.vimrc
+del %appdata%\..\Local\nvim\init.vim 
+mklink %appdata%\..\Local\nvim\init.vim %cd%\..\.vimrc
