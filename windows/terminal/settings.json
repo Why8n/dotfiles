@@ -139,7 +139,5 @@
         { "command": "paste", "keys": "ctrl+shift+v" },
         { "command": null, "keys": "ctrl+v" },
         { "command" : null, "keys" : ["ctrl+shift+6"] }
-    ],
-    "theme": "light",
-    "rowsToScroll": 500
+    ]
 }
