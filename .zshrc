@@ -198,7 +198,11 @@ export FZF_DEFAULT_OPTS='--height 90% --layout=reverse --bind=alt-j:down,alt-k:u
 alias cls=clear
 
 # npm install --global trash-cli
-alias rm="trash"
+alias rm=trash
+# nickname for voldikss/vim-floaterm
+# in neovim terminal,using command: nvi xxx,to open file in current neovim instance,so that we can edit
+# notice: make sure to: pip3 install neovim-remote
+alias nvi=floaterm
 
 # key bindings
 bindkey -s '^o' 'cd ~/program/github/dotfiles/\n'
