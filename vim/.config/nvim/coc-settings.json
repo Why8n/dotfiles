@@ -17,12 +17,15 @@
     "coc.preferences.previewAutoClose": false,
     // disable automatic update,try :CocUpdate or :CocUpdateSync manually
     //"coc.preferences.extensionUpdateCheck": "never",
+    "coc.preferences.enableFloatHighlight": true,
 
     // coc-explorer
     "explorer.width": 30,
     "explorer.floating.border.enable": true,
     "explorer.previewAction.onHover": true,
     "explorer.icon.enableNerdfont": true,
+    "explorer.quitOnOpen": true,
+    // "explorer.file.column.git.showIgnored": true,
     "explorer.presets": {
         ".vim": {
             "root-uri": "~/.vim"
@@ -33,7 +36,9 @@
     },
     "explorer.keyMappings": {
         "<cr>": ["expandable?", "expand", "open"],
-        "o": "expandOrCollapse",
+        "o": [
+            "expandable?","expandOrCollapse" , "open"
+        ],
         "re": "expandRecursive",
         "v": "open:vsplit",
         "s": "open:split",

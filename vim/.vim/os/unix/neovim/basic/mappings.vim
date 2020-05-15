@@ -1,1 +1,1 @@
-nnoremap <leader>te :vertical botright split term://bash<cr>
+" nnoremap <leader>te :vertical botright split term://bash<cr>

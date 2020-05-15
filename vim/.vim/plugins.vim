@@ -115,6 +115,7 @@ function! s:installVimPlugins()
       \ 'swift' ] }
 
     Plug 'liuchengxu/vim-which-key'
+    Plug 'voldikss/vim-floaterm'
 endfunction
 
 function! s:installNvimPlugins()

@@ -818,8 +818,8 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " By default timeoutlen is 1000 ms
 set timeoutlen=100
 " Map leader to which_key
-nnoremap <silent> <leader> :silent WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
+nnoremap <silent> <Leader> :silent WhichKey '<Space>'<CR>
+vnoremap <silent> <Leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 " Map , to which_key
 nnoremap <silent> <localleader> :silent <c-u> :silent WhichKey  ','<CR>
 vnoremap <silent> <localleader> :silent <c-u> :silent WhichKeyVisual  ','<CR>
@@ -830,7 +830,7 @@ let g:which_key_map =  {}
 " format: {char} : [{action} , {description}
 " single mappings
 let g:which_key_map['e'] = [ ':silent CocCommand explorer' , 'explorer'  ]
-let g:which_key_map['t'] = ['Rgrep' , 'search text']
+" let g:which_key_map['t'] = ['Rgrep' , 'search text']
 " prefix mappings
 let g:which_key_map.w = {
       \ 'name' : '+windows' ,
@@ -856,6 +856,7 @@ let g:which_key_map.o = {
       \ 'name' : '+open'                  ,
       \ 'q'    : ['copen'                 , 'open-quickfix']              ,
       \ 'e'    : [':CocCommand explorer'  , 'coc-explorer']               ,
+      \ 'r'    : [':FloatermNew ranger'  , 'ranger']               ,
       \ 'v'    : [':botright vs $MYVIMRC' , 'edit myvimrc(bottom right)'] ,
       \ 'p'    : [':CocList explPresets' , 'show presets'] ,
       \ }
@@ -900,11 +901,25 @@ let g:which_key_map.s = {
       \ 'y' : [':Filetypes'    , 'file types'],
       \ 'z' : [':FZF'          , 'FZF'],
       \ }
+let g:which_key_map.v = {
+      \ 'name' : '+vimrc'      ,
+      \ 's'    : [':source $MYVIMRC'     , 'source $MYVIMRC']   ,
+      \ 'e'    : [':edit $MYVIMRC'     , 'edit $MYVIMRC']   ,
+      \ 'o'    : [':botright vs $MYVIMRC'     , 'edit $MYVIMRC (bottom right)']   ,
+      \ }
 let g:which_key_map.a = {
       \ 'name' : '+action'      ,
       \ 'l'    : ['CocList'     , 'coc-list']   ,
-      \ 's'    : [':source $MYVIMRC'     , 'source $MYVIMRC']   ,
       \ 't'    : [':Tabularize' , 'tabularize'] ,
+      \ 'i'    : [':PlugInstall' , 'PlugInsall'] ,
+      \ 'u'    : [':PlugUpdate' , 'PlugUpdate'] ,
+      \ 'c'    : ['set concealcursor = ""' , 'disable concealcursor'] ,
+      \}
+let g:which_key_map.f = {
+      \ 'name' : '+file handler'      ,
+      \ 'w'    : [':w'     , 'save']   ,
+      \ 'q'    : [':q' , 'exit'] ,
+      \ 'd'    : [':q!' , 'discard'] ,
       \}
 " floating window
 let g:which_key_use_floating_win = 0
@@ -913,3 +928,37 @@ highlight default link WhichKey          Operator
 highlight default link WhichKeySeperator DiffAdded
 highlight default link WhichKeyGroup     Identifier
 highlight default link WhichKeyDesc      Function
+
+" ----------------------------
+" Plug 'voldikss/vim-floaterm'
+" notice: by installing: `pip3 install neovim-remote`, `floaterm xxx` will open text file in current neovim instance
+" ----------------------------
+let g:floaterm_shell = "$SHELL"
+" 'floating'(neovim) or 'popup'(vim) by default.
+" let g:floaterm_wintype = 'normal'
+" let g:floaterm_wintitle = v:true
+let g:floaterm_width = 0.7
+let g:floaterm_height = 0.7
+" let g:floaterm_position = 'center'
+" open floating window in project dir
+let g:floaterm_rootmarkers = ['.project', '.git', 'package.json', 'node_modules', '.hg', '.svn', '.root', '.gitignore']
+let g:floaterm_autoinsert = v:true
+" 0: not close, 1: not close when abnormal, 2: always close
+let g:floaterm_autoclose = 0
+
+" nnoremap <sttilent> <Leader>tt   :FloatermNew<CR>
+" tnoremap <silent> <Leader>tt   <C-\><C-n>:FloatermNew<CR>
+nnoremap <silent> <Leader>tp   :FloatermPrev<CR>
+tnoremap <silent> <Leader>tp   <C-\><C-n>:FloatermPrev<CR>
+nnoremap <silent> <Leader>tn   :FloatermNext<CR>
+tnoremap <silent> <Leader>tn   <C-\><C-n>:FloatermNext<CR>
+nnoremap <silent> <Leader>tt  :FloatermToggle<CR>
+tnoremap <silent> <Leader>tt  <C-\><C-n>:FloatermToggle<CR>
+nnoremap <silent> <Leader>tk  :FloatermKill<CR>
+tnoremap <silent> <Leader>tk  <C-\><C-n>:FloatermKill<CR>
+
+" Set floaterm window's background to black
+" hi Floaterm guibg=black
+" Set floating window border line color to cyan, and background to orange
+" hi FloatermBorder guibg=orange guifg=cyan
+
