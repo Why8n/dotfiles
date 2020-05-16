@@ -745,7 +745,7 @@ autocmd VimEnter * silent! unmap <Leader>cl | nnoremap <Leader>cl :<C-u>CocList<
 " Use preset argument to open it
 " nnoremap <space>ed   :CocCommand explorer --preset .vim<CR>
 nnoremap <Leader>ef   :CocCommand explorer --preset floating<CR>
-nnoremap <silent> <Leader>ep :CocCommand explorer<CR>
+nnoremap <silent> <Leader>ep :exec 'CocCommand explorer '.getcwd()<CR>
 " autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
 " List all presets
@@ -816,7 +816,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " Plug 'liuchengxu/vim-which-key'
 " -------------
 " By default timeoutlen is 1000 ms
-set timeoutlen=100
+set timeoutlen=1000
 " Map leader to which_key
 nnoremap <silent> <Leader> :silent WhichKey '<Space>'<CR>
 vnoremap <silent> <Leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
@@ -828,29 +828,30 @@ call which_key#register(',', "g:which_key_map")
 " Define prefix dictionary
 let g:which_key_map =  {}
 " format: {char} : [{action} , {description}
+" {action}: execute in normal mode or command/function
 " single mappings
-let g:which_key_map['e'] = [ ':silent CocCommand explorer' , 'explorer'  ]
+let g:which_key_map['e'] = [ ':CocCommand explorer --preset floating' , 'explorer'  ]
 " let g:which_key_map['t'] = ['Rgrep' , 'search text']
 " prefix mappings
 let g:which_key_map.w = {
       \ 'name' : '+windows' ,
-      \ 'w' : ['<C-W>w'     , 'other-window']          ,
-      \ 'd' : ['<C-W>c'     , 'delete-window']         ,
-      \ '-' : ['<C-W>s'     , 'split-window-below']    ,
-      \ '|' : ['<C-W>v'     , 'split-window-right']    ,
-      \ '2' : ['<C-W>v'     , 'layout-double-columns'] ,
-      \ 'h' : ['<C-W>h'     , 'window-left']           ,
-      \ 'j' : ['<C-W>j'     , 'window-below']          ,
-      \ 'l' : ['<C-W>l'     , 'window-right']          ,
-      \ 'k' : ['<C-W>k'     , 'window-up']             ,
-      \ 'H' : ['<C-W>5<'    , 'expand-window-left']    ,
-      \ 'J' : ['resize +5'  , 'expand-window-below']   ,
-      \ 'L' : ['<C-W>5>'    , 'expand-window-right']   ,
-      \ 'K' : ['resize -5'  , 'expand-window-up']      ,
-      \ '=' : ['<C-W>='     , 'balance-window']        ,
-      \ 's' : ['<C-W>s'     , 'split-window-below']    ,
-      \ 'v' : ['<C-W>v'     , 'split-window-below']    ,
-      \ '?' : ['Windows'    , 'fzf-window']            ,
+      \ 'w'    : ['<C-W>w'     , 'other-window']          ,
+      \ 'd'    : ['<C-W>c'     , 'delete-window']         ,
+      \ '-'    : ['<C-W>s'     , 'split-window-below']    ,
+      \ '|'    : ['<C-W>v'     , 'split-window-right']    ,
+      \ '2'    : ['<C-W>v'     , 'layout-double-columns'] ,
+      \ 'h'    : ['<C-W>h'     , 'window-left']           ,
+      \ 'j'    : ['<C-W>j'     , 'window-below']          ,
+      \ 'l'    : ['<C-W>l'     , 'window-right']          ,
+      \ 'k'    : ['<C-W>k'     , 'window-up']             ,
+      \ 'H'    : ['<C-W>5<'    , 'expand-window-left']    ,
+      \ 'J'    : ['resize +5'  , 'expand-window-below']   ,
+      \ 'L'    : ['<C-W>5>'    , 'expand-window-right']   ,
+      \ 'K'    : ['resize -5'  , 'expand-window-up']      ,
+      \ '='    : ['<C-W>='     , 'balance-window']        ,
+      \ 's'    : ['<C-W>s'     , 'split-window-below']    ,
+      \ 'v'    : ['<C-W>v'     , 'split-window-below']    ,
+      \ '?'    : ['Windows'    , 'fzf-window']            ,
       \ }
 let g:which_key_map.o = {
       \ 'name' : '+open'                  ,
@@ -862,64 +863,67 @@ let g:which_key_map.o = {
       \ }
 
 let g:which_key_map.b = {
-      \ 'name' : '+buffer' ,
-      \ '1' : ['b1'        , 'buffer 1']        ,
-      \ '2' : ['b2'        , 'buffer 2']        ,
-      \ 'd' : ['bd'        , 'delete-buffer']   ,
-      \ 'f' : ['bfirst'    , 'first-buffer']    ,
-      \ 'h' : ['Startify'  , 'home-buffer']     ,
-      \ 'l' : ['blast'     , 'last-buffer']     ,
-      \ 'n' : ['bnext'     , 'next-buffer']     ,
-      \ 'p' : ['bprevious' , 'previous-buffer'] ,
-      \ '?' : ['Buffers'   , 'fzf-buffer']      ,
-      \ 'o' : ['BufOnly'   , 'buffer only']      ,
+      \ 'name' : '+buffer'         ,
+      \ '1' : ['b1'                , 'buffer 1']                    ,
+      \ '2' : ['b2'                , 'buffer 2']                    ,
+      \ 'd' : ['bd'                , 'delete-buffer']               ,
+      \ 'f' : ['bfirst'            , 'first-buffer']                ,
+      \ 'h' : ['Startify'          , 'home-buffer']                 ,
+      \ 'l' : ['blast'             , 'last-buffer']                 ,
+      \ 'n' : ['bnext'             , 'next-buffer']                 ,
+      \ 'p' : ['bprevious'         , 'previous-buffer']             ,
+      \ '?' : ['Buffers'           , 'fzf-buffer']                  ,
+      \ 'w' : [':w'             , 'buffer save']                 ,
+      \ 's' : [':w !sudo tee %' , 'buffer save in readonly']     ,
+      \ 'q' : [':q'             , 'exit buffer']                 ,
+      \ 'e' : [':q!'            , 'discard buffer']              ,
+      \ 'o' : {
+        \ 'name': '+open/only...',
+        \ '?' : ['Buffers'           , 'fzf-buffer']                  ,
+        \ 'o' : ['only'              , 'buffer only']                 ,
+        \ 'O' : ['BufOnly'           , 'buffer only & remove others'] ,
+          \},
       \ }
 let g:which_key_map.s = {
-      \ 'name' : '+search' ,
-      \ '/' : [':History/'     , 'history'],
-      \ ';' : [':Commands'     , 'commands'],
-      \ 'a' : [':Ag'           , 'text Ag'],
-      \ 'b' : [':BLines'       , 'current buffer'],
-      \ 'B' : [':Buffers'      , 'open buffers'],
-      \ 'c' : [':Commits'      , 'commits'],
-      \ 'C' : [':BCommits'     , 'buffer commits'],
-      \ 'f' : [':Files'        , 'files'],
-      \ 'g' : [':GFiles'       , 'git files'],
-      \ 'G' : [':GFiles?'      , 'modified git files'],
-      \ 'h' : [':History'      , 'file history'],
-      \ 'H' : [':History:'     , 'command history'],
-      \ 'l' : [':Lines'        , 'lines'] ,
-      \ 'm' : [':Marks'        , 'marks'] ,
-      \ 'M' : [':Maps'         , 'normal maps'] ,
-      \ 'p' : [':Helptags'     , 'help tags'] ,
-      \ 'P' : [':Tags'         , 'project tags'],
-      \ 's' : [':Snippets'     , 'snippets'],
-      \ 'S' : [':Colors'       , 'color schemes'],
-      \ 't' : [':Rgrep'        , 'text Rg'],
-      \ 'T' : [':BTags'        , 'buffer tags'],
-      \ 'w' : [':Windows'      , 'search windows'],
-      \ 'y' : [':Filetypes'    , 'file types'],
-      \ 'z' : [':FZF'          , 'FZF'],
+      \ 'name' : '+search'  ,
+      \ '/' : [':History/'  , 'history']            ,
+      \ ';' : [':Commands'  , 'commands']           ,
+      \ 'a' : [':Ag'        , 'text Ag']            ,
+      \ 'b' : [':BLines'    , 'current buffer']     ,
+      \ 'B' : [':Buffers'   , 'open buffers']       ,
+      \ 'c' : [':Commits'   , 'commits']            ,
+      \ 'C' : [':BCommits'  , 'buffer commits']     ,
+      \ 'f' : [':Files'     , 'files']              ,
+      \ 'g' : [':GFiles'    , 'git files']          ,
+      \ 'G' : [':GFiles?'   , 'modified git files'] ,
+      \ 'h' : [':History'   , 'file history']       ,
+      \ 'H' : [':History:'  , 'command history']    ,
+      \ 'l' : [':Lines'     , 'lines']              ,
+      \ 'm' : [':Marks'     , 'marks']              ,
+      \ 'M' : [':Maps'      , 'normal maps']        ,
+      \ 'p' : [':Helptags'  , 'help tags']          ,
+      \ 'P' : [':Tags'      , 'project tags']       ,
+      \ 's' : [':Snippets'  , 'snippets']           ,
+      \ 'S' : [':Colors'    , 'color schemes']      ,
+      \ 't' : [':Rgrep'     , 'text Rg']            ,
+      \ 'T' : [':BTags'     , 'buffer tags']        ,
+      \ 'w' : [':Windows'   , 'search windows']     ,
+      \ 'y' : [':Filetypes' , 'file types']         ,
+      \ 'z' : [':FZF'       , 'FZF']                ,
       \ }
 let g:which_key_map.v = {
-      \ 'name' : '+vimrc'      ,
-      \ 's'    : [':source $MYVIMRC'     , 'source $MYVIMRC']   ,
-      \ 'e'    : [':edit $MYVIMRC'     , 'edit $MYVIMRC']   ,
-      \ 'o'    : [':botright vs $MYVIMRC'     , 'edit $MYVIMRC (bottom right)']   ,
+      \ 'name' : '+vimrc'                 ,
+      \ 's'    : [':source $MYVIMRC'      , 'source $MYVIMRC']              ,
+      \ 'e'    : [':edit $MYVIMRC'        , 'edit $MYVIMRC']                ,
+      \ 'o'    : [':botright vs $MYVIMRC' , 'edit $MYVIMRC (bottom right)'] ,
       \ }
 let g:which_key_map.a = {
-      \ 'name' : '+action'      ,
-      \ 'l'    : ['CocList'     , 'coc-list']   ,
-      \ 't'    : [':Tabularize' , 'tabularize'] ,
-      \ 'i'    : [':PlugInstall' , 'PlugInsall'] ,
-      \ 'u'    : [':PlugUpdate' , 'PlugUpdate'] ,
+      \ 'name' : '+action'                 ,
+      \ 'l'    : ['CocList'                , 'coc-list']              ,
+      \ 't'    : [':Tabularize'            , 'tabularize']            ,
+      \ 'i'    : [':PlugInstall'           , 'PlugInsall']            ,
+      \ 'u'    : [':PlugUpdate'            , 'PlugUpdate']            ,
       \ 'c'    : ['set concealcursor = ""' , 'disable concealcursor'] ,
-      \}
-let g:which_key_map.f = {
-      \ 'name' : '+file handler'      ,
-      \ 'w'    : [':w'     , 'save']   ,
-      \ 'q'    : [':q' , 'exit'] ,
-      \ 'd'    : [':q!' , 'discard'] ,
       \}
 " floating window
 let g:which_key_use_floating_win = 0
@@ -928,6 +932,8 @@ highlight default link WhichKey          Operator
 highlight default link WhichKeySeperator DiffAdded
 highlight default link WhichKeyGroup     Identifier
 highlight default link WhichKeyDesc      Function
+" ignore key <leader>1
+" let g:which_key_map.1 = 'which_key_ignore'
 
 " ----------------------------
 " Plug 'voldikss/vim-floaterm'
