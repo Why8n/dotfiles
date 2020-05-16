@@ -575,15 +575,16 @@ nnoremap <silent> <Leader>rg       :Rgrep<CR>
 vnoremap <silent> <Leader>rg       y:Rgrep <C-R>"<CR>
 
 nnoremap <silent> <Leader>fz       :Files<CR>
-nnoremap <silent> <C-n> :call fzf#vim#files(<SID>getProjectDir())<CR>
-nnoremap <F2> :call <SID>setProjectDir(expand('%:p:h'))<CR>
-function! s:getProjectDir()
-    return get(g:,'project_path',expand('%:p:h'))
-endfunction
-function! s:setProjectDir(path)
-    let g:project_path = a:path
-    echom 'set project directory: ' . a:path
-endfunction
+" nnoremap <silent> <C-n> :call fzf#vim#files(<SID>getProjectDir())<CR>
+nnoremap <silent> <C-n> :call fzf#vim#files(FindRootDirectory())<CR>
+" nnoremap <F2> :call <SID>setProjectDir(expand('%:p:h'))<CR>
+" function! s:getProjectDir()
+"     return get(g:,'project_path',expand('%:p:h'))
+" endfunction
+" function! s:setProjectDir(path)
+"     let g:project_path = a:path
+"     echom 'set project directory: ' . a:path
+" endfunction
 " -------------------
 " tpope/vim-repeat
 " -------------------
@@ -967,4 +968,22 @@ tnoremap <silent> <Leader>tk  <C-\><C-n>:FloatermKill<CR>
 " hi Floaterm guibg=black
 " Set floating window border line color to cyan, and background to orange
 " hi FloatermBorder guibg=orange guifg=cyan
+
+" --------------------------
+" Plug 'airblade/vim-rooter'
+" --------------------------
+" project-root pattern( / represents for directory)
+let g:rooter_patterns = ['.git', '.git/', 'svn/', 'node_modules/']
+" for non-project files,change to current file's directory
+let g:rooter_change_directory_for_non_project_files = 'current'
+" trigger vim-rooter: directories and all files (default)
+let g:rooter_targets = '/,*'
+" disable changing directory automatically
+let g:rooter_manual_only = 1
+" echoing the project directory
+let g:rooter_silent_chdir = 0
+" resolve symbolic links
+let g:rooter_resolve_links = 1
+" When Rooter changes the working directory it emits the autocmd user event RooterChDir
+" autocmd User RooterChDir call s:setProjectDir(FindRootDirectory())
 
