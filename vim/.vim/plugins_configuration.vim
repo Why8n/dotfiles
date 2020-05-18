@@ -850,7 +850,13 @@ let g:which_key_map.w = {
       \ 'L'    : ['<C-W>5>'    , 'expand-window-right']   ,
       \ 'K'    : ['resize -5'  , 'expand-window-up']      ,
       \ '='    : ['<C-W>='     , 'balance-window']        ,
-      \ 's'    : ['<C-W>s'     , 'split-window-below']    ,
+      \ 's' : {
+        \ 'name': '+split-window'   ,
+        \ 'j' : [':rightbelow new'   , 'horizontial split (down)']  ,
+        \ 'k' : [':leftabove new'   , 'horizontial split (above)'] ,
+        \ 'l' : [':rightbelow vnew' , 'vertical split (right)']    ,
+        \ 'h' : [':leftabove vnew'   , 'vertical split (left)']    ,
+        \},
       \ 'v'    : ['<C-W>v'     , 'split-window-below']    ,
       \ '?'    : ['Windows'    , 'fzf-window']            ,
       \ }
@@ -864,26 +870,26 @@ let g:which_key_map.o = {
       \ }
 
 let g:which_key_map.b = {
-      \ 'name' : '+buffer'         ,
-      \ '1' : ['b1'                , 'buffer 1']                    ,
-      \ '2' : ['b2'                , 'buffer 2']                    ,
-      \ 'd' : ['bd'                , 'delete-buffer']               ,
-      \ 'f' : ['bfirst'            , 'first-buffer']                ,
-      \ 'h' : ['Startify'          , 'home-buffer']                 ,
-      \ 'l' : ['blast'             , 'last-buffer']                 ,
-      \ 'n' : ['bnext'             , 'next-buffer']                 ,
-      \ 'p' : ['bprevious'         , 'previous-buffer']             ,
-      \ '?' : ['Buffers'           , 'fzf-buffer']                  ,
-      \ 'w' : [':w'             , 'buffer save']                 ,
-      \ 's' : [':w !sudo tee %' , 'buffer save in readonly']     ,
-      \ 'q' : [':q'             , 'exit buffer']                 ,
-      \ 'e' : [':q!'            , 'discard buffer']              ,
+      \ 'name' : '+buffer'        ,
+      \ '1' : ['b1'               , 'buffer 1']                    ,
+      \ '2' : ['b2'               , 'buffer 2']                    ,
+      \ 'd' : ['bd'               , 'delete-buffer']               ,
+      \ 'f' : ['bfirst'           , 'first-buffer']                ,
+      \ 'h' : ['Startify'         , 'home-buffer']                 ,
+      \ 'l' : ['blast'            , 'last-buffer']                 ,
+      \ 'n' : ['bnext'            , 'next-buffer']                 ,
+      \ 'p' : ['bprevious'        , 'previous-buffer']             ,
+      \ '?' : ['Buffers'          , 'fzf-buffer']                  ,
+      \ 'w' : [':w'               , 'buffer save']                 ,
+      \ 's' : [':w !sudo tee %'   , 'buffer save in readonly']     ,
+      \ 'q':  [':q'               , 'exit buffer']                 ,
+      \ 'e' : [':q!'              , 'discard buffer']              ,
       \ 'o' : {
-        \ 'name': '+open/only...',
-        \ '?' : ['Buffers'           , 'fzf-buffer']                  ,
-        \ 'o' : ['only'              , 'buffer only']                 ,
-        \ 'O' : ['BufOnly'           , 'buffer only & remove others'] ,
-          \},
+        \ 'name': '+open/only...' ,
+        \ '?' : ['Buffers'        , 'fzf-buffer']                  ,
+        \ 'o' : [':only'          , 'buffer only']                 ,
+        \ 'O' : [':BufOnly'       , 'buffer only & remove others'] ,
+        \}                        ,
       \ }
 let g:which_key_map.s = {
       \ 'name' : '+search'  ,
@@ -921,11 +927,21 @@ let g:which_key_map.v = {
 let g:which_key_map.a = {
       \ 'name' : '+action'                 ,
       \ 'l'    : ['CocList'                , 'coc-list']              ,
-      \ 't'    : [':Tabularize'            , 'tabularize']            ,
       \ 'i'    : [':PlugInstall'           , 'PlugInsall']            ,
       \ 'u'    : [':PlugUpdate'            , 'PlugUpdate']            ,
       \ 'c'    : ['set concealcursor = ""' , 'disable concealcursor'] ,
+      \ 'd'    : [':windo diffthis'    , 'vimdiff (diffthis)']            ,
       \}
+let g:which_key_map.t = {
+    \ 'name' : '+terminal'                             ,
+    \ ';' : [':FloatermNew --wintype=popup --height=6' , 'terminal'] ,
+    \ 'n' : [':FloatermNew'                            , 'new']      ,
+    \ 't' : [':FloatermToggle'                         , 'toggle']   ,
+    \ 'k' : [':FloatermKill'                           , 'kill']     ,
+    \ 'f' : [':FloatermNew fzf'                        , 'fzf']      ,
+    \ 'p' : [':FloatermNew python'                     , 'python']   ,
+    \ 'r' : [':FloatermNew ranger'                     , 'ranger']   ,
+    \ }
 " floating window
 let g:which_key_use_floating_win = 0
 " Change the colors if you want
@@ -987,3 +1003,8 @@ let g:rooter_resolve_links = 1
 " When Rooter changes the working directory it emits the autocmd user event RooterChDir
 " autocmd User RooterChDir call s:setProjectDir(FindRootDirectory())
 
+" ------------------------
+" Plug 'godlygeek/tabular'
+" ------------------------
+nnoremap <Leader>tb :<C-u>Tabularize /
+vnoremap <Leader>tb :Tabularize /
