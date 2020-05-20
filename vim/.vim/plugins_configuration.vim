@@ -563,9 +563,16 @@ nnoremap <silent> <Leader>ag       :Ag <C-R><C-W><CR>
 xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR> 
 
 
+function! s:searchTextCmd(path,params)
+    if strlen(a:path)
+        return 'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(a:params).' '.shellescape(FindRootDirectory())
+    endif
+    return 'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(a:params)
+endfunction
+
 command! -bang -nargs=* Rgrep
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <SID>searchTextCmd(FindRootDirectory(),<q-args>), 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
@@ -892,19 +899,23 @@ let g:which_key_map.b = {
         \}                        ,
       \ }
 let g:which_key_map.s = {
-      \ 'name' : '+search'  ,
-      \ '/' : [':History/'  , 'history']            ,
-      \ ';' : [':Commands'  , 'commands']           ,
-      \ 'a' : [':Ag'        , 'text Ag']            ,
-      \ 'b' : [':BLines'    , 'current buffer']     ,
-      \ 'B' : [':Buffers'   , 'open buffers']       ,
-      \ 'c' : [':Commits'   , 'commits']            ,
-      \ 'C' : [':BCommits'  , 'buffer commits']     ,
-      \ 'f' : [':Files'     , 'files']              ,
-      \ 'g' : [':GFiles'    , 'git files']          ,
-      \ 'G' : [':GFiles?'   , 'modified git files'] ,
-      \ 'h' : [':History'   , 'file history']       ,
-      \ 'H' : [':History:'  , 'command history']    ,
+      \ 'name' : '+search' ,
+      \ '/' : [':History/' , 'history']            ,
+      \ ';' : [':Commands' , 'commands']           ,
+      \ 'a' : [':Ag'       , 'text Ag']            ,
+      \ 'b' : [':BLines'   , 'current buffer']     ,
+      \ 'B' : [':Buffers'  , 'open buffers']       ,
+      \ 'c' : [':Commits'  , 'commits']            ,
+      \ 'C' : [':BCommits' , 'buffer commits']     ,
+      \ 'f' : [':Files'    , 'files']              ,
+      \ 'g' : [':GFiles'   , 'git files']          ,
+      \ 'G' : [':GFiles?'  , 'modified git files'] ,
+      \ 'h' : [':Helptags' , 'help documentation'] ,
+      \ 'H' : {
+          \ 'name': '+history'   ,
+          \ 'h'   : [':History'  , 'file history']    ,
+          \ 'H'   : [':History:' , 'command history'] ,
+          \ },
       \ 'l' : [':Lines'     , 'lines']              ,
       \ 'm' : [':Marks'     , 'marks']              ,
       \ 'M' : [':Maps'      , 'normal maps']        ,
@@ -912,7 +923,7 @@ let g:which_key_map.s = {
       \ 'P' : [':Tags'      , 'project tags']       ,
       \ 's' : [':Snippets'  , 'snippets']           ,
       \ 'S' : [':Colors'    , 'color schemes']      ,
-      \ 't' : [':Rgrep'     , 'text Rg']            ,
+      \ 't' : [':Rgrep'     , 'search text']            ,
       \ 'T' : [':BTags'     , 'buffer tags']        ,
       \ 'w' : [':Windows'   , 'search windows']     ,
       \ 'y' : [':Filetypes' , 'file types']         ,
