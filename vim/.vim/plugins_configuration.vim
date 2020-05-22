@@ -826,13 +826,15 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " By default timeoutlen is 1000 ms
 set timeoutlen=1000
 " Map leader to which_key
+" let g:mapleader = "\<Space>"
 nnoremap <silent> <Leader> :silent WhichKey '<Space>'<CR>
 vnoremap <silent> <Leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
-" Map , to which_key
-nnoremap <silent> <localleader> :silent <c-u> :silent WhichKey  ','<CR>
-vnoremap <silent> <localleader> :silent <c-u> :silent WhichKeyVisual  ','<CR>
+" Map \ to which_key
+let g:maplocalleader = '\'
+nnoremap <silent> <localleader> :silent <c-u> :silent WhichKey  '\'<CR>
+vnoremap <silent> <localleader> :silent <c-u> :silent WhichKeyVisual  '\'<CR>
 
-call which_key#register(',', "g:which_key_map")
+call which_key#register('\', "g:which_key_map")
 " Define prefix dictionary
 let g:which_key_map =  {}
 " format: {char} : [{action} , {description}

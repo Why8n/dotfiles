@@ -1,6 +1,6 @@
 " change leader \ to ;
 let mapleader=' '
-let g:maplocalleader = ','
+" let g:maplocalleader = ','
 set nocompatible
 
 set nu
