@@ -116,6 +116,8 @@ function! s:installVimPlugins()
 
     Plug 'liuchengxu/vim-which-key'
     Plug 'voldikss/vim-floaterm'
+    Plug 'airblade/vim-rooter'
+
 endfunction
 
 function! s:installNvimPlugins()

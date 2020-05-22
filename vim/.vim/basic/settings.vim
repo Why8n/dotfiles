@@ -1,6 +1,6 @@
 " change leader \ to ;
 let mapleader=' '
-let g:maplocalleader = ','
+" let g:maplocalleader = ','
 set nocompatible
 
 set nu
@@ -25,6 +25,8 @@ set softtabstop=0
 " Be smart when using tabs
 set smarttab
 set expandtab
+" always show tabs on left top corner
+set showtabline=2
 
 " 检测文件类型
 filetype on
@@ -43,9 +45,10 @@ syntax on
 " allow to switch buffers without saving
 set hidden
 
-" 智能缩进
-set smartindent
-
+" better disable this,or it will disable >> when line starts with #
+" set smartindent
+set autoindent
+filetype plugin indent on
 " set cmd window height :( cmd )
 set cmdheight=1
 " 在被分割的窗口间显示空白，便于阅读

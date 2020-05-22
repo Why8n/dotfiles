@@ -12,3 +12,5 @@
 " Python
 " Semantic Highlighting for Python in Neovim
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+
+Plug 'ThePrimeagen/vim-be-good', {'on': 'VimBeGood'}
