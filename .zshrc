@@ -175,7 +175,7 @@ zinit snippet https://github.com/imomaliev/tmux-bash-completion/tree/master/comp
 
 [ -f ~/.fzf.zsh  ] && source ~/.fzf.zsh
 if  command -v rg > /dev/null; then
-	export FZF_DEFAULT_COMMAND='rg --files --hidden .'
+	export FZF_DEFAULT_COMMAND='rg --files . --hidden -uuu'
 fi
 export FZF_DEFAULT_OPTS='--height 90% --layout=reverse --bind=alt-j:down,alt-k:up,alt-i:toggle+down --border --preview 
 				"[[ $(file --mime {}) =~ binary ]]      &&
@@ -203,6 +203,7 @@ alias rm=trash
 # in neovim terminal,using command: nvi xxx,to open file in current neovim instance,so that we can edit
 # notice: make sure to: pip3 install neovim-remote
 alias nvi=floaterm
+alias sudo='sudo env PATH=$PATH'
 
 # key bindings
 bindkey -s '^o' 'cd ~/program/github/dotfiles/\n'
@@ -211,3 +212,5 @@ bindkey -s '^o' 'cd ~/program/github/dotfiles/\n'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
