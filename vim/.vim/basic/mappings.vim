@@ -111,3 +111,6 @@ cnoremap <C-v> <C-r>+
 nnoremap <silent> <C-x> "+dd
 vnoremap <silent> <C-x> "+d
 
+" move cursor line up & down
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
