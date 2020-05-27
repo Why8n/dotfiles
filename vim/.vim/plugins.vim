@@ -117,7 +117,11 @@ function! s:installVimPlugins()
     Plug 'liuchengxu/vim-which-key'
     Plug 'voldikss/vim-floaterm'
     Plug 'airblade/vim-rooter'
-
+    Plug 'honza/vim-snippets'
+    " provides additional text objects(di(,ca}...)
+    Plug 'wellle/targets.vim'
+    " show definiations & references
+    Plug 'pechorin/any-jump.vim' ,{'on':['AnyJump','AnyJumpVisual','AnyJumpBack','AnyJumpLastResults']}
 endfunction
 
 function! s:installNvimPlugins()

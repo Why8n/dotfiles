@@ -516,8 +516,36 @@ nnoremap <Leader>ud :UndotreeToggle<CR>
 " ------------------------
 " fzf
 " ------------------------
+let $FZF_DEFAULT_COMMAND="rg --files . --hidden -uuu --glob '!.git/**'"
+" let g:fzf_tags_command = 'ctags -R
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
 if has('nvim') || has('gui_running')
-  let $FZF_DEFAULT_OPTS .= ' --inline-info'
+  " let $FZF_DEFAULT_OPTS .= ' --inline-info'
+  let $FZF_DEFAULT_OPTS='--height 90% --layout=reverse --bind=alt-j:down,alt-k:up,alt-i:toggle+down --border --preview 
+              \ "[[ $(file --mime {}) =~ binary ]]      &&
+              \ echo {} is a binary file               ||
+              \ (bat --style=numbers --color=always {} ||
+              \ highlight -O ansi -l {}               ||
+              \ coderay {}                            ||
+              \ rougify {}                            ||
+              \ cat {}) 2> /dev/null | head -500" 
+              \ --preview-window=down'
+
 endif
 
 " Hide statusline of terminal buffer
@@ -531,7 +559,7 @@ let g:fzf_layout = { 'window': '-tabnew' }
 let g:fzf_layout = { 'window': '10new' }
 " floating fzf
 if has('nvim')
-    let $FZF_DEFAULT_OPTS='--layout=reverse'
+    " let $FZF_DEFAULT_OPTS='--layout=reverse'
     let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
     function! FloatingFZF()
@@ -565,9 +593,9 @@ xnoremap <silent> <Leader>ag       y:Ag <C-R>"<CR>
 
 function! s:searchTextCmd(path,params)
     if strlen(a:path)
-        return 'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(a:params).' '.shellescape(FindRootDirectory())
+        return 'rg --column --line-number --no-heading --color=always --smart-case --hidden '.shellescape(a:params).' '.shellescape(FindRootDirectory())
     endif
-    return 'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(a:params)
+    return 'rg --column --line-number --no-heading --color=always --smart-case --hidden '.shellescape(a:params)
 endfunction
 
 command! -bang -nargs=* Rgrep
@@ -576,12 +604,6 @@ command! -bang -nargs=* Rgrep
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
-" nnoremap <silent> <Leader>rg       :Rgrep <C-R><C-W><CR>
-xnoremap <silent> <Leader>rg       y:Rgrep <C-R>"<CR> 
-nnoremap <silent> <Leader>rg       :Rgrep<CR>
-vnoremap <silent> <Leader>rg       y:Rgrep <C-R>"<CR>
-
-nnoremap <silent> <Leader>fz       :Files<CR>
 " nnoremap <silent> <C-n> :call fzf#vim#files(<SID>getProjectDir())<CR>
 nnoremap <silent> <C-n> :call fzf#vim#files(FindRootDirectory())<CR>
 " nnoremap <F2> :call <SID>setProjectDir(expand('%:p:h'))<CR>
@@ -901,35 +923,36 @@ let g:which_key_map.b = {
         \}                        ,
       \ }
 let g:which_key_map.s = {
-      \ 'name' : '+search' ,
-      \ '/' : [':History/' , 'history']            ,
-      \ ';' : [':Commands' , 'commands']           ,
-      \ 'a' : [':Ag'       , 'text Ag']            ,
-      \ 'b' : [':BLines'   , 'current buffer']     ,
-      \ 'B' : [':Buffers'  , 'open buffers']       ,
-      \ 'c' : [':Commits'  , 'commits']            ,
-      \ 'C' : [':BCommits' , 'buffer commits']     ,
-      \ 'f' : [':Files'    , 'files']              ,
-      \ 'g' : [':GFiles'   , 'git files']          ,
-      \ 'G' : [':GFiles?'  , 'modified git files'] ,
-      \ 'h' : [':Helptags' , 'help documentation'] ,
+      \ 'name' : '+search'       ,
+      \ '/' : [':History/'       , 'history']            ,
+      \ ';' : [':Commands'       , 'commands']           ,
+      \ 'a' : [':Ag'             , 'text Ag']            ,
+      \ 'b' : [':BLines'         , 'current buffer']     ,
+      \ 'B' : [':Buffers'        , 'open buffers']       ,
+      \ 'c' : [':Commits'        , 'commits']            ,
+      \ 'C' : [':BCommits'       , 'buffer commits']     ,
+      \ 'f' : [':Files'          , 'files']              ,
+      \ 'g' : [':GFiles'         , 'git files']          ,
+      \ 'G' : [':GFiles?'        , 'modified git files'] ,
+      \ 'h' : [':Helptags'       , 'help documentation'] ,
       \ 'H' : {
           \ 'name': '+history'   ,
-          \ 'h'   : [':History'  , 'file history']    ,
-          \ 'H'   : [':History:' , 'command history'] ,
-          \ },
-      \ 'l' : [':Lines'     , 'lines']              ,
-      \ 'm' : [':Marks'     , 'marks']              ,
-      \ 'M' : [':Maps'      , 'normal maps']        ,
-      \ 'p' : [':Helptags'  , 'help tags']          ,
-      \ 'P' : [':Tags'      , 'project tags']       ,
-      \ 's' : [':Snippets'  , 'snippets']           ,
-      \ 'S' : [':Colors'    , 'color schemes']      ,
-      \ 't' : [':Rgrep'     , 'search text']            ,
-      \ 'T' : [':BTags'     , 'buffer tags']        ,
-      \ 'w' : [':Windows'   , 'search windows']     ,
-      \ 'y' : [':Filetypes' , 'file types']         ,
-      \ 'z' : [':FZF'       , 'FZF']                ,
+          \ 'h'   : [':History'  , 'file history']       ,
+          \ 'H'   : [':History:' , 'command history']    ,
+          \ }                    ,
+      \ 'l' : [':Lines'          , 'lines']              ,
+      \ 'm' : [':Marks'          , 'marks']              ,
+      \ 'M' : [':Maps'           , 'normal maps']        ,
+      \ 'p' : [':Helptags'       , 'help tags']          ,
+      \ 'P' : [':Tags'           , 'project tags']       ,
+      \ 's' : [':Snippets'       , 'snippets']           ,
+      \ 'S' : [':Colors'         , 'color schemes']      ,
+      \ 't' : [':Rgrep'          , 'search text']        ,
+      \ 'T' : [':BTags'          , 'buffer tags']        ,
+      \ 'w' : [':Windows'        , 'search windows']     ,
+      \ 'y' : [':Filetypes'      , 'file types']         ,
+      \ 'z' : [':FZF'            , 'FZF']                ,
+      \ 'j' : [':AnyJump'        , 'show references']    ,
       \ }
 let g:which_key_map.v = {
       \ 'name' : '+vimrc'                 ,
@@ -955,6 +978,44 @@ let g:which_key_map.t = {
     \ 'p' : [':FloatermNew python'                     , 'python']   ,
     \ 'r' : [':FloatermNew ranger'                     , 'ranger']   ,
     \ }
+" l is for language server protocol
+let g:which_key_map.l = {
+      \ 'name' : '+lsp' ,
+      \ '.' : [':CocConfig'                          , 'config'],
+      \ ';' : ['<Plug>(coc-refactor)'                , 'refactor'],
+      \ 'a' : ['<Plug>(coc-codeaction)'              , 'line action'],
+      \ 'A' : ['<Plug>(coc-codeaction-selected)'     , 'selected action'],
+      \ 'b' : [':CocNext'                            , 'next action'],
+      \ 'B' : [':CocPrev'                            , 'prev action'],
+      \ 'c' : [':CocList commands'                   , 'commands'],
+      \ 'd' : ['<Plug>(coc-definition)'              , 'definition'],
+      \ 'D' : ['<Plug>(coc-declaration)'             , 'declaration'],
+      \ 'e' : [':CocList extensions'                 , 'extensions'],
+      \ 'f' : ['<Plug>(coc-format-selected)'         , 'format selected'],
+      \ 'F' : ['<Plug>(coc-format)'                  , 'format'],
+      \ 'h' : ['<Plug>(coc-float-hide)'              , 'hide'],
+      \ 'i' : ['<Plug>(coc-implementation)'          , 'implementation'],
+      \ 'I' : [':CocList diagnostics'                , 'diagnostics'],
+      \ 'j' : ['<Plug>(coc-float-jump)'              , 'float jump'],
+      \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code lens'],
+      \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next diagnostic'],
+      \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next error'],
+      \ 'o' : ['<Plug>(coc-openlink)'                , 'open link'],
+      \ 'O' : [':CocList outline'                    , 'outline'],
+      \ 'p' : ['<Plug>(coc-diagnostic-prev)'         , 'prev diagnostic'],
+      \ 'P' : ['<Plug>(coc-diagnostic-prev-error)'   , 'prev error'],
+      \ 'q' : ['<Plug>(coc-fix-current)'             , 'quickfix'],
+      \ 'r' : ['<Plug>(coc-rename)'                  , 'rename'],
+      \ 'R' : ['<Plug>(coc-references)'              , 'references'],
+      \ 's' : [':CocList -I symbols'                 , 'symbols'],
+      \ 'S' : [':CocList snippets'                   , 'snippets'],
+      \ 't' : ['<Plug>(coc-type-definition)'         , 'type definition'],
+      \ 'u' : [':CocListResume'                      , 'resume list'],
+      \ 'U' : [':CocUpdate'                          , 'update CoC'],
+      \ 'v' : [':Vista!!'                            , 'tag viewer'],
+      \ 'z' : [':CocDisable'                         , 'disable CoC'],
+      \ 'Z' : [':CocEnable'                          , 'enable CoC'],
+      \ }
 " floating window
 let g:which_key_use_floating_win = 0
 " Change the colors if you want
@@ -1021,3 +1082,103 @@ let g:rooter_resolve_links = 1
 " ------------------------
 nnoremap <Leader>tb :<C-u>Tabularize /
 vnoremap <Leader>tb :Tabularize /
+
+
+" =========================
+" Plug 'honza/vim-snippets'
+" =========================
+" Use <C-l> for trigger snippet expand.
+inoremap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vnoremap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" ============================
+" Plug 'pechorin/any-jump.vim'
+" ============================
+" Normal mode: Jump to definition under cursore
+nnoremap <leader>j :AnyJump<CR>
+
+" Visual mode: jump to selected text in visual mode
+xnoremap <leader>j :AnyJumpVisual<CR>
+
+" Normal mode: open previous opened file (after jump)
+nnoremap <leader>ab :AnyJumpBack<CR>
+
+" Normal mode: open last closed search window again
+nnoremap <leader>al :AnyJumpLastResults<CR>
+" Show line numbers in search rusults
+let g:any_jump_list_numbers = 0
+
+" Auto search references
+let g:any_jump_references_enabled = 1
+
+" Auto group results by filename
+let g:any_jump_grouping_enabled = 0
+
+" Amount of preview lines for each search result
+let g:any_jump_preview_lines_count = 5
+
+" Max search results, other results can be opened via [a]
+let g:any_jump_max_search_results = 10
+
+" Prefered search engine: rg or ag
+let g:any_jump_search_prefered_engine = 'rg'
+
+
+" Search results list styles:
+" - 'filename_first'
+" - 'filename_last'
+let g:any_jump_results_ui_style = 'filename_first'
+
+" Any-jump window size & position options
+let g:any_jump_window_width_ratio  = 0.6
+let g:any_jump_window_height_ratio = 0.6
+let g:any_jump_window_top_offset   = 4
+
+" Customize any-jump colors with extending default color scheme:
+let g:any_jump_colors = { "help": "Comment" }
+
+" Or override all default colors
+let g:any_jump_colors = {
+      \"plain_text":         "Comment",
+      \"preview":            "Comment",
+      \"preview_keyword":    "Operator",
+      \"heading_text":       "Function",
+      \"heading_keyword":    "Identifier",
+      \"group_text":         "Comment",
+      \"group_name":         "Function",
+      \"more_button":        "Operator",
+      \"more_explain":       "Comment",
+      \"result_line_number": "Comment",
+      \"result_text":        "Statement",
+      \"result_path":        "String",
+      \"help":               "Comment"
+      \}
+
+" Disable default any-jump keybindings (default: 0)
+let g:any_jump_disable_default_keybindings = 1
+
+" Remove comments line from search results (default: 1)
+let g:any_jump_remove_comments_from_results = 0
+
+" Custom ignore files
+" default is: ['*.tmp', '*.temp']
+let g:any_jump_ignored_files = ['*.tmp', '*.temp']
+
+" Search references only for current file type
+" (default: false, so will find keyword in all filetypes)
+let g:any_jump_references_only_for_current_filetype = 0
+
+" Disable search engine ignore vcs untracked files
+" (default: false, search engine will ignore vcs untracked files)
+let g:any_jump_disable_vcs_ignore = 0
