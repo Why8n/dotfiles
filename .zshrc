@@ -175,7 +175,8 @@ zinit snippet https://github.com/imomaliev/tmux-bash-completion/tree/master/comp
 
 [ -f ~/.fzf.zsh  ] && source ~/.fzf.zsh
 if  command -v rg > /dev/null; then
-	export FZF_DEFAULT_COMMAND='rg --files . --hidden -uuu'
+    # export FZF_DEFAULT_COMMAND='rg --files . --hidden -uuu --glob "!.git/**" --glob "!node_modules/**"'
+    export FZF_DEFAULT_COMMAND='rg --files . --hidden -uuu --glob "!**/.git/**" --glob "!**/node_modules/**"'
 fi
 export FZF_DEFAULT_OPTS='--height 90% --layout=reverse --bind=alt-j:down,alt-k:up,alt-i:toggle+down --border --preview 
 				"[[ $(file --mime {}) =~ binary ]]      &&
