@@ -48,5 +48,22 @@
         "<tab>": "actionMenu"
     },
     // coc-prettier
+    // coc-java
+    "java.enabled": true,
+    "java.home": "/usr/lib/jvm/jdk-14.0.1/",
+    "java.configuration.maven.userSettings": "/opt/apache-maven-3.6.3/conf/settings.xml",
+    "java.referencesCodeLens.enabled": true,
+    "java.implementationsCodeLens.enabled": true,
+    "java.implementationsCodeLens.enabled": true,
+    "java.implementationsCodeLens.enabled": true,
+    "java.import.gradle.enabled": true,
+    "java.import.maven.enabled": true,
+    "java.autobuild.enabled": false,
+    "java.format.onType.enabled": true,
+    "java.completion.guessMethodArguments": true,
+    "java.completion.enabled": true,
+    "java.import.gradle.wrapper.enabled": true,
+    // check output: :CocCommand workspace.showOutput java
+    "java.trace.server": "verbose"
 
 }
