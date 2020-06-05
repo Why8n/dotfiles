@@ -1,7 +1,7 @@
 source ~/.vim/utils.vim
 " call Reset()
 " Auto download vim-plug for the first time
-call DownPlugVimIfNotExists()
+"call DownPlugVimIfNotExists()
 
 function! s:basicVimConfig()
     source ~/.vim/basic/settings.vim
@@ -11,16 +11,6 @@ endfunction
 function! s:basicNvimConfig()
     call s:basicVimConfig()
     source ~/.vim/neovim/basic/mappings.vim
-endfunction
-
-function! s:plugins4Vim()
-    source ~/.vim/plugins.vim
-    call InstallVimAndConfig()
-endfunction
-
-function! s:plugins4Nvim()
-    source ~/.vim/plugins.vim
-    call InstallNvimAndConfig()
 endfunction
 
 function! s:basicVimConfig4Win()
@@ -41,28 +31,100 @@ function! s:basicNvimConfig4Unix()
     call SourceDir('~/.vim/os/unix/neovim/basic')
 endfunction
 
-" os config
-if IsWin32() 
-    if has('nvim')
-        call s:basicNvimConfig()
-        call s:basicNvimConfig4Win()
-        call s:plugins4Nvim()
-    else
-        call s:basicVimConfig()
-        call s:basicVimConfig4Win()
-        call s:plugins4Vim()
+function! s:loadVimPlugins()
+    source ~/.vim/plugins.vim
+endfunction
+
+function! s:loadNvimPlugins()
+    source ~/.vim/neovim/plugins.vim
+endfunction
+
+function! s:installVimAndConfig()
+    if dein#load_state(s:dein_path)
+      call dein#begin(s:dein_path)
+
+      call dein#add(s:dein_path.'/repos/github.com/Shougo/dein.vim')
+
+      " install third-party plugins
+      call s:loadVimPlugins()
+
+      call dein#end()
+      call dein#save_state()
     endif
-elseif IsUnix() || IsWin32Unix() || IsMac()
-    if has('nvim')
-        call s:basicNvimConfig()
-        call s:basicNvimConfig4Unix()
-        call s:plugins4Nvim()
-    else
-        call s:basicVimConfig()
-        call s:basicVimConfig4Unix()
-        call s:plugins4Vim()
+
+    source ~/.vim/plugins_configuration.vim
+endfunction
+
+function! s:installNvimAndConfig()
+    if dein#load_state(s:dein_path)
+      echom 'debug: begin(...)'
+      call dein#begin(s:dein_path)
+
+      call dein#add(s:dein_path.'/repos/github.com/Shougo/dein.vim')
+
+      " install third-party plugins
+      call s:loadVimPlugins()
+      call s:loadNvimPlugins()
+
+      call dein#end()
+      call dein#save_state()
     endif
+
+    source ~/.vim/plugins_configuration.vim
+    source ~/.vim/neovim/plugins_configuration.vim
+endfunction
+
+function! s:install()
+    " os config
+    if IsWin32() 
+        if has('nvim')
+            call s:basicNvimConfig()
+            call s:basicNvimConfig4Win()
+            call s:installNvimAndConfig()
+        else
+            call s:basicVimConfig()
+            call s:basicVimConfig4Win()
+            call s:installVimAndConfig()
+        endif
+    elseif IsUnix() || IsWin32Unix() || IsMac()
+        if has('nvim')
+            echom 'debug => linux has nvim'
+            call s:basicNvimConfig()
+            call s:basicNvimConfig4Unix()
+            call s:installNvimAndConfig()
+        else
+            call s:basicVimConfig()
+            call s:basicVimConfig4Unix()
+            call s:installVimAndConfig()
+        endif
+    endif
+endfunction
+
+if &compatible
+    set nocompatible
 endif
+
+
+let s:dein_path = '~/.vim/dein'
+
+" Add the dein installation directory into runtimepath
+let &runtimepath = &runtimepath.','.s:dein_path.'/repos/github.com/Shougo/dein.vim'
+
+"let g:dein#auto_recache = 1
+let g:dein#install_log_filename = s:dein_path.'/log.txt'
+call s:install()
+
+filetype plugin indent on
+syntax enable
+
+if !has('vim_starting') && dein#check_install()
+    call dein#install()
+endif
+
+autocmd VimEnter * call dein#call_hook('post_source')
+call dein#call_hook('source')
+
+
 
 " others
 " map <F5> :call CompileRun()<CR>
