@@ -1,5 +1,4 @@
 source ~/.vim/init.vim
-
 " reload vimrc
 " map <C-l> :source $MYVIMRC<CR>
 " no backup
@@ -125,3 +124,4 @@ autocmd BufReadPost * call AutoSave()
 "     autocmd InsertEnter * :call <SID>imSwitcher(g:curImMode)
 "     autocmd InsertLeave * :call <SID>imSwitcher(1033)
 " augroup END
+

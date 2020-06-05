@@ -1,147 +1,233 @@
-function! s:installVimPlugins()
-	" Plug 'dyng/ctrlsf.vim'
-	" way too slow on huge files
-	" Plug 'ctrlpvim/ctrlp.vim', {'on':'CtrlP'} 
-	" Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggld','NERDTreeCWD'] }
-    " Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':['NERDTreeToggle','NERDTreeCWD'] }
-	Plug 'vim-airline/vim-airline'
-	Plug 'vim-airline/vim-airline-themes'
-	Plug 'easymotion/vim-easymotion'
-    Plug 'unblevable/quick-scope'
-	Plug 'vim-syntastic/syntastic'
-	Plug 'tpope/vim-surround'
-    Plug 'scrooloose/nerdcommenter'
-	" Plug 'Raimondi/delimitMate'
-	Plug 'jiangmiao/auto-pairs'
-	Plug 'terryma/vim-multiple-cursors'
-	" 缩进指示线
-	Plug 'Yggdroot/indentLine'
+" Plug 'dyng/ctrlsf.vim'
+" way too slow on huge files
+" Plug 'ctrlpvim/ctrlp.vim', {'on':'CtrlP'} 
+" Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggld','NERDTreeCWD'] }
+" Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':['NERDTreeToggle','NERDTreeCWD'] }
+call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
+call dein#add('easymotion/vim-easymotion', {
+	\'lazy': 1,
+    \'on_map': {
+    \'n':['<Leader><Leader>w',
+        \'<Leader><Leader>b',
+        \'<Leader><Leader>s',
+        \'<Leader><Leader>f',
+        \'<Leader><Leader>F',
+        \'<Leader><Leader>t',
+        \'<Leader><Leader>T',
+        \]}
+	\})
+call dein#add('unblevable/quick-scope')
 
-	" Hyperfocus-writing in Vim
-	Plug 'junegunn/limelight.vim'
-	" distraction free writing mode
-	Plug 'junegunn/goyo.vim' 
-	" 文本对齐插件
-	Plug 'godlygeek/tabular'
+call dein#add('vim-syntastic/syntastic', {
+            \'on_cmd':'SyntasticToggleMode'
+            \})
 
-	" Find And Replace Vim plugin
-	Plug 'brooth/far.vim'
+call dein#add('tpope/vim-repeat', {'on_map' : '.'})
+call dein#add('tpope/vim-surround',{
+        \'on_map': {'n' : ['cs', 'ds', 'ys'], 'x' : 'S'}, 
+        \'depends' : 'vim-repeat'
+        \})
 
-	" --------------------------
-	" === scheme for console ===
-	" --------------------------
-	" Plug 'jnurmine/Zenburn'
-	" Plug 'kristijanhusak/vim-hybrid-material'
-    Plug 'morhetz/gruvbox'
-    Plug 'schickling/vim-bufonly'
+call dein#add('scrooloose/nerdcommenter', {
+            \'lzay': 1,
+            \'on_map': [ 
+                \'<Plug>NERDCommenterToggle',
+                \'<Leader>cc',
+                \'<Leader>cu',
+                \'<Leader>c<Space>']
+            \})
+" Plug 'Raimondi/delimitMate'
+call dein#add('jiangmiao/auto-pairs', {
+            \'lazy': 1,
+            \'on_event': 'InsertEnter'
+            \})
+call dein#add('terryma/vim-multiple-cursors', { 
+            \'on_map' : { 
+                \'n' : ['<C-n>', '<C-p>'], 'x' : '<C-n>'}
+            \}) 
+" 缩进指示线
+call dein#add('Yggdroot/indentLine',{
+            \'on_event': 'VimEnter',
+            \})
 
-	" --------------------------
-	"=== switch input method ===
-	" --------------------------
-	" Plug 'https://github.com/vim-scripts/fcitx.vim.git'
-    " Plug 'ybian/smartim'
+" Hyperfocus-writing in Vim
+" on_source: load goyo.vim,then limelight.vim will be loaded automatically
+" depens: load limelight,then goyo.vim will be loaded automatically
+call dein#add('junegunn/limelight.vim', {
+            \'on_cmd': 'Limelight',
+            \'on_source': 'goyo.vim',
+            \'depends': 'goyo.vim'
+            \})
+" distraction free writing mode
+call dein#add('junegunn/goyo.vim', {
+            \'on_cmd': 'Goyo'
+            \})
+" 文本对齐插件
+call dein#add('godlygeek/tabular', {
+            \ 'on_cmd':  'Tabularize',
+            \ 'augroup': 'tabular'
+            \})
 
-	" ----------------
-	" === markdown ===
-	" ----------------
-    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() },'for':['markdown','vim-plug']}
-	" markdown table improvment
-	Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
-	" Plug 'reedes/vim-pencil'
+" Find And Replace Vim plugin
+call dein#add('brooth/far.vim', {
+            \'on_cmd': ['Far','Fardo','Farf','Farp','Farr','Farundo']
+            \})
 
-	" -----------------
-	" === Bookmarks ===
-	" -----------------
-	Plug 'kshenoy/vim-signature'
-	Plug 'vim-scripts/Marks-Browser'
+" --------------------------
+" === scheme for console ===
+" --------------------------
+" Plug 'jnurmine/Zenburn'
+" Plug 'kristijanhusak/vim-hybrid-material'
+call dein#add('morhetz/gruvbox')
 
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
-    Plug 'junegunn/fzf.vim'
-    
-	Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
-	Plug 'mbbill/undotree'
-	Plug 'tpope/vim-repeat'
-	Plug 'itchyny/vim-cursorword'
+call dein#add('schickling/vim-bufonly', {
+            \'on_cmd': ['Bufonly','Bonly','BOnly']
+            \})
 
-    " ----------------
-    " === language ===
-    " ----------------
-    " completion
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'chemzqm/vim-run', {'on': 'Run'}
-	"Plug 'Valloric/YouCompleteMe'
-	" autocomlete by AI
-	" Plug 'zxqfl/tabnine-vim', { 'for': ['go','java', 'php', 'html', 'javascript', 'css', 'less','scss','cpp','c','javascript','kotlin','python','dart'] }
-	" Plug 'davidhalter/jedi-vim'
-    
-    " frontend
-	" HTML, CSS, JavaScript, PHP, JSON, etc.
-	" Plug 'elzr/vim-json'
-	Plug 'hail2u/vim-css3-syntax', {'on': 'SyntasticToggleMode'}
-    " color preview
-	Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-	" Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
-	Plug 'mattn/emmet-vim'
-	Plug 'posva/vim-vue'
+" --------------------------
+"=== switch input method ===
+" --------------------------
+" Plug 'https://github.com/vim-scripts/fcitx.vim.git'
+" Plug 'ybian/smartim'
 
-	" Python
-	Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
+" ----------------
+" === markdown ===
+" ----------------
+call dein#add('iamcco/markdown-preview.nvim', {
+            \'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+            \'build': 'sh -c "cd app & yarn install"' })
+" markdown table improvment
+call dein#add('dhruvasagar/vim-table-mode', { 'on_cmd': 'TableModeToggle' })
+" Plug 'reedes/vim-pencil'
 
-    " Android
-	Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
+" -----------------
+" === Bookmarks ===
+" -----------------
+call dein#add('kshenoy/vim-signature')
+call dein#add('vim-scripts/Marks-Browser',{
+            \'on_cmd': 'MarksBrowser'
+            \})
 
-    " http
-    Plug 'nicwest/vim-http', {'on': ['Http','Http!']}
+call dein#add('junegunn/fzf', { 'build': './install --all'  })
+call dein#add('junegunn/fzf.vim')
 
-    " format
-    Plug 'prettier/vim-prettier', {
-    \ 'do': 'npm install',
-    \ 'branch': 'release/1.x',
-    \ 'for': [
-      \ 'javascript',
-      \ 'typescript',
-      \ 'css',
-      \ 'less',
-      \ 'scss',
-      \ 'json',
-      \ 'graphql',
-      \ 'markdown',
-      \ 'vue',
-      \ 'lua',
-      \ 'php',
-      \ 'python',
-      \ 'ruby',
-      \ 'html',
-      \ 'swift' ] }
+call dein#add('majutsushi/tagbar', { 'on_cmd': 'TagbarOpenAutoClose' })
+call dein#add('mbbill/undotree', {
+            \'on_cmd': 'UndotreeToggle'
+            \})
+call dein#add('itchyny/vim-cursorword',{
+            \'on_event': 'VimEnter'
+            \})
 
-    Plug 'liuchengxu/vim-which-key'
-    Plug 'voldikss/vim-floaterm'
-    Plug 'airblade/vim-rooter'
-    Plug 'honza/vim-snippets'
-    " provides additional text objects(di(,ca}...)
-    Plug 'wellle/targets.vim'
-    " show definiations & references
-    Plug 'pechorin/any-jump.vim' ,{'on':['AnyJump','AnyJumpVisual','AnyJumpBack','AnyJumpLastResults']}
-endfunction
+" ----------------
+" === language ===
+" ----------------
+" completion
+call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
+call dein#add('chemzqm/vim-run', {'on_cmd': 'Run'})
+"Plug 'Valloric/YouCompleteMe'
+" autocomlete by AI
+" Plug 'zxqfl/tabnine-vim', { 'on_ft': ['go','java', 'php', 'html', 'javascript', 'css', 'less','scss','cpp','c','javascript','kotlin','python','dart'] }
+" Plug 'davidhalter/jedi-vim'
 
-function! s:installNvimPlugins()
-    source ~/.vim/neovim/plugins.vim
-endfunction
+" frontend
+" HTML, CSS, JavaScript, PHP, JSON, etc.
+" Plug 'elzr/vim-json'
+call dein#add('hail2u/vim-css3-syntax')
+" color preview
+call dein#add('gko/vim-coloresque')
+" Plug 'pangloss/vim-javascript', { 'on_ft' :['javascript', 'vim-plug'] }
+call dein#add('mattn/emmet-vim', {
+            \ 'if': v:version >= 700,
+            \ 'on_ft': ['html', 'htmljinja', 'xml', 'xsl'],
+            \})
+call dein#add('posva/vim-vue')
 
-function! InstallVimAndConfig()
-    call plug#begin('~/.vim/plugged')
-        call s:installVimPlugins()
-    call plug#end()
+" Python
+call dein#add('vim-scripts/indentpython.vim')
 
-    source ~/.vim/plugins_configuration.vim
-endfunction
+" Android
+call dein#add('udalov/kotlin-vim')
 
-function! InstallNvimAndConfig()
-    call plug#begin('~/.vim/plugged')
-        call s:installVimPlugins()
-        call s:installNvimPlugins()
-    call plug#end()
+" http
+call dein#add('nicwest/vim-http', {'on_cmd': ['Http','Http!']})
 
-    source ~/.vim/plugins_configuration.vim
-    source ~/.vim/neovim/plugins_configuration.vim
-endfunction
+" format
+call dein#add('prettier/vim-prettier', {
+	    \ 'build': 'npm install',
+	    \ 'rev': 'release/1.x',
+        \'on_cmd': [ 
+            \'Prettier',
+            \'PrettierAsync',
+            \'PrettierPartial'
+            \'PrettierFragment',
+            \'PrettierVersion',
+            \'PrettierCli',
+            \'PrettierCliPath',
+            \'PrettierCliVersion'],
+	    \ 'on_ft': [
+            \ 'javascript',
+            \ 'typescript',
+            \ 'css',
+            \ 'less',
+            \ 'scss',
+            \ 'json',
+            \ 'graphql',
+            \ 'markdown',
+            \ 'vue',
+            \ 'lua',
+            \ 'php',
+            \ 'python',
+            \ 'ruby',
+            \ 'html',
+            \ 'swift' ]
+        \})
+call dein#add('liuchengxu/vim-which-key', {
+            \'on_cmd': [ 
+                \'WhichKey',
+                \'WhichKey!',
+                \'WhichKeyVisual!',
+                \'WhichKeyVisual']
+            \})
+call dein#add('voldikss/vim-floaterm',{
+            \'lazy': 1,
+            \'on_cmd': [ 
+                \'FloatermNew',
+                \'FloatermPrev',
+                \'FloatermNext',
+                \'FloatermToggle',
+                \'FloatermUpdate',
+                \'FloatermShow',
+                \'FloatermHide',
+                \'FloatermKill',
+                \'FloatermSend']
+            \})
+call dein#add('airblade/vim-rooter')
+call dein#add('honza/vim-snippets')
+call dein#add('wellle/targets.vim')
+" show definiations & references
+call dein#add('pechorin/any-jump.vim' ,{
+            \'on_cmd':[ 
+                \'AnyJump',
+                \'AnyJumpVisual',
+                \'AnyJumpBack',
+                \'AnyJumpLastResults']
+            \})
+
+call dein#add('tpope/vim-scriptease', {
+            \'on_cmd': [ 
+                \'PP',
+                \'Runtime',
+                \'Disarm',
+                \'Scriptnames',
+                \'Messages',
+                \'Verbose',
+                \'Time',
+                \'Breakadd',
+                \'Vedit',
+                \'K',
+                \'zS',
+                \'g=']
+            \})
+

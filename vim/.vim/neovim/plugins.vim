@@ -11,6 +11,6 @@
 " Plug 'ncm2/ncm2-markdown-subscope'
 " Python
 " Semantic Highlighting for Python in Neovim
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+call dein#add('numirias/semshi', { 'on_cmd': 'UpdateRemotePlugins' })
 
-Plug 'ThePrimeagen/vim-be-good', {'on': 'VimBeGood'}
+call dein#add('ThePrimeagen/vim-be-good')
