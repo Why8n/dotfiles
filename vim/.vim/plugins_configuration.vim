@@ -890,11 +890,10 @@ if dein#tap('vim-which-key')
     nnoremap <silent> <localleader> :silent <c-u> :silent WhichKey  '\'<CR>
     vnoremap <silent> <localleader> :silent <c-u> :silent WhichKeyVisual  '\'<CR>
 
-    "call which_key#register('\', "g:which_key_map")
-    call dein#set_hook('vim-which-key', 'hook_post_source', 'call which_key#register("\", "g:which_key_map")')
-
     " Define prefix dictionary
     let g:which_key_map =  {}
+    " call which_key#register('\', "g:which_key_map")
+    call dein#set_hook(dein#plugin.name,'hook_post_source','call which_key#register("\\","g:which_key_map")')
     " format: {char} : [{action} , {description}
     " {action}: execute in normal mode or command/function
     " single mappings
