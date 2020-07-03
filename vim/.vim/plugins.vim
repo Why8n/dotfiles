@@ -124,7 +124,7 @@ call dein#add('itchyny/vim-cursorword',{
 " === language ===
 " ----------------
 " completion
-call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
+call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release', 'trusted': 1})
 call dein#add('chemzqm/vim-run', {'on_cmd': 'Run'})
 "Plug 'Valloric/YouCompleteMe'
 " autocomlete by AI
