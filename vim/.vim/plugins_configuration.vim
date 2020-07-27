@@ -557,53 +557,24 @@ if dein#tap('fzf.vim')
       \ 'spinner': ['fg', 'Label'],
       \ 'header':  ['fg', 'Comment'] }
 
-    if has('nvim') || has('gui_running')
-      " let $FZF_DEFAULT_OPTS .= ' --inline-info'
-      let $FZF_DEFAULT_OPTS='--height 90% --layout=reverse --bind=alt-j:down,alt-k:up,alt-i:toggle+down --border --preview 
-                  \ "[[ $(file --mime {}) =~ binary ]]      &&
-                  \ echo {} is a binary file               ||
-                  \ (bat --style=numbers --color=always {} ||
-                  \ highlight -O ansi -l {}               ||
-                  \ coderay {}                            ||
-                  \ rougify {}                            ||
-                  \ cat {}) 2> /dev/null | head -500" 
-                  \ --preview-window=down'
-
-    endif
+    " In Neovim, you can set up fzf window using a Vim command
+    let g:fzf_layout = {'window': {'width': 0.8,'height': 0.8}}
+    " let $FZF_DEFAULT_OPTS .= ' --inline-info'
+    let $FZF_DEFAULT_OPTS='--height 90% --layout=reverse --bind=alt-j:down,alt-k:up,alt-i:toggle+down --border --preview
+                \ "[[ $(file --mime {}) =~ binary ]]      &&
+                \ echo {} is a binary file               ||
+                \ (bat --style=numbers --color=always {} ||
+                \ highlight -O ansi -l {}               ||
+                \ coderay {}                            ||
+                \ rougify {}                            ||
+                \ cat {}) 2> /dev/null | head -500"
+                \ --preview-window=down'
 
     " Hide statusline of terminal buffer
     autocmd! FileType fzf
     autocmd  FileType fzf set laststatus=0 noshowmode noruler
       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-    " In Neovim, you can set up fzf window using a Vim command
-    let g:fzf_layout = { 'window': 'enew' }
-    let g:fzf_layout = { 'window': '-tabnew' }
-    let g:fzf_layout = { 'window': '10new' }
-    " floating fzf
-    if has('nvim')
-        " let $FZF_DEFAULT_OPTS='--layout=reverse'
-        let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-
-        function! FloatingFZF()
-          let buf = nvim_create_buf(v:false, v:true)
-          call setbufvar(buf, '&signcolumn', 'no')
-
-          let height = &lines - 3
-          let width = float2nr(&columns - (&columns * 2 / 10))
-          let col = float2nr((&columns - width) / 2)
-
-          let opts = {
-                \ 'relative': 'editor',
-                \ 'row': 1,
-                \ 'col': col,
-                \ 'width': width,
-                \ 'height': height
-                \ }
-
-          call nvim_open_win(buf, v:true, opts)
-        endfunction
-    endif
 
     command! -bang -nargs=* Ag
       \ call fzf#vim#ag(<q-args>,

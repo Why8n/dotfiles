@@ -52,12 +52,6 @@ nnoremap <Leader>J <C-w>J
 
 " 设置锚点
 map <Leader><Leader>m <Esc>/<><CR>:nohlsearch<CR>2s
-" shift+enter to append suffix
-autocmd FileType * nnoremap <S-CR> <ESC>o
-autocmd FileType * inoremap <S-CR> <ESC>o
-autocmd FileType c,cpp,java,javascript nnoremap <S-CR> <ESC>A;<CR>
-autocmd FileType c,cpp,java,javascript inoremap <S-CR> <ESC>A;<CR>
-autocmd FileType c,cpp,java,javascript nnoremap <Leader>; mpA;<ESC>`p
 " open a blank new file on the right panel
 nnoremap <Leader>sl :rightbelow vnew<CR>
 nnoremap <Leader>sh :leftabove vnew<CR>
@@ -114,3 +108,11 @@ vnoremap <silent> <C-x> "+d
 " move cursor line up & down
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" shift+enter to append suffix
+autocmd FileType * nnoremap <S-CR> <ESC>o
+autocmd FileType * inoremap <S-CR> <ESC>o
+autocmd FileType c,cpp,java,javascript nnoremap <S-CR> <ESC>A;<CR>
+autocmd FileType c,cpp,java,javascript inoremap <S-CR> <ESC>A;<CR>
+autocmd FileType c,cpp,java,javascript nnoremap <Leader>; mpA;<ESC>`p
+
