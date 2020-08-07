@@ -85,8 +85,10 @@ nnoremap <space>oi :action OptimizeImports<CR>
 map <C-f> <ESC>:action Find<CR>
 " comment
 nnoremap <Leader>cc :action CommentByLineComment<CR>
+vnoremap <Leader>cc :action CommentByLineComment<CR>
 " pretend :) uncomment 
 nnoremap <Leader>cu :action CommentByLineComment<CR>
+vnoremap <Leader>cu :action CommentByLineComment<CR>
 
 nnoremap <Leader>br :action ToggleLineBreakpoint<CR>
 " see all breakpoints
@@ -106,6 +108,10 @@ inoremap <C-j> <ESC>:action InsertLiveTemplate<CR>
 
 " <C-R>
 nnoremap <C-r> :action $Redo<CR>
+
+nnoremap <Leader>w :action SaveDocument<CR>
+
+
 
 
 " ==================================================
