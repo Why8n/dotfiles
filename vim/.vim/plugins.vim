@@ -231,3 +231,10 @@ call dein#add('tpope/vim-scriptease', {
                 \'g=']
             \})
 
+call dein#add('tpope/vim-dispatch', {
+            \'on_cmd': [ 
+                \'Make',
+                \'Dispatch',
+                \'Focus',
+                \'Start']
+            \})

@@ -1200,3 +1200,17 @@ if dein#tap('any-jump.vim')
     " (default: false, search engine will ignore vcs untracked files)
     let g:any_jump_disable_vcs_ignore = 0
 endif
+
+
+" ------------------
+" tpope/vim-dispatch
+" ------------------
+" Foreground builds: :Make
+" Background builds: :Make!
+"                    :Copen to see the build process
+"
+" build python file: :Dispatch python %
+" build by default Dispatch(set by b:dispatch): :Dispatch %
+autocmd FileType java let b:dispatch = 'java %'
+autocmd FileType python let b:dispatch = g:python3_host_prog.' %'
+autocmd FileType javascript let b:dispatch = 'node %'
