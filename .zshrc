@@ -198,8 +198,8 @@ export FZF_DEFAULT_OPTS='--height 90% --layout=reverse --bind=alt-j:down,alt-k:u
 
 alias cls=clear
 
-# npm install --global trash-cli
-alias rm=trash
+# wget --no-check-certificate https://raw.githubusercontent.com/LaiJingli/rmtrash/master/rmtrash.sh
+alias rm=/usr/local/bin/rmtrash.sh
 # nickname for voldikss/vim-floaterm
 # in neovim terminal,using command: nvi xxx,to open file in current neovim instance,so that we can edit
 # notice: make sure to: pip3 install neovim-remote
@@ -214,4 +214,6 @@ bindkey -s '^o' 'cd ~/program/github/dotfiles/\n'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
+# for pipenv
+export PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
+PATH="$PATH:$PYTHON_BIN_PATH"
