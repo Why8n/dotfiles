@@ -13,7 +13,16 @@ nnoremap <Leader><Leader>q :q!<cr>
 nnoremap <Leader>w :w<cr>
 nnoremap <Leader><Leader>o :only<cr>
 " delete all buffers except current
-nnoremap <Leader><Leader>O :w \| %bd \| e#<cr>
+nnoremap <Leader><Leader>O :call CloseAllBuffersButCurrent()<CR>
+
+function! CloseAllBuffersButCurrent()
+    let curr = bufnr("%")
+    let last = bufnr("$")
+
+    if curr > 1    | silent! execute "1,".(curr-1)."bd!"     | endif
+    if curr < last | silent! execute (curr+1).",".last."bd!" | endif
+endfunction
+
 " force close current buffer
 nnoremap <Leader>bd :bd!<cr>
 " close previews window
@@ -93,7 +102,7 @@ nnoremap <Leader>co :copen<CR>
 nnoremap <silent> <C-a> ggVG$
 
 " 选中状态下 Ctrl+c 复制
-vnoremap <C-c> "+y
+vnoremap <C-c> "+y''
 
 " Ctrl+v
 nnoremap <silent> <C-v> "+p
