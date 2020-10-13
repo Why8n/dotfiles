@@ -205,7 +205,7 @@ call dein#add('voldikss/vim-floaterm',{
             \})
 call dein#add('airblade/vim-rooter')
 call dein#add('honza/vim-snippets')
-call dein#add('wellle/targets.vim')
+" call dein#add('wellle/targets.vim')
 " show definiations & references
 call dein#add('pechorin/any-jump.vim' ,{
             \'on_cmd':[ 
@@ -238,3 +238,6 @@ call dein#add('tpope/vim-dispatch', {
                 \'Focus',
                 \'Start']
             \})
+
+" show git diff in the sign column
+call dein#add('airblade/vim-gitgutter')
