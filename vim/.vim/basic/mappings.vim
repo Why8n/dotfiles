@@ -102,11 +102,12 @@ nnoremap <Leader>co :copen<CR>
 nnoremap <silent> <C-a> ggVG$
 
 " 选中状态下 Ctrl+c 复制
-vnoremap <C-c> "+y''
+vnoremap <C-c> "+y
 
 " Ctrl+v
 nnoremap <silent> <C-v> "+p
-inoremap <silent> <C-v> <C-r><C-p>+
+" inoremap <silent> <C-v> <C-r><C-p>+
+inoremap <silent> <C-v> <C-r>+
 vnoremap <silent> <C-v> "+p
 cnoremap <C-v> <C-r>+
 

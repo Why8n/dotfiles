@@ -120,9 +120,9 @@ call dein#add('majutsushi/tagbar', { 'on_cmd': 'TagbarOpenAutoClose' })
 call dein#add('mbbill/undotree', {
             \'on_cmd': 'UndotreeToggle'
             \})
-call dein#add('itchyny/vim-cursorword',{
-            \'on_event': 'VimEnter'
-            \})
+" call dein#add('itchyny/vim-cursorword',{
+            " \'on_event': 'VimEnter'
+            " \})
 
 " ----------------
 " === language ===
@@ -245,3 +245,9 @@ call dein#add('tpope/vim-dispatch', {
 
 " show git diff in the sign column
 call dein#add('airblade/vim-gitgutter')
+
+" set paste automatically when in insert mode
+call dein#add('roxma/vim-paste-easy', {
+            \'lazy': 1,
+            \'on_event': ['InsertCharPre','InsertLeave'] 
+            \})

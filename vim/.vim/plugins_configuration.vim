@@ -699,8 +699,10 @@ if dein#tap('coc.nvim')
       endif
     endfunction
 
-    " Highlight symbol under cursor on CursorHold
+    " coc-hightlight: Highlight symbol under cursor on CursorHold
     autocmd CursorHold * silent call CocActionAsync('highlight')
+    hi default link CocHighlightText CocUnderline
+
 
     " Remap for rename current word
     nmap <Leader>rn <Plug>(coc-rename)
@@ -862,8 +864,8 @@ if dein#tap('vim-which-key')
     set timeoutlen=1000
     " Map leader to which_key
     " let g:mapleader = "\<Space>"
-    nnoremap <silent> <Leader> :silent WhichKey '<Space>'<CR>
-    vnoremap <silent> <Leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
+    nnoremap <silent> <Leader><Leader> :silent WhichKey '<Space>'<CR>
+    vnoremap <silent> <Leader><Leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
     " Map \ to which_key
     let g:maplocalleader = '\'
     nnoremap <silent> <localleader> :silent <c-u> :silent WhichKey  '\'<CR>
