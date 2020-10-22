@@ -267,6 +267,12 @@ if dein#tap('markdown-preview.nvim')
 endif
 
 " -----------------
+" skanehira/preview-markdown.vim
+" -----------------
+let g:preview_markdown_vertical = 1
+let g:preview_markdown_parser = 'mdr'
+
+" -----------------
 " vim-table-mode
 " -----------------
 if dein#tap('vim-table-mode')

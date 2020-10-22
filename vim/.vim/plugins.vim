@@ -100,6 +100,10 @@ call dein#add('iamcco/markdown-preview.nvim', {
 " markdown table improvment
 call dein#add('dhruvasagar/vim-table-mode', { 'on_cmd': 'TableModeToggle' })
 " Plug 'reedes/vim-pencil'
+call dein#add('skanehira/preview-markdown.vim', {
+            \'on_ft': ['markdown','rmd'],
+            \'on_cmd': 'PreviewMarkdown'
+            \})
 
 " -----------------
 " === Bookmarks ===
