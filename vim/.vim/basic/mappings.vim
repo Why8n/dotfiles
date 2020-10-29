@@ -101,13 +101,26 @@ nnoremap <Leader>co :copen<CR>
 " Ctrl+a
 nnoremap <silent> <C-a> ggVG$
 
+function! s:paste(mode)
+    let flag = &paste
+    set paste
+    if a:mode ==# 'insert'
+        execute "normal! \"+P\<CR>"
+    else
+        execute "normal! \"+p\<CR>"
+    endif
+    let &paste = flag
+endfunction
+
+
 " 选中状态下 Ctrl+c 复制
 vnoremap <C-c> "+y
 
 " Ctrl+v
-nnoremap <silent> <C-v> "+p
+" nnoremap <silent> <C-v> "+p
+nnoremap <silent> <C-v> :call <SID>paste('normal')<CR>
 " inoremap <silent> <C-v> <C-r><C-p>+
-inoremap <silent> <C-v> <C-r>+
+inoremap <silent> <C-v> <C-o>:call <SID>paste('insert')<CR>
 vnoremap <silent> <C-v> "+p
 cnoremap <C-v> <C-r>+
 

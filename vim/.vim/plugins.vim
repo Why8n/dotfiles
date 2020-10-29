@@ -247,7 +247,7 @@ call dein#add('tpope/vim-dispatch', {
 call dein#add('airblade/vim-gitgutter')
 
 " set paste automatically when in insert mode
-call dein#add('roxma/vim-paste-easy', {
-            \'lazy': 1,
-            \'on_event': ['InsertCharPre','InsertLeave'] 
-            \})
+" call dein#add('roxma/vim-paste-easy', {
+"             \'lazy': 1,
+"             \'on_event': ['InsertCharPre','InsertLeave']
+"             \})
