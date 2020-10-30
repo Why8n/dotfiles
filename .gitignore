@@ -18,3 +18,4 @@ temp
 !*.sh
 !*.zsh
 !android studio
+!*tmux*
