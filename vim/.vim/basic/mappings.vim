@@ -105,9 +105,11 @@ function! s:paste(mode)
     let flag = &paste
     set paste
     if a:mode ==# 'insert'
-        execute "normal! \"+P\<CR>"
+        execute "normal! \"+P<CR>"
+        execute "normal! l"
+        startinsert
     else
-        execute "normal! \"+p\<CR>"
+        execute "normal! \"+p<CR>"
     endif
     let &paste = flag
 endfunction
