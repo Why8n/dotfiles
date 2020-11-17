@@ -878,7 +878,7 @@ if dein#tap('vim-which-key')
     " format: {char} : [{action} , {description}
     " {action}: execute in normal mode or command/function
     " single mappings
-    let g:which_key_map['e'] = [ ':CocCommand explorer --preset floating' , 'explorer'  ]
+    let g:which_key_map['e'] = [ ':CocCommand explorer' , 'explorer'  ]
     " let g:which_key_map['t'] = ['Rgrep' , 'search text']
     " prefix mappings
     let g:which_key_map.w = {
@@ -1213,12 +1213,22 @@ endif
 " ------------------
 " tpope/vim-dispatch
 " ------------------
-" Foreground builds: :Make
-" Background builds: :Make!
-"                    :Copen to see the build process
-"
-" build python file: :Dispatch python %
-" build by default Dispatch(set by b:dispatch): :Dispatch %
-autocmd FileType java let b:dispatch = 'java %'
-autocmd FileType python let b:dispatch = g:python3_host_prog.' %'
-autocmd FileType javascript let b:dispatch = 'node %'
+if dein#tap('vim-dispatch')
+    " Foreground builds: :Make
+    " Background builds: :Make!
+    "                    :Copen to see the build process
+    "
+    " build python file: :Dispatch python %
+    " build by default Dispatch(set by b:dispatch): :Dispatch %
+    autocmd FileType java let b:dispatch = 'java %'
+    autocmd FileType python let b:dispatch = g:python3_host_prog.' %'
+    autocmd FileType javascript let b:dispatch = 'node %'
+endif
+" ------------------
+" whyn
+" ------------------
+if dein#tap('enhanceOPM')
+    for tob in ['()', '[]', '{}', '<>', '*', ',']
+        call enhanceOPM#EOPM(tob)
+    endfor
+endif

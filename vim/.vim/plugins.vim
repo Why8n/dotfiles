@@ -251,3 +251,11 @@ call dein#add('airblade/vim-gitgutter')
 "             \'lazy': 1,
 "             \'on_event': ['InsertCharPre','InsertLeave']
 "             \})
+
+" call dein#add('gcmt/wildfire.vim', {
+"             \'on_map': {'n' : ['<Enter>']}
+"             \})
+
+call dein#add('/mnt/e/code/vim/autopaste')
+call dein#add('Why8n/enhanceOPM')
+
