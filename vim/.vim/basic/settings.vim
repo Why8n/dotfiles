@@ -108,3 +108,7 @@ set autoread
 
 " makes popup menu smaller
 set pumheight=10
+
+" timeout for each keystroke
+set timeout timeoutlen=3000
+

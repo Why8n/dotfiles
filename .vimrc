@@ -11,7 +11,6 @@ set noswapfile
 set noerrorbells
 set novisualbell
 set vb t_vb= " turn off visual bell,error flash
-set tm=500
 
 " set cmd window height :( cmd )
 set cmdheight=1
@@ -63,9 +62,6 @@ nnoremap <Right> :vertical resize -2<CR>
 " cnoremap <C-f> <C-r><C-w>
 
 set t_Co=256
-
-
-
 
 " Vimscript file settings ---------------------- {{{
 augroup filetype_vim

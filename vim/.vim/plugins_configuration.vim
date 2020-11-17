@@ -861,7 +861,7 @@ endif
 " -------------
 if dein#tap('vim-which-key')
     " By default timeoutlen is 1000 ms
-    set timeoutlen=1000
+    " set timeoutlen=3000
     " Map leader to which_key
     " let g:mapleader = "\<Space>"
     nnoremap <silent> <Leader><Leader> :silent WhichKey '<Space>'<CR>
