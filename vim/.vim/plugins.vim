@@ -256,6 +256,30 @@ call dein#add('airblade/vim-gitgutter')
 "             \'on_map': {'n' : ['<Enter>']}
 "             \})
 
-call dein#add('/mnt/e/code/vim/autopaste')
-call dein#add('Why8n/enhanceOPM')
+" call dein#add('/mnt/e/code/vim/autopaste', {
+call dein#add('Why8n/autopaste', {
+            \'on_cmd': [
+                \'PasteInNormalMode',
+                \'PasteInInsertMode',
+                \'PasteInVisualMode'
+                \]
+            \})
 
+call dein#add('Why8n/enhanceOPM')
+" call dein#add('/mnt/e/code/vim/enhanceOPM')
+
+call dein#add('frazrepo/vim-rainbow', {
+            \'on_ft': ['c',
+                      \'c++',
+                      \'java',
+                      \'kotlin',
+                      \'groovy',
+                      \'dark',
+                      \'python',
+                      \'html',
+                      \'scss',
+                      \'javascript',
+                      \'typescript',
+                      \'vim',
+                        \]
+            \})

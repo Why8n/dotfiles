@@ -580,6 +580,7 @@ if dein#tap('fzf.vim')
     autocmd! FileType fzf
     autocmd  FileType fzf set laststatus=0 noshowmode noruler
       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+    autocmd! FileType fzf tnoremap <buffer> <ESC> <C-c>
 
 
     command! -bang -nargs=* Ag
@@ -1225,10 +1226,39 @@ if dein#tap('vim-dispatch')
     autocmd FileType javascript let b:dispatch = 'node %'
 endif
 " ------------------
-" whyn
+" why8n/enhanceOPM
 " ------------------
 if dein#tap('enhanceOPM')
-    for tob in ['()', '[]', '{}', '<>', '*', ',']
-        call enhanceOPM#EOPM(tob)
-    endfor
+    " for tob in ['()', '[]', '{}', '<>', '*', ',']
+    "     call enhanceOPM#EOPM(tob)
+    " endfor
 endif
+
+" ------------------
+" why8n/autopaste
+" ------------------
+if dein#tap('autopaste')
+    nnoremap <silent> <C-v> :PasteInNormalMode +<CR>
+    inoremap <silent> <C-v> <C-o>:PasteInInsertMode +<CR>
+    vnoremap <silent> <C-v> :<C-u>PasteInVisualMode +<CR>
+    cnoremap <C-v> <C-r>+
+endif
+
+" --------------------
+" frazrepo/vim-rainbow
+" --------------------
+if dein#tap('vim-rainbow')
+    let g:rainbow_active = 1
+    let g:rainbow_load_separately = [
+        \ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+        \ [ '*.tex' , [['(', ')'], ['\[', '\]']] ],
+        \ [ '*.cpp' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+        \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']] ],
+        \ ]
+
+    let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
+    let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
+endif
+
+
+

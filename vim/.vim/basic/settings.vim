@@ -112,3 +112,35 @@ set pumheight=10
 " timeout for each keystroke
 set timeout timeoutlen=3000
 
+
+" input method auto switch
+let s:im_en = 1033
+" let s:im_cn = 2052
+let s:im_last = s:im_en
+function! s:switch_im(im)
+    if s:im_last !=? s:im_en
+        " call system(g:input_method_select.' '.a:im)
+        silent execute '!'.g:input_method_select.' '.a:im
+    endif
+endfunction
+
+augroup im_switch
+    autocmd!
+    autocmd InsertEnter * call <SID>switch_im(s:im_last)
+    autocmd InsertLeave * let s:im_last = system(g:input_method_select) | call <SID>switch_im(s:im_en)
+augroup END
+
+
+" function! s:addQF(msg)
+"     " empty quickfix window
+"     " call setqflist([])
+"     " or
+"     " cexpr []
+"     caddexpr msg
+"     " copen
+" endfunction
+
+" add search line to quickfix window
+command! Addqf caddexpr expand('%').':'.line('.').':'.getline('.')
+
+
