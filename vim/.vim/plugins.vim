@@ -79,7 +79,7 @@ call dein#add('brooth/far.vim', {
 " --------------------------
 " Plug 'jnurmine/Zenburn'
 " Plug 'kristijanhusak/vim-hybrid-material'
-call dein#add('morhetz/gruvbox')
+call dein#add('morhetz/gruvbox', {'merge': 0})
 
 call dein#add('schickling/vim-bufonly', {
             \'on_cmd': ['Bufonly','Bonly','BOnly']
