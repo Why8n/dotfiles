@@ -2,6 +2,7 @@
 function! Reset()
     mapclear
 endfunction
+
 function! s:createDirIfNotExists(dir)
     let l:newDir = expand(a:dir)
     if !isdirectory(expand(l:newDir))
@@ -14,8 +15,8 @@ function! s:createDirIfNotExists(dir)
 endfunction
 
 function! CacheFile()
-    call s:createDirIfNotExists('~/.vim/temp')
-    let l:cacheFile = expand('~/.vim/temp/lastfile.swp')
+    call s:createDirIfNotExists('~/.vim/cached')
+    let l:cacheFile = expand('~/.vim/cached/lastfile.swp')
     execute 'w!' l:cacheFile
 endfunction
 
@@ -86,42 +87,27 @@ function! s:DownPlugVimAndInstall(path)
     endif
 endfunction
 
-function! s:DownPlugVim2Windows4nvim(path)
-    call s:DownPlugVimAndInstall(a:path)
-endfunction
-
-function! s:DownPlugVim2Windows4vim(path)
-    call s:DownPlugVimAndInstall(a:path)
-endfunction
-
-function! s:DownPlugVim2Linux4nvim(path)
-    call s:DownPlugVimAndInstall(a:path)
-endfunction
-    
-function! s:DownPlugVim2Linux4vim(path)
-    call s:DownPlugVimAndInstall(a:path)
-endfunction
-    
-function! s:DownPlugVim2Windows()
-    if has('nvim')
-        call s:DownPlugVim2Windows4nvim($USERPROFILE.'/AppData/Local/nvim/autoload/plug.vim')
-    else
-        call s:DownPlugVim2Windows4vim($VIM.'/vimfiles/autoload/plug.vim')
+function! Curl(url, localPath)
+    if !filereadable(a:localPath)
+        " curl version >= 7.52.0
+        if !executable("curl") 
+            echoerr "You have to install curl(>= 7.52.0) first"
+            execute "q!"
+        endif
+        echo printf('Installing %s to %s',a:url, a:localPath)
+        echo ""
+        execute printf("!\curl --connect-timeout 10 --retry-delay 0 --retry 10 --retry-connrefused -fLo --create-dirs %s %s", a:url, a:localPath)
     endif
 endfunction
 
-function! s:DownPlugVim2Linux()
-    if has('nvim')
-        call s:DownPlugVim2Linux4nvim($HOME.'/.config/nvim/autoload/plug.vim')
-    else
-        call s:DownPlugVim2Linux4vim($HOME.'/.vim/autoload/plug.vim')
+function! Clone(url, dir)
+    if !executable("git")
+        echoerr "You have to install git first"
+        execute "q!"
     endif
-endfunction
 
-function! DownPlugVimIfNotExists()
-    if IsWin32()
-        call s:DownPlugVim2Windows()
-    elseif IsUnix() || IsWin32Unix() || IsMac()
-        call s:DownPlugVim2Linux()
+    if !isdirectory(expand(a:dir))
+        echo 'start to clone repository: '.a:url
+        execute printf("!git clone %s %s", a:url, a:dir)
     endif
 endfunction
