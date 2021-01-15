@@ -1,7 +1,10 @@
 source ~/.vim/utils.vim
 " call Reset()
-" Auto download vim-plug for the first time
-"call DownPlugVimIfNotExists()
+
+let s:dein_path = '~/.cache/dein'
+if !isdirectory(expand(s:dein_path.'/repos/github.com/Shougo/dein.vim'))
+    call Clone('https://github.com/Shougo/dein.vim', expand(s:dein_path.'/repos/github.com/Shougo/dein.vim'))
+endif
 
 function! s:basicVimConfig()
     source ~/.vim/basic/settings.vim
@@ -52,6 +55,7 @@ function! s:installVimAndConfig()
       call dein#save_state()
     endif
 
+    call s:autoDownPlugins()
     source ~/.vim/plugins_configuration.vim
 endfunction
 
@@ -69,6 +73,7 @@ function! s:installNvimAndConfig()
       call dein#save_state()
     endif
 
+    call s:autoDownPlugins()
     source ~/.vim/plugins_configuration.vim
     source ~/.vim/neovim/plugins_configuration.vim
 endfunction
@@ -98,15 +103,19 @@ function! s:install()
     endif
 endfunction
 
+function! s:autoDownPlugins()
+    if dein#check_install()
+        echom 'call dein#install() automatically'
+        call dein#install()
+    endif
+endfunction
+
 if &compatible
     set nocompatible
 endif
 
-
-let s:dein_path = '~/.vim/dein'
-
 " Add the dein installation directory into runtimepath
-let &runtimepath = &runtimepath.','.s:dein_path.'/repos/github.com/Shougo/dein.vim'
+let &runtimepath = printf('%s,%s/repos/github.com/Shougo/dein.vim',&runtimepath,s:dein_path)
 
 "let g:dein#auto_recache = 1
 let g:dein#install_log_filename = s:dein_path.'/log.txt'
@@ -115,14 +124,8 @@ call s:install()
 filetype plugin indent on
 syntax enable
 
-if !has('vim_starting') && dein#check_install()
-    call dein#install()
-endif
-
 autocmd VimEnter * call dein#call_hook('post_source')
 call dein#call_hook('source')
-
-
 
 " others
 " map <F5> :call CompileRun()<CR>

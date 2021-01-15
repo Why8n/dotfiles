@@ -15,6 +15,10 @@ if dein#tap('quick-scope')
     let g:qs_lazy_highlight = 1
 endif
 
+" ------------------
+" 'morhetz/gruvbox'
+" ------------------
+if dein#tap('gruvbox')
 " colorscheme settings must after plug#end(),cuz only when plug#end that plugins work
 "if has('gui_running')
     "colorscheme SolarizedDark
@@ -24,6 +28,7 @@ endif
     " colorscheme hybrid_reverse
     colorscheme gruvbox
 "endif
+endif
 
 
 "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
