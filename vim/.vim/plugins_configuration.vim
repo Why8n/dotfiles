@@ -1,5 +1,5 @@
 " -----------
-" Plug 'unblevable/quick-scope'
+" Plug 'unblevable/quick-scope' {{{
 " -------------
 if dein#tap('quick-scope')
     " this has to be set before colorscheme
@@ -14,9 +14,10 @@ if dein#tap('quick-scope')
     let g:qs_max_chars=1000
     let g:qs_lazy_highlight = 1
 endif
+" }}}
 
 " ------------------
-" 'morhetz/gruvbox'
+" 'morhetz/gruvbox' {{{
 " ------------------
 if dein#tap('gruvbox')
 " colorscheme settings must after plug#end(),cuz only when plug#end that plugins work
@@ -30,18 +31,18 @@ if dein#tap('gruvbox')
 "endif
 endif
 
-
 "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
 "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
 " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
 if (has("termguicolors"))
   set termguicolors
 endif 
+" }}}
 
 " ====== plugins configurations
-" -------------
+" ------------- {{{
 "  ctrlsf
-" -------------
+" ------------- 
 " if executable('ag')
 "     let g:ctrlsf_ackprg = 'ag'
 " endif
@@ -131,11 +132,11 @@ endif
 " " autocmd BufEnter * lcd %:p:h
 " nnoremap <Leader>nc :NERDTreeCWD<CR>
 " nnoremap <Leader>nt :NERDTreeToggle<CR>
+" }}}
 
+" -------------- 
+"  syntastic {{{
 " --------------
-"  syntastic
-" --------------
-
 if dein#tap('syntastic')
     " syntastic default config
     set statusline+=%#warningmsg#
@@ -148,9 +149,10 @@ if dein#tap('syntastic')
     let g:syntastic_check_on_wq = 0
     nnoremap <Leader>sy :SyntasticToggleMode<CR>
 endif
+" }}}
 
 " ---------------
-" nerdcommenter
+" nerdcommenter {{{
 " ---------------
 if dein#tap('nerdcommenter')
     " Add spaces after comment delimiters by default
@@ -178,9 +180,10 @@ if dein#tap('nerdcommenter')
         vmap <C-_> <Plug>NERDCommenterToggle
     endif
 endif
+" }}}
 
 " -----------------------
-" markdown-preview.nvim
+" markdown-preview.nvim {{{
 " -----------------------
 if dein#tap('markdown-preview.nvim')
     " set to 1, nvim will open the preview window after entering the markdown buffer
@@ -270,15 +273,17 @@ if dein#tap('markdown-preview.nvim')
 
     nmap <silent> <Leader>md <Plug>MarkdownPreview
 endif
+" }}}
 
 " -----------------
-" skanehira/preview-markdown.vim
+" skanehira/preview-markdown.vim {{{
 " -----------------
 let g:preview_markdown_vertical = 1
 let g:preview_markdown_parser = 'mdr'
+" }}}
 
 " -----------------
-" vim-table-mode
+" vim-table-mode {{{
 " -----------------
 if dein#tap('vim-table-mode')
     " 配置快捷键
@@ -301,10 +306,10 @@ if dein#tap('vim-table-mode')
               \ <SID>isAtStartOfLine('__') ?
               \ '<c-o>:silent! TableModeDisable<CR>' : '__'
 endif
-
+" }}}
 
 " ---------------------------
-" indentLine configuration
+" indentLine configuration {{{
 " ---------------------------
 if dein#tap('indentLine')
     " do not highlight conceal color(not background)
@@ -340,9 +345,10 @@ if dein#tap('indentLine')
     "let g:jedi#completion_command = ""
     "let g:jedi#show_call_signatures = "1"
 endif
+" }}}
 
 " ----------------
-" vim-pencil
+" vim-pencil {{{
 " ---------------- 
 " augroup pencil
 "   autocmd!
@@ -386,20 +392,21 @@ endif
 " let g:EclimCompletionMethod = 'omnifunc'
 " add support completions of python
 " let g:ycm_python_binary_path =g:python3_host_prog
-
+" }}}
 
 " -------------------
-"  delimitMate
+"  delimitMate {{{
 "  ------------------
 " inoremap {<CR> {<CR>}<C-o>O
 " Use this option to tell delimitMate which characters should be considered
 " matching pairs. Read |delimitMateAutoClose| for details.
 " let delimitMate_matchpairs = "(:),[:],{:}"
 " au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
-"
+"}}}
+
 "
 " -----------------------
-"  vim-signature
+"  vim-signature {{{
 " -----------------------
 "
 if dein#tap('vim-signature')
@@ -427,18 +434,20 @@ if dein#tap('vim-signature')
             \ 'ListBufferMarkers'  :  "m?"
             \ }
 endif
+" }}}
+
 " -----------------------
-"  marks-browers
+"  marks-browers {{{
 "  -----------------------
 if dein#tap('Marks-Browser')
     nmap <silent> <Leader>mb :MarksBrowser<CR>
     " the browser window close itself after you jump to a mark
     let marksCloseWhenSelected = 1
 endif
-
+" }}}
 
 " ----------------------
-" vim-multiple-cursor
+" vim-multiple-cursor {{{
 " ----------------------
 if dein#tap('vim-multiple-cursors')
     let g:multi_cursor_use_default_mapping=0
@@ -458,9 +467,10 @@ if dein#tap('vim-multiple-cursors')
     " fix <C-n> not working in gVIM
     set selection=inclusive
 endif
+" }}}
 
 " ---------------
-" limelight
+" limelight {{{
 " ---------------
 if dein#tap('limelight.vim')
     " Color name (:help cterm-colors) or ANSI code
@@ -487,9 +497,10 @@ if dein#tap('limelight.vim')
     "   Set it to -1 not to overrule hlsearch
     let g:limelight_priority = -1
 endif
+" }}}
 
 " ----------------
-" goyo.vim
+" goyo.vim {{{
 " ----------------
 if dein#tap('goyo.vim')
     let g:gyo_width=80
@@ -521,20 +532,20 @@ if dein#tap('goyo.vim')
     autocmd! User GoyoEnter nested call <SID>goyo_enter()
     autocmd! User GoyoLeave nested call <SID>goyo_leave()
 endif
-
+" }}}
 
 " ------------------
-" tagbar
+" tagbar {{{
 " ------------------
 if dein#tap('tagbar')
     " todo:: key mapinig conflict
     map <silent> <Leader>tb :TagbarOpenAutoClose<CR>
     let g:tagbar_ctags_bin = g:ctags_path
 endif
-
+" }}}
 
 " --------------------
-" undotree
+" undotree {{{
 " --------------------
 if dein#tap('undotree')
     nnoremap <Leader>ud :UndotreeToggle<CR>
@@ -544,10 +555,11 @@ if dein#tap('undotree')
     "     set undofile
     " endif
 endif
-"
-"
+" }}}
+
+
 " ------------------------
-" fzf
+" fzf  {{{
 " ------------------------
 if dein#tap('fzf.vim')
     let $FZF_DEFAULT_COMMAND="rg --files . --hidden -uuu --glob '!.git/**'"
@@ -621,15 +633,18 @@ if dein#tap('fzf.vim')
     "     echom 'set project directory: ' . a:path
     " endfunction
 endif
+" }}}
+
 " -------------------
-" tpope/vim-repeat
+" tpope/vim-repeat {{{
 " -------------------
 if dein#tap('vim-repeat')
     silent! call repeat#set("\<Plug>MarkdownPreview", v:count)
 endif
+" }}}
 
 " -------------------
-" coc.nvim
+" coc.nvim {{{
 " -------------------
 if dein#tap('coc.nvim')
     let g:coc_global_extensions = [
@@ -793,11 +808,11 @@ if dein#tap('coc.nvim')
     " List all presets
     " nnoremap <space>el :CocList explPresets
 endif
-
+" }}}
 
 " -------------------
-" vim.run
-" -------------------
+" vim.run  {{{
+" ------------------
 if dein#tap('vim-run')
     let g:vim_run_command_map = {
       \'javascript': 'node',
@@ -810,8 +825,10 @@ if dein#tap('vim-run')
     nnoremap <Leader>cmd :Run<CR>
     vnoremap <Leader>cmd :Run<CR>
 endif
+" }}}
+
 " -------------------
-" vim-http
+" vim-http {{{
 " -------------------
 if dein#tap('vim-http')
     " clean a request before sending it to curl
@@ -821,9 +838,10 @@ if dein#tap('vim-http')
     " response buffers overwriten
     let g:vim_http_tempbuffer = 1
 endif
+" }}}
 
 " -------------------
-" vim-prettier
+" vim-prettier {{{
 " -------------------
 if dein#tap('vim-prettier')
     " Disable auto formatting of files that have "@format" tag
@@ -843,16 +861,18 @@ if dein#tap('vim-prettier')
     nnoremap <Leader>pt :PrettierAsync<CR>
     vnoremap <Leader>pt :PrettierAsync<CR>
 endif
+" }}}
 
 " -------------------
-" 'schickling/vim-bufonly'
+" 'schickling/vim-bufonly' {{{
 " -------------------
 if dein#tap('vim-bufonly')
     nnoremap <Leader>bo :BufOnly<CR>
 endif
+" }}}
 
 " -------------------
-" vim-airline/vim-airline
+" vim-airline/vim-airline {{{
 " -------------------
 if dein#tap('vim-airline')
     " Enable the list of buffers
@@ -860,10 +880,11 @@ if dein#tap('vim-airline')
     " Show just the filename
     let g:airline#extensions#tabline#fnamemod = ':t'
 endif
+" }}}
 
 
 " -------------
-" Plug 'liuchengxu/vim-which-key'
+" Plug 'liuchengxu/vim-which-key' {{{
 " -------------
 if dein#tap('vim-which-key')
     " By default timeoutlen is 1000 ms
@@ -992,8 +1013,8 @@ if dein#tap('vim-which-key')
           \}
     let g:which_key_map.t = {
         \ 'name' : '+terminal'                             ,
-        \ ';' : [':FloatermNew --wintype=popup --height=6' , 'terminal'] ,
-        \ 'n' : [':FloatermNew'                            , 'new']      ,
+        \ ';' : [':FloatermNew --wintype=popup --height=6' , 'new small'] ,
+        \ 'n' : [':FloatermNew'                            , 'new normal']      ,
         \ 't' : [':FloatermToggle'                         , 'toggle']   ,
         \ 'k' : [':FloatermKill'                           , 'kill']     ,
         \ 'f' : [':FloatermNew fzf'                        , 'fzf']      ,
@@ -1048,8 +1069,10 @@ if dein#tap('vim-which-key')
     " ignore key <leader>1
     " let g:which_key_map.1 = 'which_key_ignore'
 endif
+" }}}
+
 " ----------------------------
-" Plug 'voldikss/vim-floaterm'
+" Plug 'voldikss/vim-floaterm' {{{
 " notice: by installing: `pip3 install neovim-remote`, `floaterm xxx` will open text file in current neovim instance
 " ----------------------------
 if dein#tap('vim-floaterm')
@@ -1082,9 +1105,10 @@ if dein#tap('vim-floaterm')
     " Set floating window border line color to cyan, and background to orange
     " hi FloatermBorder guibg=orange guifg=cyan
 endif
+" }}}
 
 " --------------------------
-" Plug 'airblade/vim-rooter'
+" Plug 'airblade/vim-rooter' {{{
 " --------------------------
 if dein#tap('vim-rooter')
     " project-root pattern( / represents for directory)
@@ -1102,18 +1126,20 @@ if dein#tap('vim-rooter')
     " When Rooter changes the working directory it emits the autocmd user event RooterChDir
     " autocmd User RooterChDir call s:setProjectDir(FindRootDirectory())
 endif
+" }}}
 
 " ------------------------
-" Plug 'godlygeek/tabular'
+" Plug 'godlygeek/tabular' {{{
 " ------------------------
 if dein#tap('tabular')
     nnoremap <Leader>tb :<C-u>Tabularize /
     vnoremap <Leader>tb :Tabularize /
 endif
+" }}}
 
 
 " =========================
-" Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets' {{{
 " =========================
 if dein#tap('vim-snippets')
     " Use <C-l> for trigger snippet expand.
@@ -1131,9 +1157,10 @@ if dein#tap('vim-snippets')
     " Use <C-j> for both expand and jump (make expand higher priority.)
     imap <C-j> <Plug>(coc-snippets-expand-jump)
 endif
+" }}}
 
 " ============================
-" Plug 'pechorin/any-jump.vim'
+" Plug 'pechorin/any-jump.vim' {{{
 " ============================
 if dein#tap('any-jump.vim')
     " Normal mode: Jump to definition under cursore
@@ -1214,10 +1241,11 @@ if dein#tap('any-jump.vim')
     " (default: false, search engine will ignore vcs untracked files)
     let g:any_jump_disable_vcs_ignore = 0
 endif
+" }}}
 
 
 " ------------------
-" tpope/vim-dispatch
+" tpope/vim-dispatch {{{
 " ------------------
 if dein#tap('vim-dispatch')
     " Foreground builds: :Make
@@ -1230,17 +1258,20 @@ if dein#tap('vim-dispatch')
     autocmd FileType python let b:dispatch = g:python3_host_prog.' %'
     autocmd FileType javascript let b:dispatch = 'node %'
 endif
+" }}}
+
 " ------------------
-" why8n/enhanceOPM
+" why8n/enhanceOPM {{{
 " ------------------
 if dein#tap('enhanceOPM')
     " for tob in ['()', '[]', '{}', '<>', '*', ',']
     "     call enhanceOPM#EOPM(tob)
     " endfor
 endif
+" }}}
 
 " ------------------
-" why8n/autopaste
+" why8n/autopaste {{{
 " ------------------
 if dein#tap('autopaste')
     nnoremap <silent> <C-v> :PasteInNormalMode +<CR>
@@ -1248,9 +1279,10 @@ if dein#tap('autopaste')
     vnoremap <silent> <C-v> :<C-u>PasteInVisualMode +<CR>
     cnoremap <C-v> <C-r>+
 endif
+" }}}
 
 " --------------------
-" frazrepo/vim-rainbow
+" frazrepo/vim-rainbow {{{
 " --------------------
 if dein#tap('vim-rainbow')
     let g:rainbow_active = 1
@@ -1264,6 +1296,4 @@ if dein#tap('vim-rainbow')
     let g:rainbow_guifgs = ['RoyalBlue3', 'DarkOrange3', 'DarkOrchid3', 'FireBrick']
     let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
 endif
-
-
-
+" }}}
