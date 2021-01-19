@@ -120,9 +120,9 @@ call dein#add('majutsushi/tagbar', { 'on_cmd': 'TagbarOpenAutoClose' })
 call dein#add('mbbill/undotree', {
             \'on_cmd': 'UndotreeToggle'
             \})
-" call dein#add('itchyny/vim-cursorword',{
-            " \'on_event': 'VimEnter'
-            " \})
+call dein#add('itchyny/vim-cursorword',{
+            \'on_event': 'VimEnter'
+            \})
 
 " ----------------
 " === language ===

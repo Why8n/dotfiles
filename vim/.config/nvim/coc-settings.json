@@ -65,7 +65,9 @@
     "java.import.gradle.wrapper.enabled": true,
     // check output: :CocCommand workspace.showOutput java
     "java.trace.server": "verbose",
-    // coc-hightlight
-    "coc.preferences.colorSupport": false
-
+    // coc-highlight
+    "coc.preferences.colorSupport": true,
+    "highlight.document.enable": true,
+    "highlight.colors.enable": true,
+    "highlight.colorNames.enable": true
 }

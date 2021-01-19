@@ -721,9 +721,8 @@ if dein#tap('coc.nvim')
     endfunction
 
     " coc-hightlight: Highlight symbol under cursor on CursorHold
-    autocmd CursorHold * silent call CocActionAsync('highlight')
-    hi default link CocHighlightText CocUnderline
-
+    " autocmd CursorHold * silent call CocActionAsync('highlight')
+    " hi default link CocHighlightText CocUnderline
 
     " Remap for rename current word
     nmap <Leader>rn <Plug>(coc-rename)
