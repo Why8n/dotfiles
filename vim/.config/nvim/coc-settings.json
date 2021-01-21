@@ -1,73 +1,102 @@
 {
-    // Enable preselect feature on neovim, default: `true`
-    "suggest.enablePreselect": true,
-    // Add preview option to `completeopt`, default: `false`
-    "suggest.enablePreview": false,
-    // completion automatically select the first completed
-    "suggest.noselect": false,
-    // "suggest.triggerAfterInsertEnter": true
-    "suggest.minTriggerInputLength": 2,
-    // trigger mode of auto completion: always(default),trigger,none
-    "suggest.autoTrigger": "always",
-    // support completion trigger on insert enter
-    "suggest.triggerAfterInsertEnter": true,
-    // Target to show hover information, default is floating window when possible.
-    "coc.preferences.hoverTarget": "preview",
-    // Auto close preview window on cursor move.,  default: `true`
-    "coc.preferences.previewAutoClose": false,
-    // disable automatic update,try :CocUpdate or :CocUpdateSync manually
-    //"coc.preferences.extensionUpdateCheck": "never",
-    "coc.preferences.enableFloatHighlight": true,
+  // Enable preselect feature on neovim, default: `true`
+  "suggest.enablePreselect": true,
+  // Add preview option to `completeopt`, default: `false`
+  "suggest.enablePreview": false,
+  // completion automatically select the first completed
+  "suggest.noselect": false,
+  // "suggest.triggerAfterInsertEnter": true
+  "suggest.minTriggerInputLength": 2,
+  // trigger mode of auto completion: always(default),trigger,none
+  "suggest.autoTrigger": "always",
+  // support completion trigger on insert enter
+  "suggest.triggerAfterInsertEnter": true,
+  // Target to show hover information, default is floating window when possible.
+  "coc.preferences.hoverTarget": "preview",
+  // Auto close preview window on cursor move.,  default: `true`
+  "coc.preferences.previewAutoClose": false,
+  // disable automatic update,try :CocUpdate or :CocUpdateSync manually
+  //"coc.preferences.extensionUpdateCheck": "never",
+  "coc.preferences.enableFloatHighlight": true,
 
-    // coc-explorer
-    "explorer.width": 30,
-    "explorer.floating.border.enable": true,
-    "explorer.previewAction.onHover": true,
-    "explorer.icon.enableNerdfont": true,
-    "explorer.quitOnOpen": true,
-    // "explorer.file.column.git.showIgnored": true,
-    "explorer.presets": {
-        ".vim": {
-            "root-uri": "~/.vim"
-        },
-        "floating": {
-            "position": "floating"
-        }
+  // coc-explorer
+  "explorer.width": 30,
+  "explorer.previewAction.onHover": "labeling",
+  "explorer.floating.border.enable": true,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.quitOnOpen": true,
+  // "explorer.file.column.git.showIgnored": true,
+  "explorer.presets": {
+    ".vim": {
+      "root-uri": "~/.vim"
     },
-    "explorer.keyMappings": {
-        "<cr>": ["expandable?", "expand", "open"],
-        "o": [
-            "expandable?","expandOrCollapse" , "open"
-        ],
-        "re": "expandRecursive",
-        "v": "open:vsplit",
-        "s": "open:split",
-        "t": "open:tab",
-        ".": "toggleHidden",
-        "R": "refresh",
-        "<tab>": "actionMenu"
-    },
-    // coc-prettier
-    // coc-java
-    "java.enabled": true,
-    "java.home": "/usr/lib/jvm/jdk-14.0.1/",
-    "java.configuration.maven.userSettings": "/opt/apache-maven-3.6.3/conf/settings.xml",
-    "java.referencesCodeLens.enabled": true,
-    "java.implementationsCodeLens.enabled": true,
-    "java.implementationsCodeLens.enabled": true,
-    "java.implementationsCodeLens.enabled": true,
-    "java.import.gradle.enabled": true,
-    "java.import.maven.enabled": true,
-    "java.autobuild.enabled": false,
-    "java.format.onType.enabled": true,
-    "java.completion.guessMethodArguments": true,
-    "java.completion.enabled": true,
-    "java.import.gradle.wrapper.enabled": true,
-    // check output: :CocCommand workspace.showOutput java
-    "java.trace.server": "verbose",
-    // coc-highlight
-    "coc.preferences.colorSupport": true,
-    "highlight.document.enable": true,
-    "highlight.colors.enable": true,
-    "highlight.colorNames.enable": true
+    "floating": {
+      "position": "floating"
+    }
+  },
+  "explorer.keyMappings.global": {
+    "i": false, // cancel default mapkey
+
+    "*": "toggleSelection",
+    "<tab>": "actionMenu",
+
+    "o": ["wait", "expanded?", "collapse", "expand"],
+    "<cr>": ["wait", "expandable?", "cd", "open"],
+
+    "e": "open",
+    "s": "open:split",
+    "S": "open:vsplit",
+    "t": "open:tab",
+    "<bs>": ["wait", "gotoParent"],
+
+    "gl": ["wait", "expand:recursive"],
+    "gh": ["wait", "collapse:recursive"],
+    "il": "preview:labeling",
+    "ic": "preview:content",
+
+    "yp": "copyFilepath",
+    "yn": "copyFilename",
+    "yy": "copyFile",
+    "dd": "cutFile",
+    "p": "pasteFile",
+    "df": "delete",
+    "dF": "deleteForever",
+
+    "a": "addFile",
+    "A": "addDirectory",
+    "r": "rename",
+
+    "g.": "toggleHidden",
+    "R": "refresh",
+    "q": "quit",
+
+    "f": "search",
+    "F": "searchRecursive",
+
+    "gf": "gotoSource:file",
+    "gb": "gotoSource:buffer"
+  },
+  // coc-prettier
+  // coc-java
+  "java.enabled": true,
+  "java.home": "/usr/lib/jvm/jdk-14.0.1/",
+  "java.configuration.maven.userSettings": "/opt/apache-maven-3.6.3/conf/settings.xml",
+  "java.referencesCodeLens.enabled": true,
+  "java.implementationsCodeLens.enabled": true,
+  "java.implementationsCodeLens.enabled": true,
+  "java.implementationsCodeLens.enabled": true,
+  "java.import.gradle.enabled": true,
+  "java.import.maven.enabled": true,
+  "java.autobuild.enabled": false,
+  "java.format.onType.enabled": true,
+  "java.completion.guessMethodArguments": true,
+  "java.completion.enabled": true,
+  "java.import.gradle.wrapper.enabled": true,
+  // check output: :CocCommand workspace.showOutput java
+  "java.trace.server": "verbose",
+  // coc-highlight
+  "coc.preferences.colorSupport": true,
+  "highlight.document.enable": true,
+  "highlight.colors.enable": true,
+  "highlight.colorNames.enable": true
 }
