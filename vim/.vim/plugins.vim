@@ -265,7 +265,9 @@ call dein#add('Why8n/autopaste', {
                 \]
             \})
 
-call dein#add('Why8n/enhanceOPM')
+call dein#add('Why8n/enhanceOPM', {
+            \'on_event': 'VimEnter',
+            \})
 " call dein#add('/mnt/e/code/vim/enhanceOPM')
 
 call dein#add('frazrepo/vim-rainbow', {
