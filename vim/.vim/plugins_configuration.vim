@@ -623,7 +623,7 @@ if dein#tap('fzf.vim')
       \           : fzf#vim#with_preview('right:50%:hidden', '?'),
       \   <bang>0)
     " nnoremap <silent> <C-n> :call fzf#vim#files(<SID>getProjectDir())<CR>
-    nnoremap <silent> <C-n> :call fzf#vim#files(FindRootDirectory())<CR>
+    nnoremap <silent> <C-n> :call fzf#vim#gitfiles(FindRootDirectory())<CR>
     " nnoremap <F2> :call <SID>setProjectDir(expand('%:p:h'))<CR>
     " function! s:getProjectDir()
     "     return get(g:,'project_path',expand('%:p:h'))
