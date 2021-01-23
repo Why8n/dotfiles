@@ -17,7 +17,9 @@ call dein#add('easymotion/vim-easymotion', {
         \'<Leader><Leader>T',
         \]}
 	\})
-call dein#add('unblevable/quick-scope')
+call dein#add('unblevable/quick-scope', {
+            \'on_map': {'n' : ['f','F','t','T']}
+            \})
 
 call dein#add('vim-syntastic/syntastic', {
             \'on_cmd':'SyntasticToggleMode'
@@ -108,7 +110,10 @@ call dein#add('skanehira/preview-markdown.vim', {
 " -----------------
 " === Bookmarks ===
 " -----------------
-call dein#add('kshenoy/vim-signature')
+" showing marks on left side, plus handle marks
+call dein#add('kshenoy/vim-signature', {
+            \'on_event': 'VimEnter',
+            \})
 call dein#add('vim-scripts/Marks-Browser',{
             \'on_cmd': 'MarksBrowser'
             \})
@@ -138,9 +143,11 @@ call dein#add('chemzqm/vim-run', {'on_cmd': 'Run'})
 " frontend
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 " Plug 'elzr/vim-json'
-call dein#add('hail2u/vim-css3-syntax')
+call dein#add('hail2u/vim-css3-syntax', {
+	         \ 'on_ft': ['css']
+            \})
 " color preview
-call dein#add('gko/vim-coloresque')
+" call dein#add('gko/vim-coloresque')
 " Plug 'pangloss/vim-javascript', { 'on_ft' :['javascript', 'vim-plug'] }
 call dein#add('mattn/emmet-vim', {
             \ 'if': v:version >= 700,
@@ -149,10 +156,14 @@ call dein#add('mattn/emmet-vim', {
 call dein#add('posva/vim-vue')
 
 " Python
-call dein#add('vim-scripts/indentpython.vim')
+call dein#add('vim-scripts/indentpython.vim', {
+            \'on_ft': ['python']
+            \})
 
 " Android
-call dein#add('udalov/kotlin-vim')
+call dein#add('udalov/kotlin-vim', {
+            \'on_ft': ['kotlin']
+            \})
 
 " http
 call dein#add('nicwest/vim-http', {'on_cmd': ['Http','Http!']})
@@ -207,8 +218,12 @@ call dein#add('voldikss/vim-floaterm',{
                 \'FloatermKill',
                 \'FloatermSend']
             \})
-call dein#add('airblade/vim-rooter')
-call dein#add('honza/vim-snippets')
+call dein#add('airblade/vim-rooter', {
+            \'on_event': 'VimEnter',
+            \})
+call dein#add('honza/vim-snippets', {
+            \'on_event': 'VimEnter',
+            \})
 " call dein#add('wellle/targets.vim')
 " show definiations & references
 call dein#add('pechorin/any-jump.vim' ,{
@@ -244,7 +259,9 @@ call dein#add('tpope/vim-dispatch', {
             \})
 
 " show git diff in the sign column
-call dein#add('airblade/vim-gitgutter')
+call dein#add('airblade/vim-gitgutter', {
+            \'on_event': 'VimEnter',
+            \})
 
 " set paste automatically when in insert mode
 " call dein#add('roxma/vim-paste-easy', {
