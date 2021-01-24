@@ -44,10 +44,10 @@ call dein#add('jiangmiao/auto-pairs', {
             \'lazy': 1,
             \'on_event': 'InsertEnter'
             \})
-call dein#add('terryma/vim-multiple-cursors', { 
-            \'on_map' : { 
-                \'n' : ['<C-n>', '<C-p>'], 'x' : '<C-n>'}
-            \}) 
+" call dein#add('terryma/vim-multiple-cursors', {
+            " \'on_map' : {
+                " \'n' : ['<C-n>', '<C-p>'], 'x' : '<C-n>'}
+            " \})
 " 缩进指示线
 call dein#add('Yggdroot/indentLine',{
             \'on_event': 'VimEnter',

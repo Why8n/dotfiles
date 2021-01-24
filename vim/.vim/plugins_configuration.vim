@@ -449,24 +449,24 @@ endif
 " ----------------------
 " vim-multiple-cursor {{{
 " ----------------------
-if dein#tap('vim-multiple-cursors')
-    let g:multi_cursor_use_default_mapping=0
-    " Default mapping
-    let g:multi_cursor_start_word_key      = '<C-m>'
-    let g:multi_cursor_select_all_word_key = '<A-m>'
-    let g:multi_cursor_start_key           = 'g<C-m>'
-    let g:multi_cursor_select_all_key      = 'g<A-m>'
-    let g:multi_cursor_next_key            = '<C-m>'
-    let g:multi_cursor_prev_key            = '<C-p>'
-    let g:multi_cursor_skip_key            = '<C-x>'
-    let g:multi_cursor_quit_key            = '<Esc>'
-    " fix <A-n> not working in VIM,but works in gVIM
-    if !has('gui_running')
-        map "in Insert mode, type Ctrl+v Alt+n here" <A-n>
-    endif
-    " fix <C-n> not working in gVIM
-    set selection=inclusive
-endif
+" if dein#tap('vim-multiple-cursors')
+"     let g:multi_cursor_use_default_mapping=0
+"     " Default mapping
+"     let g:multi_cursor_start_word_key      = '<C-m>'
+"     let g:multi_cursor_select_all_word_key = '<A-m>'
+"     let g:multi_cursor_start_key           = 'g<C-m>'
+"     let g:multi_cursor_select_all_key      = 'g<A-m>'
+"     let g:multi_cursor_next_key            = '<C-m>'
+"     let g:multi_cursor_prev_key            = '<C-p>'
+"     let g:multi_cursor_skip_key            = '<C-x>'
+"     let g:multi_cursor_quit_key            = '<Esc>'
+"     " fix <A-n> not working in VIM,but works in gVIM
+"     if !has('gui_running')
+"         map "in Insert mode, type Ctrl+v Alt+n here" <A-n>
+"     endif
+"     " fix <C-n> not working in gVIM
+"     set selection=inclusive
+" endif
 " }}}
 
 " ---------------
@@ -815,7 +815,15 @@ if dein#tap('coc.nvim')
 
     " List all presets
     " nnoremap <space>el :CocList explPresets
-endif
+
+    " -------------------
+    "iamcco/coc-vimlsp 
+    " -------------------
+    let g:markdown_fenced_languages = [
+          \ 'vim',
+          \ 'help'
+          \]
+    endif
 " }}}
 
 " -------------------
