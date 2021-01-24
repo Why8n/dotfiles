@@ -10,4 +10,12 @@
 .config/nvim/*
 # but not ignore spec file under nvim
 !.config/nvim/coc-settings.json
+!.vim/
+.vim/*
+!.vim/lib/
+.vim/lib/*
+!.vim/lib/java
+.vim/lib/java/*
+!.vim/lib/java/*.tar.gz
+
 

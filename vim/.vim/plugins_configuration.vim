@@ -763,13 +763,20 @@ if dein#tap('coc.nvim')
     " use `:OR` for organize import of current buffer
     command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
+    " Formatting selected code.
+    xnoremap <silent> <leader>fm :call CocAction('formatSelected', visualmode())<CR>
+    nnoremap <silent> <leader>fm :call CocAction('format')<CR>
+
     " -------------------
     " coc-prettier
     " -------------------
     command! -nargs=0 Prettier :CocCommand prettier.formatFile
     " Remap for format selected region
-    nnoremap <Leader>fm  :CocCommand prettier.formatFile<CR>
-    vnoremap <Leader>fm  <Plug>(coc-format-selected)
+    augroup prettierformat
+    autocmd!
+    autocmd FileType javascript,typescript,css nnoremap <silent> <Leader>fm  :CocCommand prettier.formatFile<CR>
+    autocmd FileType javascript,typescript,css xnoremap <silent> <Leader>fm  <Plug>(coc-format-selected)
+    augroup END
 
     " Add status line support, for integration with other plugin, checkout `:h coc-status`
     set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}

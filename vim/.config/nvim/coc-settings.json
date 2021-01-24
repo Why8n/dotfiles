@@ -81,6 +81,7 @@
   "java.enabled": true,
   "java.home": "/usr/lib/jvm/jdk-14.0.1/",
   "java.configuration.maven.userSettings": "/opt/apache-maven-3.6.3/conf/settings.xml",
+  "java.jdt.ls.home": "/home/whyn/.vim/lib/java/che-jdt-language-server-latest",
   "java.referencesCodeLens.enabled": true,
   "java.implementationsCodeLens.enabled": true,
   "java.implementationsCodeLens.enabled": true,
@@ -88,6 +89,9 @@
   "java.import.gradle.enabled": true,
   "java.import.maven.enabled": true,
   "java.autobuild.enabled": false,
+  "java.format.enabled": true,
+  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+  "java.format.comments.enabled": true,
   "java.format.onType.enabled": true,
   "java.completion.guessMethodArguments": true,
   "java.completion.enabled": true,
@@ -98,5 +102,6 @@
   "coc.preferences.colorSupport": true,
   "highlight.document.enable": true,
   "highlight.colors.enable": true,
-  "highlight.colorNames.enable": true
+  "highlight.colorNames.enable": true,
+  "java.errors.incompleteClasspath.severity": "ignore"
 }
