@@ -547,14 +547,14 @@ endif
 " --------------------
 " undotree {{{
 " --------------------
-if dein#tap('undotree')
-    nnoremap <Leader>ud :UndotreeToggle<CR>
-    " 持久化历史记录
-    " if has("persistent_undo")
-    "     set undodir=$HOME."/.undodir"
-    "     set undofile
-    " endif
-endif
+" if dein#tap('undotree')
+"     nnoremap <Leader>ud :UndotreeToggle<CR>
+"     " 持久化历史记录
+"     " if has("persistent_undo")
+"     "     set undodir=$HOME."/.undodir"
+"     "     set undofile
+"     " endif
+" endif
 " }}}
 
 
@@ -647,6 +647,8 @@ endif
 " coc.nvim {{{
 " -------------------
 if dein#tap('coc.nvim')
+    " #1775: fix cursor getting thin when run CocList
+    let g:coc_disable_transparent_cursor = 1
     let g:coc_global_extensions = [
                 \ 'coc-tsserver','coc-html','coc-css','coc-vetur',
                 \ 'coc-java','coc-python','coc-flutter','coc-vimlsp',
@@ -1012,20 +1014,19 @@ if dein#tap('vim-which-key')
     let g:which_key_map.a = {
           \ 'name' : '+action'                 ,
           \ 'l'    : ['CocList'                , 'coc-list']              ,
-          \ 'i'    : [':PlugInstall'           , 'PlugInsall']            ,
-          \ 'u'    : [':PlugUpdate'            , 'PlugUpdate']            ,
+          \ 'u'    : ['UndotreeToggle'         , 'undo tree']             ,
           \ 'c'    : ['set concealcursor = ""' , 'disable concealcursor'] ,
-          \ 'd'    : [':windo diffthis'    , 'vimdiff (diffthis)']            ,
+          \ 'd'    : [':windo diffthis'        , 'vimdiff (diffthis)']    ,
           \}
     let g:which_key_map.t = {
         \ 'name' : '+terminal'                             ,
-        \ ';' : [':FloatermNew --wintype=popup --height=6' , 'new small'] ,
-        \ 'n' : [':FloatermNew'                            , 'new normal']      ,
-        \ 't' : [':FloatermToggle'                         , 'toggle']   ,
-        \ 'k' : [':FloatermKill'                           , 'kill']     ,
-        \ 'f' : [':FloatermNew fzf'                        , 'fzf']      ,
-        \ 'p' : [':FloatermNew python'                     , 'python']   ,
-        \ 'r' : [':FloatermNew ranger'                     , 'ranger']   ,
+        \ ';' : [':FloatermNew --wintype=popup --height=6' , 'new small']  ,
+        \ 'n' : [':FloatermNew'                            , 'new normal'] ,
+        \ 't' : [':FloatermToggle'                         , 'toggle']     ,
+        \ 'k' : [':FloatermKill'                           , 'kill']       ,
+        \ 'f' : [':FloatermNew fzf'                        , 'fzf']        ,
+        \ 'p' : [':FloatermNew python'                     , 'python']     ,
+        \ 'r' : [':FloatermNew ranger'                     , 'ranger']     ,
         \ }
     " l is for language server protocol
     let g:which_key_map.l = {
@@ -1065,6 +1066,7 @@ if dein#tap('vim-which-key')
           \ 'z' : [':CocDisable'                         , 'disable CoC'],
           \ 'Z' : [':CocEnable'                          , 'enable CoC'],
           \ }
+
     " floating window
     let g:which_key_use_floating_win = 0
     " Change the colors if you want
