@@ -20,15 +20,8 @@ endif
 " 'morhetz/gruvbox' {{{
 " ------------------
 if dein#tap('gruvbox')
-" colorscheme settings must after plug#end(),cuz only when plug#end that plugins work
-"if has('gui_running')
-    "colorscheme SolarizedDark
-"else
-    " colorscheme zenburn
     set background=dark
-    " colorscheme hybrid_reverse
     colorscheme gruvbox
-"endif
 endif
 
 "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
@@ -40,100 +33,6 @@ endif
 " }}}
 
 " ====== plugins configurations
-" ------------- {{{
-"  ctrlsf
-" ------------- 
-" if executable('ag')
-"     let g:ctrlsf_ackprg = 'ag'
-" endif
-" let g:ctrlsf_case_sensitive = 'smart'
-" let g:ctrlsf_default_root = 'project'
-" let g:ctrlsf_default_view_mode = 'normal'
-" let g:ctrlsf_position = 'left'
-" let g:ctrlsf_winsize = '30%'
-"
-" nmap <C-f> :CtrlSF <C-r><C-w>
-" imap <C-f> <ESC>:CtrlSF<Space>
-" " visiual and select mode
-" vmap <C-f> "1y:CtrlSF<Space><C-R>1<CR>
-" " visiual mode
-" " xnoremap <C-f> :CtrlSF<Space>
-" " command line mode
-" cmap <C-f> CtrlSF<Space>
-"
-
-
-" ------------
-" ctrlp
-" ------------
-"let g:ctrlp_map = '<c-p>'
-"let g:ctrlp_cmd = 'CtrlP'
-"" set local working directory:current file
-"let g:ctrlp_working_path_mode = 'ra'
-"let g:ctrlp_max_files=0
-"let g:ctrlp_max_depth=40
-"" exclusions
-"set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-"set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-"let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-"let g:ctrlp_custom_ignore = {
-            "\ 'dir':  '\v[\/]\.(git|hg|svn)$',
-            "\ 'file': '\v\.(exe|so|dll)$',
-            "\ }
-"" let g:ctrlp_user_command = ['.git/', 'git ls-files --cached --others  --exclude-standard %s']
-"" Use a custom file listing command:
-"" The Silver Searcher
-"if executable('ag')
-    "" Use ag over grep
-    "let g:ctrlp_user_command = ['ag','ag %s -i --nocolor --nogroup --hidden
-                "\ --ignore .git
-                "\ --ignore .svn
-                "\ --ignore .hg
-                "\ --ignore .DS_Store
-                "\ --ignore "**/*.pyc"
-                "\ -g ""' ]
-"elseif IsUnix() || IsMac()
-    "let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
-"elseif IsWin32()
-    "let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
-"endif
-"
-" ------------
-" nerdtree
-" ------------
-" let NERDTreeWinPos='left'
-" let NERDTreeWinSize=30
-" " 当不带参数打开Vim时自动加载项目树 -- no
-" autocmd StdinReadPre * let s:std_in=1
-" " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" " 当所有文件关闭时关闭项目树窗格
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-" "ignore files in NERDTree
-" let NERDTreeIgnore=['\.pyc$', '\~$', 'node_modules','\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-" " 不显示项目树上额外的信息，例如帮助、提示什么的
-" let NERDTreeMinimalUI=1
-" "Refresh both CtrlP and NERDTree
-" " nmap <Leader>r :NERDTreeFocus<CR>R<c-w><c-p>:CtrlPClearCache<CR>
-"
-" " returns true iff is NERDTree open/active
-" " function! s:isNTOpen()
-" "     return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-" " endfunction
-" "
-" " " switch to current file directory
-" " function! SyncTree()
-" "     if s:isNTOpen()
-" "         NERDTreeClose
-" "     else
-" "         NERDTreeCWD
-" "     endif
-" " endfunction
-"
-" " autocmd BufEnter * lcd %:p:h
-" nnoremap <Leader>nc :NERDTreeCWD<CR>
-" nnoremap <Leader>nt :NERDTreeToggle<CR>
-" }}}
-
 " -------------- 
 "  syntastic {{{
 " --------------
@@ -333,78 +232,9 @@ if dein#tap('indentLine')
     " change conceal behaviour
     let g:indentLine_concealcursor = ''
     let g:indentLine_conceallevel = 2
-
-    " -------------
-    " jedi-vim
-    " -------------
-    "let g:jedi#auto_initialization = 1
-    ""let g:jedi#completion_enabled = 0
-    ""let g:jedi#auto_vim_configuration = 0
-    ""let g:jedi#smart_auto_mapping = 0
-    "let g:jedi#popup_on_dot = 1
-    "let g:jedi#completion_command = ""
-    "let g:jedi#show_call_signatures = "1"
 endif
 " }}}
 
-" ----------------
-" vim-pencil {{{
-" ---------------- 
-" augroup pencil
-"   autocmd!
-"   autocmd FileType markdown,mkd,md call pencil#init()
-"   autocmd FileType text         call pencil#init()
-" augroup END
-" let g:airline_section_x = '%{PencilMode()}'
-"
-"----------------------------
-"YouCompleteMe
-"----------------------------
-"let g:ycm_key_invoke_completion = '<M-/>' "default <C-Space>,modify to alt+/
-"" 自动补全配置
-"set completeopt=longest,menu " "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-"autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
-"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
-"
-""youcompleteme  默认tab  s-tab 和自动补全冲突
-"let g:ycm_key_list_select_completion=['<c-n>']
-"let g:ycm_key_list_select_completion = ['<Down>']
-"let g:ycm_key_list_previous_completion=['<c-p>']
-"let g:ycm_key_list_previous_completion = ['<Up>']
-"let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
-"
-"let g:ycm_min_num_of_chars_for_completion = 1
-""在注释输入中也能补全
-"let g:ycm_complete_in_comments = 1
-""在字符串输入中也能补全
-"let g:ycm_complete_in_strings = 1
-""注释和字符串中的文字也会被收入补全
-"let g:ycm_collect_identifiers_from_comments_and_strings = 0
-"" 让YouCompleteMe同时利用原来的ctags
-"let g:ycm_collect_identifiers_from_tag_files = 1  
-"let g:clang_user_options='|| exit 0'
-"nnoremap <Leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> " 跳转到定义处
-
-" let g:ycm_server_python_interpreter=g:python3_host_prog
-" let g:ycm_global_ycm_extra_conf= g:ycm_extra_conf
-
-" add support completions of java
-" let g:EclimCompletionMethod = 'omnifunc'
-" add support completions of python
-" let g:ycm_python_binary_path =g:python3_host_prog
-" }}}
-
-" -------------------
-"  delimitMate {{{
-"  ------------------
-" inoremap {<CR> {<CR>}<C-o>O
-" Use this option to tell delimitMate which characters should be considered
-" matching pairs. Read |delimitMateAutoClose| for details.
-" let delimitMate_matchpairs = "(:),[:],{:}"
-" au FileType vim,html let b:delimitMate_matchpairs = "(:),[:],{:},<:>"
-"}}}
-
-"
 " -----------------------
 "  vim-signature {{{
 " -----------------------
@@ -444,29 +274,6 @@ if dein#tap('Marks-Browser')
     " the browser window close itself after you jump to a mark
     let marksCloseWhenSelected = 1
 endif
-" }}}
-
-" ----------------------
-" vim-multiple-cursor {{{
-" ----------------------
-" if dein#tap('vim-multiple-cursors')
-"     let g:multi_cursor_use_default_mapping=0
-"     " Default mapping
-"     let g:multi_cursor_start_word_key      = '<C-m>'
-"     let g:multi_cursor_select_all_word_key = '<A-m>'
-"     let g:multi_cursor_start_key           = 'g<C-m>'
-"     let g:multi_cursor_select_all_key      = 'g<A-m>'
-"     let g:multi_cursor_next_key            = '<C-m>'
-"     let g:multi_cursor_prev_key            = '<C-p>'
-"     let g:multi_cursor_skip_key            = '<C-x>'
-"     let g:multi_cursor_quit_key            = '<Esc>'
-"     " fix <A-n> not working in VIM,but works in gVIM
-"     if !has('gui_running')
-"         map "in Insert mode, type Ctrl+v Alt+n here" <A-n>
-"     endif
-"     " fix <C-n> not working in gVIM
-"     set selection=inclusive
-" endif
 " }}}
 
 " ---------------
@@ -624,14 +431,6 @@ if dein#tap('fzf.vim')
       \   <bang>0)
     " nnoremap <silent> <C-n> :call fzf#vim#files(<SID>getProjectDir())<CR>
     nnoremap <silent> <C-n> :call fzf#vim#gitfiles(FindRootDirectory())<CR>
-    " nnoremap <F2> :call <SID>setProjectDir(expand('%:p:h'))<CR>
-    " function! s:getProjectDir()
-    "     return get(g:,'project_path',expand('%:p:h'))
-    " endfunction
-    " function! s:setProjectDir(path)
-    "     let g:project_path = a:path
-    "     echom 'set project directory: ' . a:path
-    " endfunction
 endif
 " }}}
 
@@ -722,10 +521,6 @@ if dein#tap('coc.nvim')
       endif
     endfunction
 
-    " coc-hightlight: Highlight symbol under cursor on CursorHold
-    " autocmd CursorHold * silent call CocActionAsync('highlight')
-    " hi default link CocHighlightText CocUnderline
-
     " Remap for rename current word
     nmap <Leader>rn <Plug>(coc-rename)
 
@@ -783,14 +578,6 @@ if dein#tap('coc.nvim')
     " Add status line support, for integration with other plugin, checkout `:h coc-status`
     set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-    " Using CocList
-    " Show all diagnostics
-    " nnoremap <silent> <space>a  :<C-u>CocList diagnostics<CR>
-    " Manage extensions
-    " nnoremap <silent> <space>e  :<C-u>CocList extensions<CR>
-    " Show commands
-    " nnoremap <silent> <space>c  :<C-u>CocList commands<CR>
-    " Find symbol of current document
     nnoremap <silent> <space>o  :<C-u>CocList outline<CR>
     " Search workspace symbols
     nnoremap <silent> <space>s  :<C-u>CocList -I symbols<CR>
@@ -973,7 +760,7 @@ if dein#tap('vim-which-key')
           \ 'w' : [':w'               , 'buffer save']                 ,
           \ 's' : [':w !sudo tee %'   , 'buffer save in readonly']     ,
           \ 'q':  [':q'               , 'exit buffer']                 ,
-          \ 'e' : [':q!'              , 'discard buffer']              ,
+          \ 'Q' : [':q!'              , 'discard buffer']              ,
           \ 'o' : {
             \ 'name': '+open/only...' ,
             \ '?' : ['Buffers'        , 'fzf-buffer']                  ,
@@ -1023,7 +810,11 @@ if dein#tap('vim-which-key')
           \ 'name' : '+action'                 ,
           \ 'l'    : ['CocList'                , 'coc-list']              ,
           \ 'u'    : ['UndotreeToggle'         , 'undo tree']             ,
-          \ 'c'    : ['set concealcursor = ""' , 'disable concealcursor'] ,
+          \ 'c'    : {
+              \'name': '+cursor'               ,
+              \'c' : ['set concealcursor = ""' , 'disable concealcursor'] ,
+              \'n' : [':set cursorcolumn!'     , 'toggle cursor column']  ,
+              \},
           \ 'd'    : [':windo diffthis'        , 'vimdiff (diffthis)']    ,
           \}
     let g:which_key_map.t = {

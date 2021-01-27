@@ -1,8 +1,3 @@
-" Plug 'dyng/ctrlsf.vim'
-" way too slow on huge files
-" Plug 'ctrlpvim/ctrlp.vim', {'on':'CtrlP'} 
-" Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggld','NERDTreeCWD'] }
-" Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':['NERDTreeToggle','NERDTreeCWD'] }
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
 call dein#add('easymotion/vim-easymotion', {
@@ -39,15 +34,6 @@ call dein#add('scrooloose/nerdcommenter', {
                 \'<Leader>cu',
                 \'<Leader>c<Space>']
             \})
-" Plug 'Raimondi/delimitMate'
-call dein#add('jiangmiao/auto-pairs', {
-            \'lazy': 1,
-            \'on_event': 'InsertEnter'
-            \})
-" call dein#add('terryma/vim-multiple-cursors', {
-            " \'on_map' : {
-                " \'n' : ['<C-n>', '<C-p>'], 'x' : '<C-n>'}
-            " \})
 " 缩进指示线
 call dein#add('Yggdroot/indentLine',{
             \'on_event': 'VimEnter',
@@ -87,11 +73,6 @@ call dein#add('schickling/vim-bufonly', {
             \'on_cmd': ['Bufonly','Bonly','BOnly']
             \})
 
-" --------------------------
-"=== switch input method ===
-" --------------------------
-" Plug 'https://github.com/vim-scripts/fcitx.vim.git'
-" Plug 'ybian/smartim'
 
 " ----------------
 " === markdown ===
@@ -135,10 +116,6 @@ call dein#add('itchyny/vim-cursorword',{
 " completion
 call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release', 'trusted': 1})
 call dein#add('chemzqm/vim-run', {'on_cmd': 'Run'})
-"Plug 'Valloric/YouCompleteMe'
-" autocomlete by AI
-" Plug 'zxqfl/tabnine-vim', { 'on_ft': ['go','java', 'php', 'html', 'javascript', 'css', 'less','scss','cpp','c','javascript','kotlin','python','dart'] }
-" Plug 'davidhalter/jedi-vim'
 
 " frontend
 " HTML, CSS, JavaScript, PHP, JSON, etc.
@@ -224,7 +201,6 @@ call dein#add('airblade/vim-rooter', {
 call dein#add('honza/vim-snippets', {
             \'on_event': 'VimEnter',
             \})
-" call dein#add('wellle/targets.vim')
 " show definiations & references
 call dein#add('pechorin/any-jump.vim' ,{
             \'on_cmd':[ 
@@ -262,16 +238,6 @@ call dein#add('tpope/vim-dispatch', {
 call dein#add('airblade/vim-gitgutter', {
             \'on_event': 'VimEnter',
             \})
-
-" set paste automatically when in insert mode
-" call dein#add('roxma/vim-paste-easy', {
-"             \'lazy': 1,
-"             \'on_event': ['InsertCharPre','InsertLeave']
-"             \})
-
-" call dein#add('gcmt/wildfire.vim', {
-"             \'on_map': {'n' : ['<Enter>']}
-"             \})
 
 " call dein#add('/mnt/e/code/vim/autopaste', {
 call dein#add('Why8n/autopaste', {
