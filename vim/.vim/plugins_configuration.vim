@@ -453,7 +453,6 @@ if dein#tap('coc.nvim')
                 \ 'coc-java','coc-python','coc-flutter','coc-vimlsp',
                 \ 'coc-emmet','coc-snippets','coc-xml','coc-yaml',
                 \ 'coc-highlight',
-                \ 'coc-pairs',
                 \ 'coc-explorer',
                 \ 'coc-json',
                 \ 'coc-prettier',
