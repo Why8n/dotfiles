@@ -141,3 +141,7 @@ autocmd FileType c,cpp,java,javascript nnoremap <S-CR> <ESC>A;<CR>
 autocmd FileType c,cpp,java,javascript inoremap <S-CR> <ESC>A;<CR>
 autocmd FileType c,cpp,java,javascript nnoremap <Leader>; mpA;<ESC>`p
 
+" Map Ctrl-Backspace to delete the previous word in insert mode.
+noremap! <C-BS> <C-w>
+noremap! <C-h> <C-w>
+inoremap <C-BS> <C-W>
