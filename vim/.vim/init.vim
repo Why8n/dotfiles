@@ -80,7 +80,7 @@ endfunction
 
 function! s:install()
     " os config
-    if IsWin32() 
+    if IsWin() 
         if has('nvim')
             call s:basicNvimConfig()
             call s:basicNvimConfig4Win()

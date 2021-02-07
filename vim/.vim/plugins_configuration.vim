@@ -1103,3 +1103,12 @@ if dein#tap('vim-rainbow')
     let g:rainbow_ctermfgs = ['lightblue', 'lightgreen', 'yellow', 'red', 'magenta']
 endif
 " }}}
+
+
+" -----------------------------
+" vscode plugins configuration{{{
+" -----------------------------
+if exists('g:vscode')
+    let vscodePath = '~/.vim/vscode'
+    execute printf('source %s/plugins_configuration.vim', vscodePath)
+endif

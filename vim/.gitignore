@@ -18,4 +18,6 @@
 .vim/lib/java/*
 !.vim/lib/java/*.tar.gz
 
+!vscode
+
 
