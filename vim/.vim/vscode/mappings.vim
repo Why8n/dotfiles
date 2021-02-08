@@ -13,12 +13,6 @@ nnoremap <expr> <Leader>gf VSCodeNotify('workbench.action.navigateForward')
 
 nnoremap gr <Cmd>call VSCodeNotify('editor.action.goToReferences')<CR>
 
-" copy & paste
-xnoremap <expr> <C-c> <SID>rangeExitSelection('editor.action.clipboardCopyAction')()
-nnoremap <expr> <C-c> <SID>rangeExitSelection('editor.action.clipboardCopyAction')() . '_'
-nnoremap <C-v> :call VSCodeNotify('editor.action.clipboardPasteAction')<CR>
-nnoremap <C-x> :call VSCodeNotify('editor.action.clipboardCutAction')<CR>
-
 " windows 
 nnoremap <Leader>q :call VSCodeNotify('workbench.action.closeActiveEditor')<CR>
 nnoremap <Leader>w :call VSCodeNotify('workbench.action.files.save')<CR>
@@ -45,17 +39,19 @@ nnoremap <expr> <Leader>c<Space> <SID>rangeExitSelection('editor.action.commentL
 " whichkey
 " ----------
 nnoremap <silent> \ :call VSCodeNotify('whichkey.show')<CR>
-xnoremap <silent> \ :<C-u>call <SID>range('whichkey.show')<CR>
+xnoremap <silent> \ :<C-U>call <SID>range('whichkey.show')<CR>
 
 function! s:range(cmd, ...) abort
     let selection = get(a:, 1, 0)
     normal! gv
     let visualmode = visualmode()
     if visualmode == "V"
+        echom 'capitcal V'
         let startLine = line("v")
         let endLine = line(".")
         call VSCodeNotifyRange(a:cmd, startLine, endLine, selection)
     else
+        echom 'small V'
         let startPos = getpos("v")
         let endPos = getpos(".")
         call VSCodeNotifyRangePos(a:cmd, startPos[1], endPos[1], startPos[2], endPos[2], selection)

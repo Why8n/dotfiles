@@ -8,7 +8,7 @@ vimfiles/*
 !vs2017
 !Surfingkeys
 !StrokesPlus
-!vscode/settings.json
+!vscode
 !ReadMe.md
 .netrwhist
 temp

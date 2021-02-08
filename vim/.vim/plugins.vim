@@ -13,6 +13,14 @@ call dein#add('Why8n/enhanceOPM', {
             \'on_event': 'VimEnter',
             \})
 " call dein#add('/mnt/e/code/vim/enhanceOPM')
+" call dein#add('/mnt/e/code/vim/autopaste', {
+call dein#add('Why8n/autopaste', {
+            \'on_cmd': [
+                \'PasteInNormalMode',
+                \'PasteInInsertMode',
+                \'PasteInVisualMode'
+                \]
+            \})
 
 if exists('g:vscode')
     let vscodePath = '~/.vim/vscode'
@@ -257,15 +265,6 @@ else
     " show git diff in the sign column
     call dein#add('airblade/vim-gitgutter', {
                 \'on_event': 'VimEnter',
-                \})
-
-    " call dein#add('/mnt/e/code/vim/autopaste', {
-    call dein#add('Why8n/autopaste', {
-                \'on_cmd': [
-                    \'PasteInNormalMode',
-                    \'PasteInInsertMode',
-                    \'PasteInVisualMode'
-                    \]
                 \})
 
     call dein#add('frazrepo/vim-rainbow', {
