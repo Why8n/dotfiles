@@ -27,8 +27,8 @@ function! SourceDir(path)
     endfor
 endfunction
 
-function! IsWin32()
-    return has('win32')
+function! IsWin()
+    return has('win32') || has('win64')
 endfunction
 
 function! IsWin32Unix()
@@ -52,7 +52,7 @@ func! CompileRun()
     elseif &filetype == 'java'
         exec "!javac % && java %<"
     elseif &filetype == 'kotlin'
-        if IsWin32()
+        if IsWin()
             exec "!kotlinc % -include-runtime -d %<.jar && java -jar %<.jar && del %<.jar"
         else
             exec "!kotlinc % -include-runtime -d %<.jar && java -jar %<.jar && rm %<.jar"
