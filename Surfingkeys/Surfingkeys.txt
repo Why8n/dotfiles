@@ -49,6 +49,6 @@ mapkey('as', 'hide danmu', function() {
 },{domain:/youku\.com/i});
 
 // unmap all for specific sites
-unmapAllExcept([],/keybr.com|typingclub.com/)
+unmapAllExcept([],/keybr.com|typingclub.com|typeracer.com|monkeytype.com/)
 // disable Surflingkeys on specific domain
 settings.blacklistPattern = /.*freecodecamp.org/i;
