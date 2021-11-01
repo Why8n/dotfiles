@@ -101,8 +101,10 @@ nnoremap <leader>sew :action SearchEverywhere<CR>
 nnoremap <Leader>cmd :action ChooseRunConfiguration<CR>
 
 nnoremap <Leader>sel :action ActivateTerminalToolWindow<CR>
-" <C-S-F<F4>> close windows just popup
-nnoremap <leader>cw :action CloseActiveTab<CR>
+" <S-Esc> hide active window
+nnoremap <leader>hw :action HideActiveWindow<CR>
+" <C-S-F12> hide all tabs
+nnoremap <leader>cw :action HideAllWindows<CR>
 " <C-j>
 inoremap <C-j> <ESC>:action InsertLiveTemplate<CR>
 
