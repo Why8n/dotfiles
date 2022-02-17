@@ -1,3 +1,26 @@
+const {
+    aceVimMap,
+    mapkey,
+    imap,
+    iunmap,
+    imapkey,
+    getClickableElements,
+    vmapkey,
+    map,
+    unmap,
+    cmap,
+    addSearchAlias,
+    removeSearchAlias,
+    tabOpenLink,
+    readText,
+    Clipboard,
+    Front,
+    Hints,
+    Visual,
+    RUNTIME,
+    unmapAllExcept,
+    Trie,
+} = api;
 
 settings.smoothScroll = true;
 settings.scrollStepSize = 80;
@@ -49,6 +72,6 @@ mapkey('as', 'hide danmu', function() {
 },{domain:/youku\.com/i});
 
 // unmap all for specific sites
-unmapAllExcept([],/keybr.com|typingclub.com|typeracer.com|monkeytype.com/)
+unmapAllExcept([],/keybr.com|typingclub.com|typeracer.com|monkeytype.com|zty.pe|typingtest.com|leetcode-cn.com|leetcode.com/)
 // disable Surflingkeys on specific domain
 settings.blacklistPattern = /.*freecodecamp.org/i;
