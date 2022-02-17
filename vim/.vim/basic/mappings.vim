@@ -1,4 +1,4 @@
-map <silent> <Leader><CR> :nohlsearch<CR>
+nnoremap <silent> <Leader><CR> :nohlsearch<CR>
 " Tab operation，map tab will cause <C-i> lose jump function
 " map <tab> gt
 " map <S-tab> gT

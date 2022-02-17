@@ -26,7 +26,7 @@ set tm=500
 nnoremap <Leader>su :action ShowUsages<CR>
 nnoremap <Leader>fu :action FindUsages<CR>
 nnoremap <Leader><space> a<space><ESC>:action CodeCompletion<CR>
-inoremap <Leader><space> <space><ESC>:action CodeCompletion<CR>
+" inoremap <Leader><space> <space><ESC>:action CodeCompletion<CR>
 " copy
 vnoremap <C-c> :action $Copy<CR>
 " paste
@@ -40,7 +40,7 @@ nnoremap <C-x> :action $Cut<CR>
 nnoremap <C-n> :action GotoClass<CR>
 inoremap <C-n> <ESC>:action GotoClass<CR>
 nnoremap <leader>gc :action GotoClass<CR>
-inoremap <leader>gc <ESC>:action GotoClass<CR>
+" inoremap <leader>gc <ESC>:action GotoClass<CR>
 " <C-e>
 nnoremap <leader>cf :action RecentFiles<CR>
 " <C-S-N>
@@ -64,7 +64,7 @@ nnoremap <C-S-H> :action MethodHierarchy<CR>
 nnoremap <leader>hm :action MethodHierarchy<CR>
 " as mouse clicked
 nnoremap <leader>gd :action GotoDeclaration<CR>
-inoremap <leader>gd <ESC>:action GotoDeclaration<CR>
+" inoremap <leader>gd <ESC>:action GotoDeclaration<CR>
 " mean going to see the real implementation,aka method
 nnoremap <Leader>gi :action GotoImplementation<CR>
 
@@ -76,7 +76,7 @@ nnoremap <leader>fw :action Forward<CR>
 nnoremap <C-A-l> :action ReformatCode<CR>
 inoremap <C-A-l> <ESC>:action ReformatCode<CR>a
 nnoremap <leader>fm :action ReformatCode<CR>
-inoremap <leader>fm <ESC>:action ReformatCode<CR>a
+" inoremap <leader>fm <ESC>:action ReformatCode<CR>a
 
 nnoremap <Leader>oi :action OptimizeImports<CR>
 nnoremap <space>oi :action OptimizeImports<CR>
@@ -101,8 +101,10 @@ nnoremap <leader>sew :action SearchEverywhere<CR>
 nnoremap <Leader>cmd :action ChooseRunConfiguration<CR>
 
 nnoremap <Leader>sel :action ActivateTerminalToolWindow<CR>
-" <C-S-F<F4>> close windows just popup
-nnoremap <leader>cw :action CloseActiveTab<CR>
+" <S-Esc> hide active window
+nnoremap <leader>hw :action HideActiveWindow<CR>
+" <C-S-F12> hide all tabs
+nnoremap <leader>cw :action HideAllWindows<CR>
 " <C-j>
 inoremap <C-j> <ESC>:action InsertLiveTemplate<CR>
 
