@@ -1,5 +1,10 @@
 return {
   {
+    'Why8n/enhanceOPM',
+    event = 'VeryLazy'
+  },
+
+  {
     'tpope/vim-surround',
     event = 'VeryLazy',
     dependencies = {
