@@ -1,5 +1,13 @@
 return {
   {
+    'tpope/vim-surround',
+    event = 'VeryLazy',
+    dependencies = {
+      'tpope/vim-repeat'
+    }
+  },
+
+  {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
     opts = { -- this is equalent to setup({}) function
@@ -23,5 +31,6 @@ return {
     keys = {
       { "<leader><leader>s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
     },
-  }
+  },
+
 }
