@@ -53,4 +53,33 @@ return {
     },
   },
 
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+      ---Add a space b/w comment and the line
+      padding = true,
+      ---Whether the cursor should stay at its position
+      sticky = true,
+      ---LHS of toggle mappings in NORMAL mode
+      toggler = {
+        ---Line-comment toggle keymap
+        line = '<leader>cc',
+        ---Block-comment toggle keymap
+        block = '<leader>bc',
+      },
+      ---LHS of operator-pending mappings in NORMAL and VISUAL mode
+      opleader = {
+        ---Line-comment keymap
+        line = '<leader>cc',
+        ---Block-comment keymap
+        block = '<leader>cb',
+      },
+    },
+    keys = {
+      { '<leader>cc', mode = {'n', 'x'}},
+      {'<leader>cb', mode = {'x'}},
+      { '<C-_>', mode = {'x'}, '<Plug>(comment_toggle_linewise_visual)' },
+      { '<leader>cu', mode = {'x'}, '<Plug>(comment_toggle_linewise_visual)' },
+    },
+  }
 }
