@@ -5,6 +5,21 @@ return {
   },
 
   {
+    'Why8n/autopaste',
+    cmd = {
+      'PasteInNormalMode',
+      'PasteInInsertMode',
+      'PasteInVisualMode'
+    },
+    keys = {
+      { '<C-v>', mode = { 'c' }, '<C-r>+'},
+      { '<C-v>', mode = { 'n' }, '<cmd>PasteInNormalMode +<cr>'},
+      { '<C-v>', mode = { 'i' }, '<cmd>PasteInInsertMode +<cr>'},
+      -- { '<C-v>', mode = { 'x' }, '<cmd><C-u>PasteInVisualMode +<cr>'}
+    },
+  },
+
+  {
     'tpope/vim-surround',
     event = 'VeryLazy',
     dependencies = {

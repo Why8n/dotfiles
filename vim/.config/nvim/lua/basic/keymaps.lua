@@ -27,9 +27,9 @@ keymap.set('c', '<C-h>', '<C-w>')
 
 -- copy & paste
 keymap.set('v', '<C-c>', '"+y')
-keymap.set('n', '<C-v>', '"+p')
-keymap.set('i', '<C-v>', '<C-r><C-p>+')
-keymap.set('v', '<C-v>', '"+p')
+-- keymap.set('n', '<C-v>', '"+p')
+-- keymap.set('i', '<C-v>', '<C-r><C-p>+')
+-- keymap.set('v', '<C-v>', '"+p')
 
 keymap.set('n', '<leader>sv', '<C-w>v') -- 水平新增窗口 
 keymap.set('n', '<leader>sh', '<C-w>s') -- 垂直新增窗口
