@@ -81,5 +81,24 @@ return {
       { '<C-_>', mode = {'x'}, '<Plug>(comment_toggle_linewise_visual)' },
       { '<leader>cu', mode = {'x'}, '<Plug>(comment_toggle_linewise_visual)' },
     },
-  }
+  },
+
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    },
+    config = true,
+    cmd = {
+      'Neotree',
+      'Neotree toggle'
+    },
+    keys = {
+      { [[<leader>e]], mode = { 'n', 'x' }, [[<cmd>Neotree toggle<cr>]]},
+    }
+  },
 }

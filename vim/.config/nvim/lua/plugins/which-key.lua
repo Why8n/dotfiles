@@ -118,7 +118,8 @@ return {
 
       o = {
         name = '+open'                  ,
-        e    = { '<cmd>CocCommand explorer<cr>'  , 'coc-explorer'               }, -- todo
+        e    = { '<cmd>Neotree '..vim.fn.expand('%:p:h')..'<cr>'  , 'open current buffer directory'               }, 
+        g = { '<cmd>Neotree '..find_git_root()..'<cr>', 'open directory of git root'},
         q    = { '<cmd>copen<cr>'                 , 'open-quickfix'              },
         v    = { '<cmd>botright vs $MYVIMRC<cr>' , 'edit myvimrc(bottom right)' },
       },
