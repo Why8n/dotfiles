@@ -6,10 +6,6 @@
 .config/*
 # but not ignore spec subfolder under root
 !.config/nvim/
-# ignore everything under folder nvim
-.config/nvim/*
-# but not ignore spec file under nvim
-!.config/nvim/coc-settings.json
 !.vim/
 .vim/*
 !.vim/lib/
@@ -19,5 +15,4 @@
 !.vim/lib/java/*.tar.gz
 
 !vscode
-
 
