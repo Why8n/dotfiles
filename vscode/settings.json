@@ -34,7 +34,7 @@
     "bracket-pair-colorizer-2.forceUniqueOpeningColor": true,
     "bracket-pair-colorizer-2.forceIterationColorCycle": true,
     "bracket-pair-colorizer-2.colorMode": "Consecutive",
-    "editor.matchBrackets": false,
+    "editor.matchBrackets": "never",
     "bracket-pair-colorizer-2.highlightActiveScope": true,
     "bracket-pair-colorizer-2.activeScopeCSS": [
         "borderStyle : solid",
@@ -102,7 +102,6 @@
     ],
     //settins sync
     "sync.gist": "7500c2b706adda4f9b85325f6615f0ed",
-    "window.zoomLevel": 0,
     //eslint
     "eslint.enable": true,
     "eslint.options": {
@@ -139,7 +138,7 @@
     },
     "liveServer.settings.donotShowInfoMsg": true,
     "[vue]": {
-        "editor.defaultFormatter": "octref.vetur"
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "workbench.iconTheme": "vscode-icons",
     "vetur.format.defaultFormatterOptions": {
@@ -148,13 +147,14 @@
             "singleQuote": true
         }
     },
-    "python.languageServer": "Microsoft",
+    "python.languageServer": "Default",
     "vsicons.dontShowNewVersionMessage": true,
     "editor.lineNumbers": "relative",
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "java.configuration.checkProjectSettingsExclusions": false,
     // vscode-neovim
+    // "vscode-neovim.neovimClean": true,
     // Windows
     "vscode-neovim.neovimExecutablePaths.win32": "D:\\Program Files (x86)\\Neovim\\bin\\nvim.exe",
     // Linux
@@ -694,4 +694,15 @@
     ],
     // fix explorer navigation issue, Refs: https://github.com/microsoft/vscode/issues/66995 
     "workbench.list.automaticKeyboardNavigation": false,
+    "leetcode.workspaceFolder": "e:\\code\\leetcode",
+    "editor.linkedEditing": true,
+    "workbench.editor.splitInGroupLayout": "vertical",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "bracket-pair-colorizer-2.depreciation-notice": false,
+    "leetcode.endpoint": "leetcode-cn",
+    "leetcode.defaultLanguage": "java",
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "extensions.ignoreRecommendations": true,
 }
