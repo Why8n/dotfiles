@@ -109,4 +109,62 @@ return {
             require("im_select").setup({})
         end,
     },
+    {
+        'Vonr/align.nvim',
+        branch = "v2",
+        lazy = true,
+        keys = {
+            {
+                '<leader>a1', 
+                mode = { 'x' },
+                noremap = true,
+                silent = true,
+                function() 
+                    require'align'.align_to_char({
+                        length = 1,
+                    })
+                end, 
+                desc = 'aligns to 1 character'
+            },
+            {
+                '<leader>a2', 
+                mode = { 'x' },
+                noremap = true,
+                silent = true,
+                function() 
+                    require'align'.align_to_char({
+                        preview = true,
+                        length = 2,
+                    })
+                end, 
+                desc = 'aligns to 2 characters with previews' 
+            },
+            {
+                '<leader>as', 
+                mode = { 'x' },
+                noremap = true,
+                silent = true,
+                function() 
+                    require'align'.align_to_string({
+                        preview = true,
+                        regex = false,
+                    })
+                end, 
+                desc = 'aligns to a string with previews' 
+            },
+            {
+                '<leader>ar', 
+                mode = { 'x' },
+                noremap = true,
+                silent = true,
+                function() 
+                    require'align'.align_to_string({
+                        preview = true,
+                        regex = true,
+                    })
+                end, 
+                desc = 'aligns to a vim regex with previews' 
+            },
+        }
+    }
 }
