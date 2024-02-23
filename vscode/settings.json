@@ -705,4 +705,7 @@
         "asvetliakov.vscode-neovim": 1
     },
     "extensions.ignoreRecommendations": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
 }
