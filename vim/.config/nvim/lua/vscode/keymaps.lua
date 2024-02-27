@@ -81,6 +81,18 @@ keymap.set('n', '<leader>sk',
 
 keymap.set('n', '<leader><leader>o','<cmd>Only!<cr>')
 
+-- explorer
+keymap.set('n', '<leader>e', 
+    function()
+        vscode.call('workbench.action.toggleSidebarVisibility')
+    end,{ noremap = true, expr = true })
+-- terminal
+keymap.set('n', '<leader>tm',
+    function()
+        -- vscode.call('workbench.action.terminal.toggleTerminal')
+        vscode.call('workbench.action.togglePanel')
+    end,{ noremap = true, expr = true })
+
 -- format
 keymap.set('n', '<leader>fm', 
     function()
