@@ -1,3 +1,11 @@
+-- Options are automatically loaded before lazy.nvim startup
+-- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
+-- Add any additional options here
+
+vim.g.mapleader = '\\'
+vim.g.maplocalleader = ' '
+
+
 local options = vim.opt
 
 -- line
@@ -39,7 +47,7 @@ options.termguicolors = true
 options.signcolumn = "yes"
 
 -- --------------------
--- vim涉及字符显示的选项有三个，fileencoding文件字符编码，encoding缓冲区字符编码，termencoding终端字符编码。  
+-- vim涉及字符显示的选项有三个，fileencoding文件字符编码，encoding缓冲区字符编码，termencoding终端字符编码。
 --
 -- 　　vim显示字符的顺序:（探测文件编码，从fileencodings里面选择最合适的编码赋值给fileencoding）按fileencoding编码读取文件->将读取到的内容转成encoding编码->将encoding编码转换成termencoding打印到终端->终端(我们平时主要使用的是securecrt)按设置的编码(一般是utf8)显示字符。
 -- --------------------
@@ -52,13 +60,5 @@ options.ff = 'unix'
 -- fileformats
 options.ffs = 'unix,dos,mac'
 
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
+-- clipboard
+vim.opt.clipboard = ""
